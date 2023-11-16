@@ -8,8 +8,10 @@ from nltk.corpus import stopwords
 
 def prepare_corpus(data_filename):
     doc_dataset = load_from_disk(f'data/{data_filename}')
-    
-    nltk.download('stopwords')
+    try:
+        stopwords.words('english')
+    except LookupError:
+        nltk.download('stopwords')
     english_stops = set(stopwords.words('english'))
 
     def tokenize(text):
@@ -71,7 +73,7 @@ def main(args):
     model_name_parts = []
     for arg, value in vars(args).items():
         if arg not in ['data_filename', 'model_type', 'num_beta_sample']:
-            model_name_parts.append(f"{arg}_")
+            model_name_parts.append(f"{arg}")
         model_name_parts.append(f"{value}")
     model_name = '-'.join(model_name_parts)
     
