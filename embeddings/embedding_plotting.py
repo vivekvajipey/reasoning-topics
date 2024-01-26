@@ -78,14 +78,36 @@ class DimensionalViz:
         plt.colorbar(scatter, label='Index in Embeddings Array')
         plt.show()
     
+    # def scree_plot(self):
+    #     plt.figure(figsize=(5, 5))
+    #     explained_variance = np.insert(self.pca_model.explained_variance_ratio_, 0, 0, axis=0)
+    #     plt.plot(np.cumsum(explained_variance))
+    #     plt.xlabel('Number of Components')
+    #     plt.ylabel('Cumulative Explained Variance')
+    #     plt.title('Scree Plot of PCA')
+    #     plt.grid(True)
+    #     plt.show()
+    
+    from sklearn.decomposition import PCA
+
     def scree_plot(self):
+        pca = PCA(n_components=0.99)
+        pca.fit(self.all_embeddings)
+
         plt.figure(figsize=(5, 5))
-        explained_variance = np.insert(self.pca_model.explained_variance_ratio_, 0, 0, axis=0)
-        plt.plot(np.cumsum(explained_variance))
+        explained_variance = np.insert(pca.explained_variance_ratio_, 0, 0, axis=0)
+        cumulative_explained_variance = np.cumsum(explained_variance)
+        plt.plot(cumulative_explained_variance)
         plt.xlabel('Number of Components')
         plt.ylabel('Cumulative Explained Variance')
         plt.title('Scree Plot of PCA')
         plt.grid(True)
+
+        thresholds = [0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.99]
+        for threshold in thresholds:
+            num_components = np.argmax(cumulative_explained_variance >= threshold) + 1
+            print(f"{num_components} principal components explain {threshold*100}% of the variance.")
+
         plt.show()
 
     def umap(self):
@@ -137,3 +159,9 @@ class DimensionalViz:
 
         plt.colorbar(scatter, label='Index of Embedding')
         plt.show()
+
+
+# def plot_with_labels(embed_seq, dim_viz):
+#     # number labels
+#     labels = [str(i) for i in range(len(embed_seq))]
+#     dim_viz.pca(embed_seq[0], cot_strings=labels, connections=True, str_labels=True)
