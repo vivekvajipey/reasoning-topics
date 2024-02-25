@@ -7,6 +7,7 @@ import wandb
 from dataset import ContrastiveDataset
 from model import SimpleContrastiveNetwork, ContrastiveLoss
 from sentence_transformers import SentenceTransformer
+from util import set_seed, generate_run_name
 
 def train(args, model, train_loader, val_loader, criterion, optimizer, device, run_name):
     best_loss = float('inf')
@@ -20,23 +21,11 @@ def train(args, model, train_loader, val_loader, criterion, optimizer, device, r
             anchor_in, positives_in, negatives_in = data
             anchor_in, positives_in, negatives_in = anchor_in.to(device), positives_in.to(device), negatives_in.to(device)
 
-            # print(anchor_in.shape)
-            # print(positives_in.shape)
-            # print(negatives_in.shape)
-
             anchor_out = model(anchor_in)
             positives_out = model(positives_in)
             negatives_out = model(negatives_in)
 
-            # print(anchor_out.shape)
-            # print(positives_out.shape)
-            # print(negatives_out.shape)
-
-            combined_out = torch.cat((positives_out, negatives_out), dim=0)
-            # print('combined shape: ', combined_out.shape) 
-            # # print('repeated shape: ', anchor_out.repeat(2, 1).shape)
-
-            loss = criterion(anchor_out.repeat(2, 1), combined_out)
+            loss = criterion(anchor_out, positives_out, negatives_out)
             loss.backward()
             optimizer.step()
             total_loss += loss.item()
@@ -52,6 +41,7 @@ def train(args, model, train_loader, val_loader, criterion, optimizer, device, r
         if avg_val_loss < best_loss:
             best_loss = avg_val_loss
             torch.save(model.state_dict(), f'best_models/best_{run_name}.pth')
+    torch.save(model.state_dict(), f'best_models/best_{run_name}_final_val_loss={best_loss:.6f}.pth')
 
 def validate(model, val_loader, criterion, device):
     model.eval()
@@ -65,39 +55,18 @@ def validate(model, val_loader, criterion, device):
             positives_out = model(positives_in)
             negatives_out = model(negatives_in)
 
-            combined_out = torch.cat((positives_out, negatives_out), dim=0)
-
-            loss = criterion(anchor_out.repeat(2, 1), combined_out)
+            loss = criterion(anchor_out, positives_out, negatives_out)
             total_loss += loss.item()
 
     avg_loss = total_loss / len(val_loader)
     return avg_loss
-
-def generate_run_name(args):
-    run_name = "cl_transform"
-    run_name += f"-{args.csv_path.split('.')[0]}"
-    run_name += f"-b{args.batch_size}"
-    run_name += f"-e{args.epochs}"
-    run_name += f"-lr{args.lr}"
-    run_name += f"-lt{args.loss_temp}"
-    return run_name
-
-def set_seed(seed_value=42):
-    """Set seed for reproducibility."""
-    random.seed(seed_value)
-    np.random.seed(seed_value)
-    torch.manual_seed(seed_value)
-
-    # if torch.backends.mps.is_available():
-    #     torch.backends.cudnn.benchmark = False
-    #     torch.backends.cudnn.deterministic = True
 
 def main(args):
     set_seed(42)
 
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
     model = SimpleContrastiveNetwork().to(device)
-    criterion = ContrastiveLoss(temperature=args.loss_temp)
+    criterion = ContrastiveLoss(temperature=args.loss_temp, loss_type=args.loss_type)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
 
     sent_transformer = SentenceTransformer('all-MiniLM-L6-v2') 
@@ -115,13 +84,14 @@ def main(args):
     train(args, model, train_loader, val_loader, criterion, optimizer, device, run_name)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Train a Simple Contrastive Network')
+    parser = argparse.ArgumentParser(description='train reasoning extracting contrastive learning transformation model')
     parser.add_argument('--batch_size', type=int, default=16, help='input batch size')
     parser.add_argument('--epochs', type=int, default=10, help='number of epochs')
     parser.add_argument('--lr', type=float, default=1e-4, help='learning rate')
     parser.add_argument('--loss_temp', type=float, default=0.3, help='contrastive loss temperature parameter')
+    parser.add_argument('--loss_type', type=str, default='BCE', help='loss type used in ContrastiveLoss')
     parser.add_argument('--csv_path', type=str, default='gsm8k_cl_trans_para0_47_autosplit.csv', help='dataset csv file path, data folder implied')
-    parser.add_argument('--use_wandb', action='store_true', default=False, help='log run to WandB') 
+    parser.add_argument('--use_wandb', action='store_true', default=True, help='log run to WandB') 
 
     args = parser.parse_args()
     main(args)

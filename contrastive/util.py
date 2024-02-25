@@ -18,6 +18,7 @@ def generate_run_name(args):
     run_name += f"-b{args.batch_size}"
     run_name += f"-e{args.epochs}"
     run_name += f"-lr{args.lr:.6f}"
-    run_name += f"-lt{args.loss_temp:.6f}"
+    run_name += f"-{args.loss_type}"
+    run_name += f"-lt{args.loss_temp:.2f}"
     return run_name
 

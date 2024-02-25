@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from info_nce import info_nce
 
 class SimpleContrastiveNetwork(nn.Module):
     def __init__(self, input_dim=384, hidden_dim=384):
@@ -14,32 +15,38 @@ class SimpleContrastiveNetwork(nn.Module):
         return x
 
 class ContrastiveLoss(nn.Module):
-    def __init__(self, temperature=0.3):
+    def __init__(self, temperature: float = 0.3, loss_type: str = 'BCE'):
         super(ContrastiveLoss, self).__init__()
         self.temperature = temperature
         self.cosine_similarity = nn.CosineSimilarity(dim=-1)
+        self.loss_type = loss_type
 
-    def forward(self, z1, z2):
-        # print('Z1 dims: ', z1.shape)
-        # print('Z2 dims: ', z2.shape)
+    def forward(self, anchor, positives, negatives):
+        # batch_size, num_negatives, _ = negatives.shape
+        
+        # print('anchor: ', anchor.shape)
+        # print('positives: ', positives.shape)
+        # print('negatives: ', negatives.shape)
 
-        z1 = F.normalize(z1, p=2, dim=-1)
-        z2 = F.normalize(z2, p=2, dim=-1)
-        cos_sim = self.cosine_similarity(z1.unsqueeze(1), z2.unsqueeze(0)) / self.temperature
+        if self.loss_type == "InfoNCE":
+            loss = info_nce(anchor, positives.squeeze(1), negatives, self.temperature, 'mean', 'paired')
+        else:
+            loss_types = {'BCE': nn.BCEWithLogitsLoss(), 'CE': nn.CrossEntropyLoss()}
+            assert self.loss_type in loss_types, "Loss type used in ContrastiveLoss is not supported"
+            z2 = torch.cat((positives, negatives), dim=1)
+            z1 = anchor.unsqueeze(1).repeat(1, z2.size(1), 1)
+            z1 = F.normalize(z1, p=2, dim=-1)
+            z2 = F.normalize(z2, p=2, dim=-1)
 
-
-        n = z1.size(0)
-        labels = torch.eye(n).to(z1.device)
-        
-        # Flatten to match the BCE loss requirements
-        cos_sim_flat = cos_sim.view(-1)
-        labels_flat = labels.view(-1)
-        
-        # Apply sigmoid to scale cosine similarity to [0, 1]
-        cos_sim_flat_sigmoid = torch.sigmoid(cos_sim_flat)
-        
-        # Binary Cross Entropy Loss
-        loss_fct = nn.BCELoss()
-        loss = loss_fct(cos_sim_flat_sigmoid, labels_flat)
-        
+            print("z1: ", z1.shape)
+            print("z2: ", z2.shape)
+            cos_sim = self.cosine_similarity(z1.unsqueeze(1), z2.unsqueeze(0)) / self.temperature
+            n = z1.size(0)
+            labels = torch.eye(n).to(z1.device)
+            cos_sim_flat = cos_sim.view(-1)
+            labels_flat = labels.view(-1)
+            
+            # Adjust loss function to BCEWithLogitsLoss
+            loss_fct = loss_types[self.loss_type]
+            loss = loss_fct(cos_sim_flat, labels_flat)
         return loss
