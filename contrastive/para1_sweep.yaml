@@ -1,0 +1,27 @@
+project: gsm8k-cl-transform
+program: train_cl_transform.py
+method: bayes
+metric:
+  goal: minimize
+  name: val_loss
+parameters:
+  batch_size:
+    values: [16, 32]
+  loss_temp:
+    values: [0.05, 0.15, 0.3]
+  loss_type:
+    values:
+      - InfoNCE
+    distribution: categorical
+  csv_path:
+    values:
+      - gsm8k_cl_trans_para1_112_autosplit.csv
+    distribution: categorical
+  epochs:
+    values:
+      - 50
+    distribution: categorical
+  lr:
+    max: 0.002
+    min: 0.00002
+    distribution: uniform

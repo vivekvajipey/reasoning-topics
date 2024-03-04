@@ -16,16 +16,9 @@ class ContrastiveDataset(torch.utils.data.Dataset):
 
     def __getitem__(self, idx):
         row = self.df.iloc[idx]
-        # Encode the reasoning trace as the "anchor"
         anchor_embedding = self.encode_sentences(row['Reasoning Trace'])
-        # Encode positive and negative examples
         positive_embeddings = self.encode_sentences(row['Positive'])
         negative_embeddings = self.encode_sentences(row['Negative'])
-        # print('anchor embed: ', anchor_embedding.shape)
-        # print("pos type: ", type(row['Positive']))
-        # print('positives embed: ', positive_embeddings.shape)
-        # print("neg type: ", type(row['Negative']))
-        # print('negatives embed: ', negative_embeddings.shape)
         return anchor_embedding, positive_embeddings, negative_embeddings
 
     def encode_sentences(self, sentences):
