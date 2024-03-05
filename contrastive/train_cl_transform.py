@@ -90,7 +90,7 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=1e-4, help='learning rate')
     parser.add_argument('--loss_temp', type=float, default=0.3, help='contrastive loss temperature parameter')
     parser.add_argument('--loss_type', type=str, default='BCE', help='loss type used in ContrastiveLoss')
-    parser.add_argument('--csv_path', type=str, default='gsm8k_cl_trans_para0_47_autosplit.csv', help='dataset csv file path, data folder implied')
+    parser.add_argument('--csv_path', type=str, default='gsm8k_cl_trans_para1_112_autosplit.csv', help='dataset csv file path, data folder implied')
     parser.add_argument('--use_wandb', action='store_true', default=True, help='log run to WandB') 
 
     args = parser.parse_args()
