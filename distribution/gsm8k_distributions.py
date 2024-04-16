@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from pprint import pprint
+import time
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, GenerationConfig
 from util import get_prompt_message, extract_last_sentence, extract_last_integer, extract_last_number
@@ -105,8 +106,10 @@ def main():
     model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.bfloat16, device_map="auto")
     model.generation_config = GenerationConfig.from_pretrained(model_name)
     model.generation_config.pad_token_id = model.generation_config.eos_token_id
-
+    
+    total_start = time.time()
     for idx, row in gpt35_df[:5].iterrows():
+        start_time = time.time()
         question = row['Question']
         # print("CURRENT QUESTION: ", question)
         rk_ak_pairs, unique_answers = generate_responses(model, tokenizer, question, num_samples=3, num_fewshot=2)
@@ -115,6 +118,8 @@ def main():
 
         for ai, logp in logp_ai_given_q.items():
             print(f"-log p({ai} | q): {logp}")
+        print("iteration time (s): ", time.time() - start_time)
+    print("total time (min): ",  (time.time() - total_start) / 60)
 
 if __name__ == "__main__":
     main()
