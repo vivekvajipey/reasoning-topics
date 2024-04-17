@@ -1,0 +1,2 @@
+Fix dealing with floats:
+- Extracted 8 from:  .80for50minutesofbabysitting.Theansweris$8.80.</s>
