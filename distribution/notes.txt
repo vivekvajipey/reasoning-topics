@@ -1,2 +1,9 @@
 Fix dealing with floats:
 - Extracted 8 from:  .80for50minutesofbabysitting.Theansweris$8.80.</s>
+- Problem 4: {36: 7, 39: 9, 28: 1, 40: 2, 35: 14, 150: 1, 37: 4, 12: 1, 15: 1, 10: 2, 7: 1, 31: 3, 32: 6, 30: 6, 27: 1, 0: 1, 25: 3, 23: 3, 24: 2, 38: 1, 88: 1, 62: 1, 72: 2, 19: 1, 80: 2, 60: 2, 70: 1, 21: 1, 87: 1, 53: 3, 18: 1, 41: 1, 20: 1, 56: 3, 65: 1, 43: 2, 22: 1, 74: 1, 64: 2, 71: 1, 135: 1, 98: 1}
+- Onesent doesn't work automatic extraction: Extracted 24 from:  Nataliasoldatotalof96clipstoherfriendsinAprilandMay(48inApriland24inMay).</s>
+
+Direct Prompt:
+- idk: Extracted 5 from:  ����������🏽����🏻����🏾��������������������🏼����🏽����🏾��������������������🏼����🏽����🏾����������������🏼
+- For problem 0: Extracted 7 from:  seconds.Whatishisspeedinmilesperhour?
+A:Theanswerisapproximately7.7milesperhour.

@@ -7,14 +7,14 @@ from pprint import pprint
 import time
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, GenerationConfig
-from util import get_prompt_message, extract_last_sentence, extract_last_integer, extract_last_number
+from util import get_prompt_message, extract_last_integer, extract_last_number
 from util import remove_last_sentence
 
-def generate_responses(model, tokenizer, question, num_samples=2, num_fewshot=3, temp=0.0):
+def generate_responses(model, tokenizer, question, num_samples=2, num_fewshot=3, temp=0.0, direct_prompt=False):
     response_outputs = []
     unique_answers = {}
 
-    messages = get_prompt_message(question, num_fewshot)
+    messages = get_prompt_message(question, num_fewshot, direct=direct_prompt)
     # messages = [{"role": "user", "content": question } ] # quick for testing
     for i in range(num_samples):
         input_tensor = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt")
@@ -39,7 +39,7 @@ def generate_responses(model, tokenizer, question, num_samples=2, num_fewshot=3,
         last_number = extract_last_number(last_segment)
         assert last_number is not None, "No numbers in last segment..."
         last_integer = int(last_number)
-        print(f"Extracted {last_integer} from: ", last_segment[-50:])
+        print(f"Extracted {last_integer} from: ", last_segment[-100:])
 
         unique_answers[last_integer] = 1 + unique_answers.get(last_integer, 0)
 
@@ -131,6 +131,8 @@ def main():
     parser.add_argument("--num_rows", type=int, default=5, help="Number of rows to process from the dataset.")
     parser.add_argument("--num_samples", type=int, default=5, help="Number of samples to generate for each question.")
     parser.add_argument("--temp", type=float, default=1.0, help="Temperature setting for the generation process.")
+    parser.add_argument("--num_fewshot", type=int, default=3, help="Number of few-shot examples to use for generation.")
+    parser.add_argument("--filename", type=str, default="logs/mistral-default-exp.csv", help="Filename for logging the results.")
 
     args = parser.parse_args()
 
@@ -138,7 +140,11 @@ def main():
     NUM_ROWS = args.num_rows
     NUM_SAMPLES = args.num_samples
     TEMPERATURE = args.temp
-    NUM_FEWSHOT = 3
+    
+    NUM_FEWSHOT = args.num_fewshot
+    FILENAME = args.filename
+    
+    DIRECT_PROMPT = True
 
     gpt35_df = pd.read_csv('../conditional/data/112_gsm8k_gpt35_cot_onesent_responses.csv')
 
@@ -154,11 +160,11 @@ def main():
         start_time = time.time()
         question = row['Question']
         # print("CURRENT QUESTION: ", question)
-        generated_outputs, unique_answers = generate_responses(model, tokenizer, question, num_samples=NUM_SAMPLES, num_fewshot=NUM_FEWSHOT, temp=TEMPERATURE)
+        generated_outputs, unique_answers = generate_responses(model, tokenizer, question, num_samples=NUM_SAMPLES, num_fewshot=NUM_FEWSHOT, temp=TEMPERATURE, direct_prompt=DIRECT_PROMPT)
         print("UNIQUE ANSWER COUNTS: ", unique_answers)
         logp_ai_given_q = calculate_logp_ai_given_q_with_logprobs(model, tokenizer, generated_outputs, unique_answers)
 
-        log_results_to_csv(row['Problem Number'], unique_answers, logp_ai_given_q, filename="logs/mistral-first-exp-3shot-100.csv")
+        log_results_to_csv(row['Problem Number'], unique_answers, logp_ai_given_q, filename=FILENAME)
 
         for ai, logp in logp_ai_given_q.items():
             print(f"-log p({ai} | q): {logp}")
