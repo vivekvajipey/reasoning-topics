@@ -10,103 +10,147 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, GenerationConfig
 from util import get_prompt_message, extract_last_integer, extract_last_number
 from util import remove_last_sentence
 
-def generate_responses(model, tokenizer, question, num_samples=2, num_fewshot=3, temp=0.0, direct_prompt=False):
-    response_outputs = []
-    unique_answers = {}
+def generate_gsm8k_answer_tensor(model, tokenizer, question, num_samples, num_fewshot, temp, top_k=40, direct_prompt=False):
+    messages = get_prompt_message(question, num_fewshot, direct_prompt)
+    question_vector = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt")
+    input_tensor = question_vector.repeat(num_samples, 1)
 
-    messages = get_prompt_message(question, num_fewshot, direct=direct_prompt)
-    # messages = [{"role": "user", "content": question } ] # quick for testing
-    for i in range(num_samples):
-        input_tensor = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt")
-        outputs = model.generate(
-            input_tensor.to(model.device), 
-            max_new_tokens=1000, 
-            return_dict_in_generate=True, 
-            output_scores=True,
-            do_sample=True,
-            temperature=temp,
-            top_k=40,
-        )
-        transition_scores = model.compute_transition_scores(
-            outputs.sequences, outputs.scores, normalize_logits=True
-        )
-        # print(outputs.sequences)
+    gen_start = time.time()
+    outputs = model.generate(
+                input_tensor.to(model.device), 
+                max_new_tokens=750, 
+                return_dict_in_generate=True, 
+                output_scores=True,
+                do_sample=True,
+                temperature=temp,
+                top_k=top_k,
+            )
+    # Print decoded sentences:
+    # print(tokenizer.batch_decode(outputs.sequences))
+    print("Generation Time: ", time.time() - gen_start)
 
-        input_length = input_tensor.shape[1]
-        generated_tokens = outputs.sequences[:, input_length:]
+    return outputs.sequences
 
-        last_segment = "".join([tokenizer.decode(tok.item()) for tok in generated_tokens[0]]) # bugs when constraining to [0, -10:]
-        last_number = extract_last_number(last_segment)
-        assert last_number is not None, "No numbers in last segment..."
-        last_integer = int(last_number)
-        print(f"Extracted {last_integer} from: ", last_segment[-100:])
+def find_last_sentence(tensor):
+    batch_size, seq_length = tensor.shape
+    digit_tokens = [28734, 28740, 28750, 28770, 28781, 28782, 28784, 28787, 28783, 28774]
+    mask = torch.zeros_like(tensor)
+    inverse_mask = torch.zeros_like(tensor)
 
-        unique_answers[last_integer] = 1 + unique_answers.get(last_integer, 0)
+    for i in range(batch_size):
+        row_tensor = tensor[i]
 
-        # for tok, score in zip(generated_tokens[0], transition_scores[0]):
-        #     # | token | token string | log probability | probability
-        #     print(f"| {tok:5d} | {tokenizer.decode(tok):8s} | {score.cpu().numpy()} | {np.exp(score.cpu().numpy()):.2%}")
-        
-        response_outputs.append((outputs.sequences, generated_tokens[0], transition_scores[0]))
+        # Find period indices
+        period_indices = (row_tensor == 28723).nonzero()
+
+        seq_end = (row_tensor == 2).nonzero()
+        seq_end_index = seq_end[0].item()
+
+        # Filter out periods that are part of decimal numbers
+        filtered_indices = []
+        for idx in period_indices:
+            token_index = idx[0]
+            # Remove if period is near end of sequence (it is part of last sentence)
+            if seq_end_index - token_index < 5:
+                continue
+            # Check if the period is not at the start or end of the tensor
+            elif token_index > 0 and token_index < seq_length - 1:
+                # Check the tokens before and after the period
+                token_before = row_tensor[token_index - 1]
+                token_after = row_tensor[token_index + 1]
+                # Check if both tokens are numeric
+                if not (token_before in digit_tokens and token_after in digit_tokens):
+                    filtered_indices.append(token_index)
+
+        newline_indices = (row_tensor == 13).nonzero()
+
+        # Determine the last sentence start index
+        last_period_index = max(filtered_indices) if filtered_indices else -1
+        last_newline_index = newline_indices[-1] if newline_indices.size(0) > 0 else -1
+        last_sentence_start_index = max(last_period_index, last_newline_index)
+
+        # Set mask for the last sentence
+        if last_sentence_start_index != -1:
+            mask[i, last_sentence_start_index+1:seq_end_index+1] = 1
+            inverse_mask[i, :last_sentence_start_index+1] = 1
+
+    # Apply mask to get only the last sentences
+    last_sentence_only_tensor = tensor * mask
+    initial_sentences_tensor = tensor * inverse_mask
+
+    # print("Mask:\n", mask)
+    # print("Inverse Mask:\n", inverse_mask)
+    # print("Last Sentence Only Tensor:\n", last_sentence_only_tensor)
+    # print("Initial Sentences Tensor:\n", initial_sentences_tensor)
     
-    return response_outputs, unique_answers
+    return initial_sentences_tensor, last_sentence_only_tensor
 
-def to_tokens_and_logprobs(model, tokenizer, input_ids):
+def append_suffix_to_prefix(prefixes, suffixes, suffix_index):
+    # Extract the last sentence from the first row of suffixes
+    last_sentence_first_row = suffixes[suffix_index]
+    # Filter out zeros (masked tokens)
+    last_sentence_first_row = last_sentence_first_row[last_sentence_first_row != 0]
+
+    # Determine the maximum possible length of the new rows
+    max_length = prefixes.size(1) + last_sentence_first_row.size(0)
+
+    # Create a new tensor to hold the result with the expanded size
+    new_tensor = torch.zeros((prefixes.size(0), max_length), dtype=prefixes.dtype)
+    new_mask = torch.zeros((prefixes.size(0), max_length), dtype=torch.uint8)
+
+    for i in range(prefixes.size(0)):
+        # Get the initial sentence tokens from prefixes for the current row
+        initial_sentence = prefixes[i]
+        initial_sentence = initial_sentence[initial_sentence != 0]
+
+        # Concatenate the initial sentence with the last sentence of the first row
+        combined_sentence = torch.cat((initial_sentence, last_sentence_first_row))
+
+        new_tensor[i, :combined_sentence.size(0)] = combined_sentence
+
+        # Create mask for the appended last sentence
+        start_index_of_last_sentence = initial_sentence.size(0)
+        end_index_of_last_sentence = start_index_of_last_sentence + last_sentence_first_row.size(0)
+        new_mask[i, start_index_of_last_sentence:end_index_of_last_sentence] = 1
+
+    return new_tensor, new_mask
+
+
+def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, print_logging=False):
+    input_ids = input_ids.to(model.device)
+    answer_mask = answer_mask.to(model.device)
+
     outputs = model(input_ids)
+    if print_logging:
+        print("outputs logits: ", outputs.logits.shape)
+
     probs = torch.log_softmax(outputs.logits, dim=-1).detach()
 
     # Adjust indices to ignore the first token's log prob as it corresponds to the second token
     probs = probs[:, :-1, :]
     input_ids = input_ids[:, 1:]
+
     gen_probs = torch.gather(probs, 2, input_ids[:, :, None]).squeeze(-1)
 
-    batch = []
-    for input_sentence, input_probs in zip(input_ids, gen_probs):
-        text_sequence = []
-        for token, p in zip(input_sentence, input_probs):
-            if token not in tokenizer.all_special_ids:
-                text_sequence.append((tokenizer.decode(token), p.item()))
-        batch.append(text_sequence)
-    return batch
+    masked_probs = gen_probs * answer_mask[:, 1:].float()  # Ensure the mask is aligned and of the correct type
+    if print_logging:
+        print("masked_probs: ", masked_probs.shape)
 
-def calculate_logp_ai_given_q_with_logprobs(model, tokenizer, generated_outputs, unique_answers):
-    logp_ai_given_q = {}
+    summed_probs = masked_probs.sum(dim=1)
+    if print_logging:
+        print("summed_probs: ", summed_probs.shape)
 
-    for ai_numeric in unique_answers.keys():
-        total_log_prob = 0.0
-        count = 0
+        batch = []
+        for input_sentence, input_probs in zip(input_ids, masked_probs):
+            text_sequence = []
+            for token, p in zip(input_sentence, input_probs):
+                if token not in tokenizer.all_special_ids:
+                    print((tokenizer.decode(token), p.item()))
+                    text_sequence.append((tokenizer.decode(token), p.item()))
+            batch.append(text_sequence)
 
-        for total_tokens, generated_tokens, generated_logprobs in generated_outputs:
-            ans_declaration_toks = torch.Tensor(tokenizer(" The answer is " + str(ai_numeric))['input_ids'][1:]) # not adding '.' token or [2] EOS token here
-            ans_declaration_toks = ans_declaration_toks.to(torch.int32).to(model.device)
-            total_tokens = torch.cat((total_tokens[:, :-1], ans_declaration_toks.unsqueeze(0)), dim=1)
-            
-            log_probs = to_tokens_and_logprobs(model, tokenizer, total_tokens) 
+    return summed_probs
 
-            # print("\nCalculated Log Probabilities from Concatenated Text:")
-            # for sequence in log_probs:
-            #     for token, log_prob in sequence:
-            #         print(f"Token: {token}, Calculated Log Prob: {log_prob}")
-
-            # Sum the log probabilities of the answer tokens
-            answer_log_probs = sum(log_prob for token, log_prob in log_probs[0][-(len(str(ai_numeric))):] if token in str(ai_numeric))
-            # answer_log_probs = 0.0
-            # for token, log_prob in log_probs[0][-(len(str(ai_numeric))):]:
-            #     if token in str(ai_numeric):
-            #         print(f"logprob of token '{token}': {log_prob}")
-            #         answer_log_probs += log_prob
-            # print(f"log P(a_i = {ai_numeric} | r_k = '{rk[7:10]}...', q) = ", answer_log_probs) 
-            # print("Original answer for trace (a_k): ", ak)
-            # print()
-            
-            total_log_prob += answer_log_probs
-            count += 1
-
-        # Calculate the average log probability for ai
-        avg_log_prob = total_log_prob / count if count > 0 else float('inf')
-        logp_ai_given_q[ai_numeric] = -avg_log_prob  # Note the negation to get -log p(a_i | q)
-
-    return logp_ai_given_q
 
 def log_results_to_csv(idx, unique_answers, logp_ai_given_q, filename="generation_log.csv"):
     file_exists = os.path.isfile(filename)
@@ -128,46 +172,104 @@ def log_results_to_csv(idx, unique_answers, logp_ai_given_q, filename="generatio
 def main():
     parser = argparse.ArgumentParser(description="Run the model to generate responses and calculate log probabilities.")
     parser.add_argument("--start_row", type=int, default=0, help="Starting row for processing the dataset.")
-    parser.add_argument("--num_rows", type=int, default=5, help="Number of rows to process from the dataset.")
+    parser.add_argument("--num_rows", type=int, default=1, help="Number of rows to process from the dataset.")
     parser.add_argument("--num_samples", type=int, default=5, help="Number of samples to generate for each question.")
     parser.add_argument("--temp", type=float, default=1.0, help="Temperature setting for the generation process.")
-    parser.add_argument("--num_fewshot", type=int, default=3, help="Number of few-shot examples to use for generation.")
-    parser.add_argument("--filename", type=str, default="logs/mistral-default-exp.csv", help="Filename for logging the results.")
+    parser.add_argument("--num_fewshot", type=int, default=0, help="Number of few-shot examples to use for generation.")
+    parser.add_argument("--top_k", type=int, default=40, help="top k parameter to use for generation.")
+    parser.add_argument("--direct_prompt", type=bool, default=False, help="Indicates if Direct Prompting should be used instead of CoT.")
+    parser.add_argument("--model_name", type=str, default="mistral-7b-v0.1", help="Name of model to test on (should have both instruct and base models)")
 
     args = parser.parse_args()
 
-    START_ROW = args.start_row
-    NUM_ROWS = args.num_rows
-    NUM_SAMPLES = args.num_samples
-    TEMPERATURE = args.temp
-    
-    NUM_FEWSHOT = args.num_fewshot
-    FILENAME = args.filename
-    
-    DIRECT_PROMPT = True
+    run_name = f"{args.model_name}-samples{args.num_samples}-fewshot{args.num_fewshot}-temp{args.temp}-topk{args.top_k}"
+    if args.direct_prompt:
+        run_name += "-direct"
+    else:
+        run_name += "-CoT"
 
     gpt35_df = pd.read_csv('../conditional/data/112_gsm8k_gpt35_cot_onesent_responses.csv')
 
-    model_name = "mistralai/Mistral-7B-Instruct-v0.2"
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    tokenizer.pad_token = tokenizer.eos_token
-    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.bfloat16, device_map="auto")
-    model.generation_config = GenerationConfig.from_pretrained(model_name)
-    model.generation_config.pad_token_id = model.generation_config.eos_token_id
+    name2instruct = {"mistral-7b-v0.1":"mistralai/Mistral-7B-Instruct-v0.1"}
+    name2base = {"mistral-7b-v0.1":"mistralai/Mistral-7B-v0.1"}
+
+    instruct_model_name = name2instruct[args.model_name]
+    instruct_tokenizer = AutoTokenizer.from_pretrained(instruct_model_name)
+    instruct_tokenizer.pad_token = instruct_tokenizer.eos_token
+    instruct_model = AutoModelForCausalLM.from_pretrained(instruct_model_name, torch_dtype=torch.bfloat16, device_map="auto")
+    instruct_model.generation_config = GenerationConfig.from_pretrained(instruct_model_name)
+    instruct_model.generation_config.pad_token_id = instruct_model.generation_config.eos_token_id
+    instruct_device_map = instruct_model.hf_device_map
+
+    # base_model_name = name2base[args.model_name]
+    # base_tokenizer = AutoTokenizer.from_pretrained(base_model_name)
+    # base_tokenizer.pad_token = base_tokenizer.eos_token
+    # base_model = None
+    # base_device_map = None
+
+    # For testing, assume instruct = base
+    base_model_name = name2instruct[args.model_name]
+    base_tokenizer = instruct_tokenizer
+    base_tokenizer.pad_token = base_tokenizer.eos_token
+    base_model = instruct_model
+    base_model.generation_config = GenerationConfig.from_pretrained(base_model_name)
+    base_model.generation_config.pad_token_id = base_model.generation_config.eos_token_id
+    base_device_map = base_model.hf_device_map
     
     total_start = time.time()
-    for idx, row in gpt35_df[START_ROW:START_ROW + NUM_ROWS].iterrows():
+    for idx, row in gpt35_df[args.start_row : args.start_row + args.num_rows].iterrows():
+        # if base_model:
+            # base_model = base_model.to(torch.device('cpu'))
+
+        # Move the instruct_model back to the 'auto' device distribution
+        # for module_name, module in instruct_model.named_modules():
+        #     if module_name in instruct_device_map:
+        #         module.to(instruct_device_map[module_name])
         start_time = time.time()
+
         question = row['Question']
         # print("CURRENT QUESTION: ", question)
-        generated_outputs, unique_answers = generate_responses(model, tokenizer, question, num_samples=NUM_SAMPLES, num_fewshot=NUM_FEWSHOT, temp=TEMPERATURE, direct_prompt=DIRECT_PROMPT)
-        print("UNIQUE ANSWER COUNTS: ", unique_answers)
-        logp_ai_given_q = calculate_logp_ai_given_q_with_logprobs(model, tokenizer, generated_outputs, unique_answers)
+        
+        sampled_responses = generate_gsm8k_answer_tensor(instruct_model,
+                                    instruct_tokenizer,
+                                    question,
+                                    args.num_samples,
+                                    args.num_fewshot,
+                                    args.temp,
+                                    args.top_k,
+                                    args.direct_prompt
+                                    )
+        
+        torch.save(sampled_responses, f"tensors/{run_name}-gsm8k_p{row['Problem Number']}.pt")
 
-        log_results_to_csv(row['Problem Number'], unique_answers, logp_ai_given_q, filename=FILENAME)
+        # instruct_model = instruct_model.to('cpu')
+        # # Move base_model to instruct_model
+        # if not base_model:
+        #     base_model = AutoModelForCausalLM.from_pretrained(base_model_name, torch_dtype=torch.bfloat16, device_map="auto")
+        #     base_model.generation_config = GenerationConfig.from_pretrained(base_model_name)
+        #     base_model.generation_config.pad_token_id =base_model.generation_config.eos_token_id
+        #     base_device_map = base_model.hf_device_map
 
-        for ai, logp in logp_ai_given_q.items():
-            print(f"-log p({ai} | q): {logp}")
+        for module_name, module in base_model.named_modules():
+            if module_name in base_device_map:
+                module.to(base_device_map[module_name])
+
+        reasoning_steps, answer_statements = find_last_sentence(sampled_responses)
+        
+        num_ai = answer_statements.size(0)
+        print('num a_i: ', num_ai)
+
+        all_surprisals_ai_given_q = torch.tensor([])
+        for ai_idx in range(num_ai):
+            rk_ai, ai_mask = append_suffix_to_prefix(reasoning_steps, answer_statements, ai_idx)
+            neg_logprobs_ai_given_rk_q = sum_answer_logprobs(base_model, base_tokenizer, rk_ai, ai_mask, print_logging=False)
+            
+            # Calculate -log(P(a_i | q))
+            surprisal_a_i_given_q = torch.logsumexp(-neg_logprobs_ai_given_rk_q, dim=0) + torch.log(torch.tensor(num_ai))
+            print(f"-log p(a_{ai_idx} | q): {surprisal_a_i_given_q}")
+
+            all_surprisals_ai_given_q = torch.cat((all_surprisals_ai_given_q, torch.tensor([surprisal_a_i_given_q])))
+
         print("iteration time (s): ", time.time() - start_time)
     print("total time (min): ",  (time.time() - total_start) / 60)
 
