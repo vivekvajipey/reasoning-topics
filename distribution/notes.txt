@@ -7,3 +7,134 @@ Direct Prompt:
 - idk: Extracted 5 from:  ����������🏽����🏻����🏾��������������������🏼����🏽����🏾��������������������🏼����🏽����🏾����������������🏼
 - For problem 0: Extracted 7 from:  seconds.Whatishisspeedinmilesperhour?
 A:Theanswerisapproximately7.7milesperhour.
+
+
+
+Batch Prompting:
+- Sometimes responses are very long (max tokens?):
+["<s> [INST] Q: Mark has a garden with flowers. He planted plants of three different colors in it. Ten of them are yellow, and there are 80% more of those in purple. There are only 25% as many green flowers as there are yellow and purple flowers. How many flowers does Mark have in his garden?\nA: Let's think step by step. [/INST] Let's denote the number of purple flowers as X. Since there are 80% more purple flowers than yellow flowers, and there are 10 yellow flowers, we can write the equation: X = 10 * 1.8 = 18.\n\nLet's denote the number of green flowers as Y. Since there are 25% as many green flowers as there are yellow and purple flowers, we can write: Y = 10 + 10 + 18 * 0.25 = 15.\n\nTherefore, Mark has a total of 10 (yellow) + 18 (purple) + 15 (green) = <<10+18+15=43>>43 flowers in his garden.</s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s>",
+ "<s> [INST] Q: Mark has a garden with flowers. He planted plants of three different colors in it. Ten of them are yellow, and there are 80% more of those in purple. There are only 25% as many green flowers as there are yellow and purple flowers. How many flowers does Mark have in his garden?\nA: Let's think step by step. [/INST] Let's denote the number of purple flowers as x. Since there are 80% more purple flowers than yellow ones, the number of yellow flowers is x/1.25. The number of green flowers is 25% of the number of yellow and purple flowers combined, so it's 0.25 * (x + x/1.25).\n\nWe have three equations based on the given information:\n\n1. x + (x/1.25) + 0.25 * (x + x/1.25) = total number of flowers\n2. x + x/1.25 = 10 (yellow flowers) * 1.25\n3. 0.25 * (x + x/1.25) = 25% of (x + x/1.25)\n\nLet's solve equation 2 for x:\n\nx + x/1.25 = 12.5\nx(1 + 1/1.25) = 12.5\nx = 12.5 * 1.25 / 2\nx = 15\n\nNow let's calculate the number of yellow and purple flowers:\n\nYellow flowers = x/1.25 = 15/1.25 ≈ 12\nPurple flowers = 1.25 * Yellow flowers = 1.25 * 12 ≈ 15\n\nLet's check if the total number of flowers is correct:\n\nTotal number of flowers = 12 (yellow) + 15 (purple) + 0.25 * (12 + 15) ≈ 12 + 15 + 6.25 = 23.25\n\nHowever, the total number of flowers should be a whole number. It seems like there is a mistake in the problem statement or our calculations. We cannot determine the exact number of flowers in the garden with the given information.</s>",
+ "<s> [INST] Q: Mark has a garden with flowers. He planted plants of three different colors in it. Ten of them are yellow, and there are 80% more of those in purple. There are only 25% as many green flowers as there are yellow and purple flowers. How many flowers does Mark have in his garden?\nA: Let's think step by step. [/INST] Let's denote the number of purple flowers as X. According to the problem, there are 80% more purple flowers than yellow ones, so there are 1.8 * Ten = 18 yellow flowers.\n\nSince there are 25% as many green flowers as there are yellow and purple flowers, the number of green flowers is 0.25 * (10 + 18) = 6.5 * 18 = 117 (we round up because we can't have a fraction of a flower).\n\nSo, in total, Mark has 10 (yellow) + 18 (purple) + 117 (green) = <<10+18+117=135>>135 flowers in his garden.</s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s>"]
+
+Last sentence identification:
+There are two tokens for "." it seems: tokenizer.decode(842) == tokenizer.decode(28723)
+
+
+PROBLEM 3, BATCH 10 NOTES:
+
+PREFIXES:
+0
+<s> [INST] Q: Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?
+A: Let's think step by step. [/INST] 1. Julie reads 120 pages in total.
+2. Yesterday, she read 12 pages, leaving 108 pages to be read.
+3. Today, she read twice as many pages as yesterday, so she read 24 pages.
+4. This leaves 84 pages to be read tomorrow (108 - 24).
+5. Julie wants to read half of the remaining pages tomorrow, which is 84 / 2 = 42 pages.
+
+
+1
+<s> [INST] Q: Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?
+A: Let's think step by step. [/INST] Julie started reading a 120-page book. Yesterday, she read 12 pages, which means she has 120 - 12 = <<120-12=108>>108 pages left to read.
+
+Today, she read twice as many pages as yesterday, which is 2 * 12 = <<2*12=24>>24 pages. This leaves her with 108 - 24 = <<108-24=84>>84 pages left to read.
+
+Tomorrow, she wants to read half of the remaining pages.
+2
+<s> [INST] Q: Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?
+A: Let's think step by step. [/INST] Julie has read 12 pages yesterday and today she read twice as many pages as yesterday, which means she read 12 x 2 = <<12*2=24>>24 pages today.
+
+The total number of pages in the book is 120. After reading 24 pages today, Julie has read a total of 36 pages (12 + 24).
+
+Tomorrow, she wants to read half of the remaining pages. The remaining pages are 120 - 36 = <<120-36=84>>84 pages.
+
+
+3
+<s> [INST] Q: Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?
+A: Let's think step by step. [/INST] 1. Julie started with a 120-page book.
+2. Yesterday, she read 12 pages, leaving her with 108 pages to read.
+3. Today, she read twice as many pages as yesterday, which is 24 pages.
+4. After reading today, she has 84 pages left to read.
+5. She wants to read half of the remaining pages tomorrow, which means she should read 42 pages.
+
+
+4
+<s> [INST] Q: Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?
+A: Let's think step by step. [/INST] 1. Julie started with a 120-page book.
+2. Yesterday, she read 12 pages, leaving her with 108 pages to read.
+3. Today, she read twice as many pages as yesterday, which means she read 24 pages.
+4. So now, she has 108 - 24 = 84 pages left to read.
+5. She wants to read half of the remaining pages tomorrow, which means she should read 84 / 2 = 42 pages.
+
+
+5
+<s> [INST] Q: Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?
+A: Let's think step by step. [/INST] 1. Julie started with 120 pages and read 12 pages yesterday, leaving her with 108 pages (120 - 12 = 108).
+2. Today she read twice as many pages as yesterday, which was 12 x 2 = 24 pages.
+3. After today, she has 108 - 24 = 84 pages remaining.
+4. She wants to read half of the remaining pages tomorrow, which is 84 / 2 = 42 pages.
+
+
+6
+<s> [INST] Q: Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?
+A: Let's think step by step. [/INST] 1. Julie reads 12 pages yesterday.
+2. Today, she reads twice as many pages as yesterday, so she reads 12 * 2 = 24 pages.
+3. That means she has now read 12 + 24 = 36 pages.
+4. The book has 120 pages in total, so she still has 120 - 36 = 84 pages left to read.
+5.
+7
+<s> [INST] Q: Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?
+A: Let's think step by step. [/INST] 1. Julie started reading a 120-page book.
+2. Yesterday, she read 12 pages, leaving 108 pages unread.
+3. Today, she read twice as many pages as yesterday, which is 24 pages.
+4. This means she has now read 36 pages in total (12 from yesterday and 24 today).
+5. There are still 72 pages left to read (108 - 36).
+6. Tomorrow, she wants to read half of the remaining pages.
+7. Half of 72 pages is 36 pages.
+
+
+8
+<s> [INST] Q: Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?
+A: Let's think step by step. [/INST] 1. Julie has already read 12 pages.
+2. Today, she read twice as many pages as yesterday, which means she read 2 × 12 = 24 pages today.
+3. So far, she has read 12 + 24 = 36 pages.
+4. The book has 120 pages, so there are still 120 - 36 = 84 pages left to read.
+5. Tomorrow, Julie wants to read half of the remaining pages, which means she wants to read 84 ÷ 2 = 42 pages.
+
+
+9
+<s> [INST] Q: Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?
+A: Let's think step by step. [/INST] 1. Julie started with 120 pages and read 12 pages yesterday, so she has 108 pages left to read (120 - 12).
+2. Today, she read twice as many pages as yesterday, which means she read 24 pages (12 x 2).
+3. So now, she has 84 pages left to read (108 - 24).
+4. Tomorrow, she wants to read half of the remaining pages, which means she should read 42 pages (84 / 2).
+
+
+num a_i:  10
+SUFFIXES INDEX 0
+So, Julie should read 42 pages tomorrow to meet her goal.</s>
+append_suffix_to_prefix took 0.04500603675842285 seconds
+sum_answer_logprobs took 5.408191204071045 seconds
+-log p(a_0 | q): 6.670379161834717
+SUFFIXES INDEX 1
+So, she should read 84 / 2 = <<84/2=42>>42 pages.</s>
+append_suffix_to_prefix took 0.033178091049194336 seconds
+sum_answer_logprobs took 29.47450304031372 seconds
+-log p(a_1 | q): 6.167094707489014
+SUFFIXES INDEX 2
+To find out how many pages she should read tomorrow, we divide the remaining pages by 2: 84 / 2 = <<84/2=42>>42 pages.</s>
+append_suffix_to_prefix took 0.13729190826416016 seconds
+sum_answer_logprobs took 89.56746196746826 seconds
+-log p(a_2 | q): 16.750280380249023
+SUFFIXES INDEX 3
+So, Julie should read 42 pages tomorrow.</s>
+append_suffix_to_prefix took 0.04150795936584473 seconds
+sum_answer_logprobs took 87.11010003089905 seconds
+-log p(a_3 | q): 1.8030891418457031
+SUFFIXES INDEX 4
+Final answer: Julie should read 42 pages tomorrow.</s>
+append_suffix_to_prefix took 0.3802490234375 seconds
+sum_answer_logprobs took 97.48413705825806 seconds
+-log p(a_4 | q): 7.781846523284912
+SUFFIXES INDEX 5
+So, Julie should read 42 pages tomorrow.</s>
+append_suffix_to_prefix took 0.020301103591918945 seconds
