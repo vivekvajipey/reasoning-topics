@@ -9,6 +9,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, GenerationConfig
 from util import get_prompt_message, extract_last_integer, extract_last_number
 from util import remove_last_sentence
+from util import set_seed
 
 def find_last_sentence(tensor, verbose=False):
     batch_size, seq_length = tensor.shape
@@ -163,6 +164,8 @@ def log_results_to_csv(idx, tokenizer, problem_number, reasoning_steps, answer_s
         })
 
 def main():
+    set_seed(0)
+
     parser = argparse.ArgumentParser(description="Run the model to generate responses and calculate log probabilities.")
     parser.add_argument("--start_row", type=int, default=0, help="Starting row for processing the dataset.")
     parser.add_argument("--num_rows", type=int, default=1, help="Number of rows to process from the dataset.")
@@ -170,7 +173,7 @@ def main():
     parser.add_argument("--temp", type=float, default=0.7, help="Temperature setting for the generation process.")
     parser.add_argument("--num_fewshot", type=int, default=0, help="Number of few-shot examples to use for generation.")
     parser.add_argument("--top_k", type=int, default=40, help="top k parameter to use for generation.")
-    parser.add_argument("--direct_prompt", type=bool, default=False, help="Indicates if Direct Prompting should be used instead of CoT.")
+    parser.add_argument("--direct_prompt", action='store_true', help="Indicates if Direct Prompting should be used instead of CoT.")
     parser.add_argument("--model_name", type=str, default="mistral-7b-v0.1", help="Name of model to test on (should have both instruct and base models)")
     parser.add_argument("--verbose", action='store_true', help="Enable verbose printing")
     args = parser.parse_args()

@@ -140,7 +140,7 @@ def main():
     parser.add_argument("--temp", type=float, default=0.7, help="Temperature setting for the generation process.")
     parser.add_argument("--num_fewshot", type=int, default=0, help="Number of few-shot examples to use for generation.")
     parser.add_argument("--top_k", type=int, default=40, help="top k parameter to use for generation.")
-    parser.add_argument("--direct_prompt", type=bool, default=False, help="Indicates if Direct Prompting should be used instead of CoT.")
+    parser.add_argument("--direct_prompt", action='store_true', help="Indicates if Direct Prompting should be used instead of CoT.")
     parser.add_argument("--model_name", type=str, default="mistral-7b-v0.1", help="Name of model to test on (should have both instruct and base models)")
     parser.add_argument("--verbose", action='store_true', help="Enable verbose printing")
     args = parser.parse_args()
