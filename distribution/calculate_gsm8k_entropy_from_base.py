@@ -10,6 +10,8 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, GenerationConfig
 from util import get_prompt_message, extract_last_integer, extract_last_number
 from util import remove_last_sentence
 from util import set_seed
+from util import print_tensors_on_cuda_gpu, print_tensors_on_mps_gpu
+
 
 def find_last_sentence(tensor, verbose=False):
     batch_size, seq_length = tensor.shape
@@ -43,11 +45,13 @@ def find_last_sentence(tensor, verbose=False):
                     filtered_indices.append(token_index)
 
         newline_indices = (row_tensor == 13).nonzero()
+        inst_indices = (row_tensor == 16289).nonzero()
 
         # Determine the last sentence start index
         last_period_index = max(filtered_indices) if filtered_indices else -1
         last_newline_index = newline_indices[-1] if newline_indices.size(0) > 0 else -1
-        last_sentence_start_index = max(last_period_index, last_newline_index)
+        last_inst_index = inst_indices[-1] + 1 if newline_indices.size(0) > 0 else -1 # +1 to include ']' after 'INST' 
+        last_sentence_start_index = max(last_period_index, last_newline_index, last_inst_index)
 
         # Set mask for the last sentence
         if last_sentence_start_index != -1:
@@ -103,11 +107,10 @@ def append_suffix_to_prefix(prefixes, suffixes, suffix_index, tokenizer, verbose
     return new_tensor, new_mask
 
 
-def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, print_logging=False):
+def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, print_logging=False):
     input_ids = input_ids.to(model.device)
     answer_mask = answer_mask.to(model.device)
 
-    import time
     start_time = time.time()
     outputs = model(input_ids)
     forward_pass_duration = time.time() - start_time
@@ -199,6 +202,12 @@ def main():
     base_device_map = base_model.hf_device_map
 
     total_start = time.time()
+
+    TENSOR_PRINT = False
+    if TENSOR_PRINT:
+        print("--------------------- BEFORE DF LOOP ---------------------")
+        print_tensors_on_mps_gpu()
+
     for idx, row in gpt35_df[args.start_row : args.start_row + args.num_rows].iterrows():
         start_time = time.time()
 
@@ -239,7 +248,7 @@ def main():
 
             if args.verbose:
                 sal_start = time.time()
-            logprobs_ai_given_rk_q = sum_answer_logprobs(base_model, base_tokenizer, rk_ai, ai_mask, print_logging=False)
+            logprobs_ai_given_rk_q = sum_answer_logprobs(base_model, base_tokenizer, rk_ai, ai_mask, batch_size=5, print_logging=False)
             if args.verbose:
                 sal_total_time = time.time() - sal_start
                 print(f"sum_answer_logprobs took {sal_total_time} seconds")

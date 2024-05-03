@@ -9,7 +9,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, GenerationConfig
 from util import get_prompt_message
 
-def generate_gsm8k_answer_tensor(model, tokenizer, question, num_samples, num_fewshot, temp, top_k=40, direct_prompt=False, verbose=False):
+def generate_gsm8k_answer_tensor(model, tokenizer, question, num_samples, num_fewshot, temp, batch_size=20, top_k=40, direct_prompt=False, verbose=False):
     messages = get_prompt_message(question, num_fewshot, direct_prompt)
     question_vector = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt")
     input_tensor = question_vector.repeat(num_samples, 1)
@@ -169,15 +169,15 @@ def main():
 
         question = row['Question']
         
-        sampled_responses = generate_gsm8k_answer_tensor(instruct_model,
-                                    instruct_tokenizer,
-                                    question,
-                                    args.num_samples,
-                                    args.num_fewshot,
-                                    args.temp,
-                                    args.top_k,
-                                    args.direct_prompt,
-                                    args.verbose
+        sampled_responses = generate_gsm8k_answer_tensor(model=instruct_model,
+                                    tokenizer=instruct_tokenizer,
+                                    question=question,
+                                    num_samples=args.num_samples,
+                                    num_fewshot=args.num_fewshot,
+                                    temp=args.temp,
+                                    top_k=args.top_k,
+                                    direct_prompt=args.direct_prompt,
+                                    verbose=args.verbose
                                     )
         
         torch.save(sampled_responses, f"tensors/{run_name}-gsm8k_p{row['Problem Number']}.pt")

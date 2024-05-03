@@ -3,8 +3,25 @@ import re
 # from nltk.tokenize import sent_tokenize
 import torch
 from typing import Union
+import numpy as np
+import random
+import gc
+
+import warnings
+warnings.filterwarnings("ignore", message="torch.distributed.reduce_op is deprecated, please use torch.distributed.ReduceOp instead")
 
 # nltk.download('punkt')
+
+def set_seed(seed_value):
+    random.seed(seed_value)
+    np.random.seed(seed_value)
+    torch.manual_seed(seed_value)
+
+    if hasattr(torch, 'mps') and torch.backends.mps.is_available():
+        torch.mps.manual_seed(seed_value)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed_value)
+
 
 def get_fewshot_examples(num_examples, direct=False):
     if direct:
@@ -31,7 +48,7 @@ def get_fewshot_examples(num_examples, direct=False):
         ]
     return examples[:num_examples]
 
-def get_prompt_message(question, num_fewshot_examples=1, direct=False):
+def get_prompt_message(question, num_fewshot_examples=0, direct=False):
     # num_fewshot_examples=-1 for direct prompting, 0 for zero-shot CoT
     examples = get_fewshot_examples(num_fewshot_examples, direct=direct)
     prompt = ""
@@ -40,15 +57,15 @@ def get_prompt_message(question, num_fewshot_examples=1, direct=False):
         for i in range(min(num_fewshot_examples, len(examples))):
             prompt += examples[i] + "\n"
     
-    if num_fewshot_examples == -1:
+    if direct:
         question += " Answer in one sentence."
 
     prompt += "Q: " + question + "\nA:"
 
     if not direct and num_fewshot_examples == 0:
         prompt += " Let's think step by step."
-    if direct:
-        prompt += " The answer is "
+    # if direct:
+    #     prompt += " The answer is "
     
     print("PROMPT: ", prompt)
 
@@ -161,3 +178,23 @@ def split_into_sentences(text: str) -> list[str]:
     sentences = [s.strip() for s in sentences]
     if sentences and not sentences[-1]: sentences = sentences[:-1]
     return sentences
+
+def print_tensors_on_cuda_gpu():
+    for obj in gc.get_objects():
+        try:
+            if torch.is_tensor(obj) and obj.is_cuda:
+                print(f"Tensor on GPU: {obj.size()}, dtype: {obj.dtype}, device: {obj.device}")
+            elif hasattr(obj, 'data') and torch.is_tensor(obj.data) and obj.data.is_cuda:
+                print(f"Tensor on GPU via .data: {obj.data.size()}, dtype: {obj.data.dtype}, device: {obj.data.device}")
+        except Exception as e:
+            print("gpu print debug did not work")
+
+def print_tensors_on_mps_gpu():
+    for obj in gc.get_objects():
+        try:
+            if torch.is_tensor(obj) and obj.is_mps:
+                print(f"Tensor on GPU: {obj.size()}, dtype: {obj.dtype}, device: {obj.device}")
+            elif hasattr(obj, 'data') and torch.is_tensor(obj.data) and obj.data.is_mps:
+                print(f"Tensor on GPU via .data: {obj.data.size()}, dtype: {obj.data.dtype}, device: {obj.data.device}")
+        except Exception as e:
+            pass
