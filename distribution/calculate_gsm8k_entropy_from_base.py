@@ -112,38 +112,46 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
     answer_mask = answer_mask.to(model.device)
 
     start_time = time.time()
-    outputs = model(input_ids)
-    forward_pass_duration = time.time() - start_time
-    if print_logging:
-        print("Forward pass duration: ", forward_pass_duration)
+    total_summed_logprobs = 0
 
-    logprobs = torch.log_softmax(outputs.logits, dim=-1).detach()
+    for i in range(0, input_ids.shape[0], batch_size):
+        start_row_idx = i
+        end_row_idx = min(i + batch_size, input_ids.shape[0])
+        batch_ids = input_ids[start_row_idx:end_row_idx]
+        
+        outputs = model(batch_ids)
+        forward_pass_duration = time.time() - start_time
+        if print_logging:
+            print("Forward pass duration: ", forward_pass_duration)
 
-    # Adjust indices to ignore the first token's log prob as it corresponds to the second token
-    logprobs = logprobs[:, :-1, :]
-    input_ids = input_ids[:, 1:]
+        logprobs = torch.log_softmax(outputs.logits, dim=-1).detach()
 
-    # get logprobs corresponding to specific input_id tokens (out of all vocab logprob distribution)
-    gen_logprobs = torch.gather(logprobs, 2, input_ids[:, :, None]).squeeze(-1)
+        # Adjust indices to ignore the first token's log prob as it corresponds to the second token
+        logprobs = logprobs[:, :-1, :]
+        batch_ids  = batch_ids [:, 1:]
 
-    masked_logprobs = gen_logprobs * answer_mask[:, 1:].float() # extract logprobs from answer tokens
-    if print_logging:
-        print("masked_probs: ", masked_logprobs.shape)
+        # get logprobs corresponding to specific input_id tokens (out of all vocab logprob distribution)
+        gen_logprobs = torch.gather(logprobs, 2, batch_ids[:, :, None]).squeeze(-1)
 
-    summed_logprobs = masked_logprobs.sum(dim=1)
-    if print_logging:
-        print("summed_probs: ", summed_logprobs.shape)
+        masked_logprobs = gen_logprobs * answer_mask[start_row_idx:end_row_idx, 1:].float() # extract logprobs from answer tokens
+        if print_logging:
+            print("masked_probs: ", masked_logprobs.shape)
 
-        # batch = []
-        for input_sentence, input_probs in zip(input_ids, masked_logprobs):
-            text_sequence = []
-            for token, p in zip(input_sentence, input_probs):
-                if token not in tokenizer.all_special_ids:
-                    print((tokenizer.decode(token), p.item()))
-                    text_sequence.append((tokenizer.decode(token), p.item()))
-            # batch.append(text_sequence)
+        batch_summed_logprobs = masked_logprobs.sum(dim=1)
+        total_summed_logprobs += batch_summed_logprobs
+        if print_logging:
+            print("summed_probs: ", batch_summed_logprobs.shape)
 
-    return summed_logprobs
+            # batch = []
+            for input_sentence, input_probs in zip(batch_ids , masked_logprobs):
+                text_sequence = []
+                for token, p in zip(input_sentence, input_probs):
+                    if token not in tokenizer.all_special_ids:
+                        print((tokenizer.decode(token), p.item()))
+                        text_sequence.append((tokenizer.decode(token), p.item()))
+                # batch.append(text_sequence)
+
+    return total_summed_logprobs
 
 
 def log_results_to_csv(idx, tokenizer, problem_number, reasoning_steps, answer_statements, all_neg_logp_ai_given_q, entropy, filename="nameless_generation_log.csv"):
@@ -176,6 +184,7 @@ def main():
     parser.add_argument("--temp", type=float, default=0.7, help="Temperature setting for the generation process.")
     parser.add_argument("--num_fewshot", type=int, default=0, help="Number of few-shot examples to use for generation.")
     parser.add_argument("--top_k", type=int, default=40, help="top k parameter to use for generation.")
+    parser.add_argument("--batch_size", type=int, default=5, help="batch size for forward pass when summing logprobs")
     parser.add_argument("--direct_prompt", action='store_true', help="Indicates if Direct Prompting should be used instead of CoT.")
     parser.add_argument("--model_name", type=str, default="mistral-7b-v0.1", help="Name of model to test on (should have both instruct and base models)")
     parser.add_argument("--verbose", action='store_true', help="Enable verbose printing")
@@ -248,7 +257,7 @@ def main():
 
             if args.verbose:
                 sal_start = time.time()
-            logprobs_ai_given_rk_q = sum_answer_logprobs(base_model, base_tokenizer, rk_ai, ai_mask, batch_size=5, print_logging=False)
+            logprobs_ai_given_rk_q = sum_answer_logprobs(base_model, base_tokenizer, rk_ai, ai_mask, batch_size=args.batch_size, print_logging=False)
             if args.verbose:
                 sal_total_time = time.time() - sal_start
                 print(f"sum_answer_logprobs took {sal_total_time} seconds")
