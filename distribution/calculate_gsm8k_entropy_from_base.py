@@ -135,20 +135,25 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
 
         masked_logprobs = gen_logprobs * answer_mask[start_row_idx:end_row_idx, 1:].float() # extract logprobs from answer tokens
         if print_logging:
-            print("masked_probs: ", masked_logprobs.shape)
+            print("Masked logprobs shape: ", masked_logprobs.shape)
+            print("Masked logprobs (before sum): ", masked_logprobs)
 
         batch_summed_logprobs = masked_logprobs.sum(dim=1)
-        total_summed_logprobs += batch_summed_logprobs
         if print_logging:
-            print("summed_probs: ", batch_summed_logprobs.shape)
+            print("Batch summed logprobs: ", batch_summed_logprobs)
 
-            # batch = []
-            for input_sentence, input_probs in zip(batch_ids , masked_logprobs):
-                text_sequence = []
-                for token, p in zip(input_sentence, input_probs):
-                    if token not in tokenizer.all_special_ids:
-                        print((tokenizer.decode(token), p.item()))
-                        text_sequence.append((tokenizer.decode(token), p.item()))
+        total_summed_logprobs += batch_summed_logprobs
+        
+        # if print_logging:
+        #     print("summed_probs: ", batch_summed_logprobs.shape)
+
+        #     # batch = []
+        #     for input_sentence, input_probs in zip(batch_ids , masked_logprobs):
+        #         text_sequence = []
+        #         for token, p in zip(input_sentence, input_probs):
+        #             if token not in tokenizer.all_special_ids:
+        #                 print((tokenizer.decode(token), p.item()))
+        #                 text_sequence.append((tokenizer.decode(token), p.item()))
                 # batch.append(text_sequence)
 
     return total_summed_logprobs
@@ -258,6 +263,7 @@ def main():
             if args.verbose:
                 sal_start = time.time()
             logprobs_ai_given_rk_q = sum_answer_logprobs(base_model, base_tokenizer, rk_ai, ai_mask, batch_size=args.batch_size, print_logging=False)
+            print("logprobs_ai_given_rk_q: ", logprobs_ai_given_rk_q)
             if args.verbose:
                 sal_total_time = time.time() - sal_start
                 print(f"sum_answer_logprobs took {sal_total_time} seconds")
@@ -265,7 +271,7 @@ def main():
             # print("logprobs_ai_given_rk_q: ", logprobs_ai_given_rk_q)
 
             # Calculate -log(P(a_i | q))
-            logprob_a_i_given_q = torch.logsumexp(logprobs_ai_given_rk_q, dim=0) + torch.log(torch.tensor(num_ai))
+            logprob_a_i_given_q = torch.logsumexp(logprobs_ai_given_rk_q, dim=0) - torch.log(torch.tensor(num_ai))
             surprisal_a_i_given_q = -logprob_a_i_given_q
             print(f"-log p(a_{ai_idx} | q): {surprisal_a_i_given_q}")
 
