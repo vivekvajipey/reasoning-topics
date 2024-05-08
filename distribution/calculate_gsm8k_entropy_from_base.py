@@ -12,6 +12,7 @@ from util import remove_last_sentence
 from util import set_seed
 from util import print_tensors_on_cuda_gpu, print_tensors_on_mps_gpu
 
+TENSOR_PRINT = False
 
 def find_last_sentence(tensor, verbose=False):
     batch_size, seq_length = tensor.shape
@@ -112,14 +113,19 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
     answer_mask = answer_mask.to(model.device)
 
     start_time = time.time()
-    total_summed_logprobs = 0
+    total_summed_logprobs = torch.tensor([]).to(model.device)
 
     for i in range(0, input_ids.shape[0], batch_size):
         start_row_idx = i
         end_row_idx = min(i + batch_size, input_ids.shape[0])
         batch_ids = input_ids[start_row_idx:end_row_idx]
+
+        if TENSOR_PRINT:
+           print("tensor printing batch ", i)
+           print_tensors_on_mps_gpu() 
         
-        outputs = model(batch_ids)
+        with torch.no_grad():
+            outputs = model(batch_ids)
         forward_pass_duration = time.time() - start_time
         if print_logging:
             print("Forward pass duration: ", forward_pass_duration)
@@ -136,13 +142,12 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
         masked_logprobs = gen_logprobs * answer_mask[start_row_idx:end_row_idx, 1:].float() # extract logprobs from answer tokens
         if print_logging:
             print("Masked logprobs shape: ", masked_logprobs.shape)
-            print("Masked logprobs (before sum): ", masked_logprobs)
 
         batch_summed_logprobs = masked_logprobs.sum(dim=1)
         if print_logging:
-            print("Batch summed logprobs: ", batch_summed_logprobs)
+            print("Batch summed logprobs: ", batch_summed_logprobs.shape, "\n", batch_summed_logprobs)
 
-        total_summed_logprobs += batch_summed_logprobs
+        total_summed_logprobs = torch.cat((total_summed_logprobs, batch_summed_logprobs), dim=0)
         
         # if print_logging:
         #     print("summed_probs: ", batch_summed_logprobs.shape)
@@ -155,6 +160,8 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
         #                 print((tokenizer.decode(token), p.item()))
         #                 text_sequence.append((tokenizer.decode(token), p.item()))
                 # batch.append(text_sequence)
+
+    print("TOTAL SUMMED LOGPROBS: ", total_summed_logprobs)
 
     return total_summed_logprobs
 
@@ -217,7 +224,6 @@ def main():
 
     total_start = time.time()
 
-    TENSOR_PRINT = False
     if TENSOR_PRINT:
         print("--------------------- BEFORE DF LOOP ---------------------")
         print_tensors_on_mps_gpu()
@@ -262,7 +268,7 @@ def main():
 
             if args.verbose:
                 sal_start = time.time()
-            logprobs_ai_given_rk_q = sum_answer_logprobs(base_model, base_tokenizer, rk_ai, ai_mask, batch_size=args.batch_size, print_logging=False)
+            logprobs_ai_given_rk_q = sum_answer_logprobs(base_model, base_tokenizer, rk_ai, ai_mask, batch_size=args.batch_size, print_logging=True)
             print("logprobs_ai_given_rk_q: ", logprobs_ai_given_rk_q)
             if args.verbose:
                 sal_total_time = time.time() - sal_start
@@ -271,7 +277,7 @@ def main():
             # print("logprobs_ai_given_rk_q: ", logprobs_ai_given_rk_q)
 
             # Calculate -log(P(a_i | q))
-            logprob_a_i_given_q = torch.logsumexp(logprobs_ai_given_rk_q, dim=0) - torch.log(torch.tensor(num_ai))
+            logprob_a_i_given_q = torch.logsumexp(logprobs_ai_given_rk_q, dim=0) - torch.log(torch.tensor(num_ai)) # log ( (1 / num_ai) * sum of (exp ())
             surprisal_a_i_given_q = -logprob_a_i_given_q
             print(f"-log p(a_{ai_idx} | q): {surprisal_a_i_given_q}")
 
