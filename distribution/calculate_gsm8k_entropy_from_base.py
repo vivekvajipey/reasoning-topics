@@ -108,12 +108,13 @@ def append_suffix_to_prefix(prefixes, suffixes, suffix_index, tokenizer, verbose
     return new_tensor, new_mask
 
 
-def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, print_logging=False):
+def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, run_problem_name="nameless_logprobs", print_logging=False):
     input_ids = input_ids.to(model.device)
     answer_mask = answer_mask.to(model.device)
 
     start_time = time.time()
     total_summed_logprobs = torch.tensor([]).to(model.device)
+    norm_total_summed_logprobs = torch.tensor([]).to(model.device)
 
     if print_logging:
         print("input_ids (rk_ai) shape: ", input_ids.shape)
@@ -143,6 +144,10 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
         # get logprobs corresponding to specific input_id tokens (out of all vocab logprob distribution)
         gen_logprobs = torch.gather(logprobs, 2, batch_ids[:, :, None]).squeeze(-1)
 
+        SAVE_LOGPROBS = True
+        if SAVE_LOGPROBS:
+            torch.save(gen_logprobs, f"tensors/{run_problem_name}-logprobs.pt")
+
         masked_logprobs = gen_logprobs * answer_mask[start_row_idx:end_row_idx, 1:].float() # extract logprobs from answer tokens
         if print_logging:
             print("Answer Mask shape: ", answer_mask.shape)            
@@ -160,13 +165,14 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
             print("Batch summed logprobs: ", batch_summed_logprobs.shape, "\n", batch_summed_logprobs)
 
         total_summed_logprobs = torch.cat((total_summed_logprobs, batch_summed_logprobs), dim=0)
+        norm_total_summed_logprobs = torch.cat((norm_total_summed_logprobs, batch_summed_logprobs / nonzero_elements_count), dim=0)
         
         if print_logging:
             print("summed_probs: ", batch_summed_logprobs.shape)
 
             # batch = []
-            for input_sentence, input_probs in zip(batch_ids , masked_logprobs):
-            # for input_sentence, input_probs in zip(batch_ids , gen_logprobs): # check all logprobs
+            # for input_sentence, input_probs in zip(batch_ids , masked_logprobs):
+            for input_sentence, input_probs in zip(batch_ids , gen_logprobs): # check all logprobs
                 # text_sequence = []
                 for token, p in zip(input_sentence, input_probs):
                     if token not in tokenizer.all_special_ids:
@@ -177,27 +183,27 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
 
     print("TOTAL SUMMED LOGPROBS: ", total_summed_logprobs)
 
-    return total_summed_logprobs
+    return total_summed_logprobs, norm_total_summed_logprobs
 
 
-def log_results_to_csv(idx, tokenizer, problem_number, reasoning_steps, answer_statements, all_neg_logp_ai_given_q, entropy, filename="nameless_generation_log.csv"):
+def log_results_to_csv(idx, tokenizer, problem_number, reasoning_steps, answer_statements, all_neg_logp_ai_given_q, entropy, norm_entropy, filename="nameless_generation_log.csv"):
     print("logging to ", filename)
     file_exists = os.path.isfile(filename)
     
     with open(filename, mode='a', newline='') as file:
-        fieldnames = ['question_number', 'reasoning_steps', 'answer_statements', 'all_neg_logp_ai_given_q', 'entropy']
+        fieldnames = ['question_number', 'reasoning_steps', 'answer_statements', 'all_neg_logp_ai_given_q', 'entropy', 'normalized_entropy']
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         
         if not file_exists:
             writer.writeheader()  # Write headers if the file is being created
         
-        # Write the data row
         writer.writerow({
             'question_number': problem_number,
             'reasoning_steps': [rs.replace("<unk>", "") for rs in tokenizer.batch_decode(reasoning_steps)],
             'answer_statements': [a.replace("<unk>", "") for a in tokenizer.batch_decode(answer_statements)],
             'all_neg_logp_ai_given_q': all_neg_logp_ai_given_q.tolist(),
             'entropy': entropy.item(),
+            'normalized_entropy': norm_entropy.item()
         })
 
 def main():
@@ -243,67 +249,86 @@ def main():
         print_tensors_on_mps_gpu()
 
     for idx, row in gpt35_df[args.start_row : args.start_row + args.num_rows].iterrows():
-        start_time = time.time()
+        try:
+            start_time = time.time()
 
-        problem_number = row['Problem Number']
-        # print("CURRENT QUESTION: ", question)
-        sampled_responses = torch.load(f"tensors/{run_name}-gsm8k_p{row['Problem Number']}.pt")
-        
-        for module_name, module in base_model.named_modules():
-            if module_name in base_device_map:
-                module.to(base_device_map[module_name])
-
-        if args.verbose:
-            fls_start = time.time()
-        reasoning_steps, answer_statements = find_last_sentence(sampled_responses)
-        if args.verbose:
-            fls_total_time = time.time() - fls_start
-            print(f"find_last_sentence took {fls_total_time} seconds")
-
-        if args.verbose:
-            decoded_prefixes = base_tokenizer.batch_decode(reasoning_steps)
-        
-            print("PREFIXES: ")
-            for i, p in enumerate(decoded_prefixes):
-                print(i)
-                print(p.replace("<unk>", ""))
-        
-        num_ai = answer_statements.size(0)
-        print('num a_i: ', num_ai)
-
-        all_surprisals_ai_given_q = torch.tensor([])
-        for ai_idx in range(num_ai):
-            if args.verbose:
-                astp_start = time.time()
-            rk_ai, ai_mask = append_suffix_to_prefix(reasoning_steps, answer_statements, ai_idx, base_tokenizer, args.verbose)
-            if args.verbose:
-                astp_total_time = time.time() - astp_start
-                print(f"append_suffix_to_prefix took {astp_total_time} seconds")
+            problem_number = row['Problem Number']
+            # print("CURRENT QUESTION: ", question)
+            sampled_responses = torch.load(f"tensors/{run_name}-gsm8k_p{row['Problem Number']}.pt")
+            
+            for module_name, module in base_model.named_modules():
+                if module_name in base_device_map:
+                    module.to(base_device_map[module_name])
 
             if args.verbose:
-                sal_start = time.time()
-            logprobs_ai_given_rk_q = sum_answer_logprobs(base_model, base_tokenizer, rk_ai, ai_mask, batch_size=args.batch_size, print_logging=True)
-            print("logprobs_ai_given_rk_q: ", logprobs_ai_given_rk_q)
+                fls_start = time.time()
+            reasoning_steps, answer_statements = find_last_sentence(sampled_responses)
             if args.verbose:
-                sal_total_time = time.time() - sal_start
-                print(f"sum_answer_logprobs took {sal_total_time} seconds")
+                fls_total_time = time.time() - fls_start
+                print(f"find_last_sentence took {fls_total_time} seconds")
 
-            # print("logprobs_ai_given_rk_q: ", logprobs_ai_given_rk_q)
+            if args.verbose:
+                decoded_prefixes = base_tokenizer.batch_decode(reasoning_steps)
+            
+                print("PREFIXES: ")
+                for i, p in enumerate(decoded_prefixes):
+                    print(i)
+                    print(p.replace("<unk>", ""))
+            
+            num_ai = answer_statements.size(0)
+            print('num a_i: ', num_ai)
 
-            # Calculate -log(P(a_i | q))
-            logprob_a_i_given_q = torch.logsumexp(logprobs_ai_given_rk_q, dim=0) - torch.log(torch.tensor(num_ai)) # log ( (1 / num_ai) * sum of (exp ())
-            surprisal_a_i_given_q = -logprob_a_i_given_q
-            print(f"-log p(a_{ai_idx} | q): {surprisal_a_i_given_q}")
+            all_surprisals_ai_given_q = torch.tensor([])
+            all_norm_surprisals_ai_given_q = torch.tensor([])
+            for ai_idx in range(num_ai):
+                if args.verbose:
+                    astp_start = time.time()
+                rk_ai, ai_mask = append_suffix_to_prefix(reasoning_steps, answer_statements, ai_idx, base_tokenizer, args.verbose)
+                if args.verbose:
+                    astp_total_time = time.time() - astp_start
+                    print(f"append_suffix_to_prefix took {astp_total_time} seconds")
 
-            all_surprisals_ai_given_q = torch.cat((all_surprisals_ai_given_q, torch.tensor([surprisal_a_i_given_q])))
+                if args.verbose:
+                    sal_start = time.time()
+                logprobs_ai_given_rk_q, norm_logprobs_ai_given_rk_q = sum_answer_logprobs(
+                                                                        base_model, 
+                                                                        base_tokenizer, 
+                                                                        rk_ai, 
+                                                                        ai_mask, 
+                                                                        batch_size=args.batch_size, 
+                                                                        run_problem_name=f"{run_name}-gsm8k_p{row['Problem Number']}",
+                                                                        print_logging=True
+                                                                    )
+                print("logprobs_ai_given_rk_q: ", logprobs_ai_given_rk_q)
+                print("norm_logprobs_ai_given_rk_q: ", norm_logprobs_ai_given_rk_q)
+                if args.verbose:
+                    sal_total_time = time.time() - sal_start
+                    print(f"sum_answer_logprobs took {sal_total_time} seconds")
 
-        print("iteration time (s): ", time.time() - start_time)
+                # print("logprobs_ai_given_rk_q: ", logprobs_ai_given_rk_q)
 
-        
-        entropy = torch.mean(all_surprisals_ai_given_q)
-        print(f"QUESTION {problem_number} ENTROPY: {entropy}")
-        log_results_to_csv(idx, base_tokenizer, problem_number, reasoning_steps, answer_statements, all_surprisals_ai_given_q, entropy, filename=f"logs/{run_name}_logs.csv")
+                # Calculate -log(P(a_i | q))
+                logprob_a_i_given_q = torch.logsumexp(logprobs_ai_given_rk_q, dim=0) - torch.log(torch.tensor(num_ai)) # log ( (1 / num_ai) * sum of (exp ())
+                surprisal_a_i_given_q = -logprob_a_i_given_q
+                print(f"-log p(a_{ai_idx} | q): {surprisal_a_i_given_q}")
+                all_surprisals_ai_given_q = torch.cat((all_surprisals_ai_given_q, torch.tensor([surprisal_a_i_given_q])))
 
+                # Calculate -log(P(a_i | q)) using normalized log probabilities
+                norm_logprob_a_i_given_q = torch.logsumexp(norm_logprobs_ai_given_rk_q, dim=0) - torch.log(torch.tensor(num_ai))
+                norm_surprisal_a_i_given_q = -norm_logprob_a_i_given_q
+                all_norm_surprisals_ai_given_q = torch.cat((all_norm_surprisals_ai_given_q, torch.tensor([norm_surprisal_a_i_given_q])))
+
+            print("iteration time (s): ", time.time() - start_time)
+
+            
+            entropy = torch.mean(all_surprisals_ai_given_q)
+            print(f"QUESTION {problem_number} ENTROPY: {entropy}")
+
+            norm_entropy = torch.mean(all_norm_surprisals_ai_given_q)
+            print(f"Normalized QUESTION {problem_number} ENTROPY: {norm_entropy}")
+            log_results_to_csv(idx, base_tokenizer, problem_number, reasoning_steps, answer_statements, all_surprisals_ai_given_q, entropy, norm_entropy,filename=f"logs/{run_name}_logs.csv")
+        except Exception as e:
+            print(f"Error processing row {idx}: {e}")
     print("total time (min): ",  (time.time() - total_start) / 60)
 
 if __name__ == "__main__":
