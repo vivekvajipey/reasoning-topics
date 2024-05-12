@@ -103,7 +103,7 @@ def append_suffix_to_prefix(prefixes, suffixes, suffix_index, tokenizer, verbose
         # Create mask for the appended last sentence
         start_index_of_last_sentence = initial_sentence.size(0)
         end_index_of_last_sentence = start_index_of_last_sentence + last_sentence_first_row.size(0)
-        new_mask[i, start_index_of_last_sentence:end_index_of_last_sentence] = 1
+        new_mask[i, start_index_of_last_sentence:end_index_of_last_sentence - 1] = 1 # end_index_of_last_sentence - 1 to exclude EOS (2) token 
 
     return new_tensor, new_mask
 
@@ -114,6 +114,10 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
 
     start_time = time.time()
     total_summed_logprobs = torch.tensor([]).to(model.device)
+
+    if print_logging:
+        print("input_ids (rk_ai) shape: ", input_ids.shape)
+        print("input_ids (rk_ai): ", input_ids)
 
     for i in range(0, input_ids.shape[0], batch_size):
         start_row_idx = i
@@ -141,7 +145,15 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
 
         masked_logprobs = gen_logprobs * answer_mask[start_row_idx:end_row_idx, 1:].float() # extract logprobs from answer tokens
         if print_logging:
+            print("Answer Mask shape: ", answer_mask.shape)            
+            print("Answer Mask: ", answer_mask)
+
+        if print_logging:
             print("Masked logprobs shape: ", masked_logprobs.shape)
+        nonzero_elements_count = (masked_logprobs != 0).sum(dim=1)
+        if print_logging:
+            print(masked_logprobs)
+            print("Nonzero elements count per row (a_i length): ", nonzero_elements_count)
 
         batch_summed_logprobs = masked_logprobs.sum(dim=1)
         if print_logging:
@@ -149,16 +161,18 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
 
         total_summed_logprobs = torch.cat((total_summed_logprobs, batch_summed_logprobs), dim=0)
         
-        # if print_logging:
-        #     print("summed_probs: ", batch_summed_logprobs.shape)
+        if print_logging:
+            print("summed_probs: ", batch_summed_logprobs.shape)
 
-        #     # batch = []
-        #     for input_sentence, input_probs in zip(batch_ids , masked_logprobs):
-        #         text_sequence = []
-        #         for token, p in zip(input_sentence, input_probs):
-        #             if token not in tokenizer.all_special_ids:
-        #                 print((tokenizer.decode(token), p.item()))
-        #                 text_sequence.append((tokenizer.decode(token), p.item()))
+            # batch = []
+            for input_sentence, input_probs in zip(batch_ids , masked_logprobs):
+            # for input_sentence, input_probs in zip(batch_ids , gen_logprobs): # check all logprobs
+                # text_sequence = []
+                for token, p in zip(input_sentence, input_probs):
+                    if token not in tokenizer.all_special_ids:
+                        # print((tokenizer.decode(token), p.item()))
+                        print(f"{tokenizer.decode(token)} ({token}): {p.item()}")
+                        # text_sequence.append((tokenizer.decode(token), p.item()))
                 # batch.append(text_sequence)
 
     print("TOTAL SUMMED LOGPROBS: ", total_summed_logprobs)
@@ -196,7 +210,7 @@ def main():
     parser.add_argument("--temp", type=float, default=0.7, help="Temperature setting for the generation process.")
     parser.add_argument("--num_fewshot", type=int, default=0, help="Number of few-shot examples to use for generation.")
     parser.add_argument("--top_k", type=int, default=40, help="top k parameter to use for generation.")
-    parser.add_argument("--batch_size", type=int, default=5, help="batch size for forward pass when summing logprobs")
+    parser.add_argument("--batch_size", type=int, default=50, help="batch size for forward pass when summing logprobs")
     parser.add_argument("--direct_prompt", action='store_true', help="Indicates if Direct Prompting should be used instead of CoT.")
     parser.add_argument("--model_name", type=str, default="mistral-7b-v0.1", help="Name of model to test on (should have both instruct and base models)")
     parser.add_argument("--verbose", action='store_true', help="Enable verbose printing")
