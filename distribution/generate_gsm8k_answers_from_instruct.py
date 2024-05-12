@@ -166,7 +166,7 @@ def main():
     
     total_start = time.time()
     for idx, row in gpt35_df[args.start_row : args.start_row + args.num_rows].iterrows():
-        # try:
+        try:
             start_time = time.time()
 
             # question = row['Question']
@@ -185,8 +185,8 @@ def main():
             
             torch.save(sampled_responses, f"tensors/{run_name}-gsm8k_p{row['index']}.pt")
             print("iteration time (s): ", time.time() - start_time)
-        # except Exception as e:
-            # print(f"Error processing row {idx}: {e}")
+        except Exception as e:
+            print(f"Error processing row {idx}: {e}")
     print("total time (min): ",  (time.time() - total_start) / 60)
 
 if __name__ == "__main__":
