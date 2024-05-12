@@ -151,7 +151,8 @@ def main():
     else:
         run_name += "-CoT"
 
-    gpt35_df = pd.read_csv('data/112_gsm8k_gpt35_cot_onesent_responses.csv')
+    # gpt35_df = pd.read_csv('data/112_gsm8k_gpt35_cot_onesent_responses.csv') # train set selected questions
+    gpt35_df = pd.read_csv('data/gsm8kTest.csv')
 
     name2instruct = {"mistral-7b-v0.1":"mistralai/Mistral-7B-Instruct-v0.1"}
 

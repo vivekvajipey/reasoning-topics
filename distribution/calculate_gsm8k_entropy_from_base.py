@@ -146,7 +146,7 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
 
         SAVE_LOGPROBS = True
         if SAVE_LOGPROBS:
-            torch.save(gen_logprobs, f"tensors/{run_problem_name}-logprobs.pt")
+            torch.save(gen_logprobs, f"logprob_tensors/{run_problem_name}-logprobs.pt")
 
         masked_logprobs = gen_logprobs * answer_mask[start_row_idx:end_row_idx, 1:].float() # extract logprobs from answer tokens
         if print_logging:
@@ -228,7 +228,8 @@ def main():
     else:
         run_name += "-CoT"
 
-    gpt35_df = pd.read_csv('data/112_gsm8k_gpt35_cot_onesent_responses.csv')
+    # gpt35_df = pd.read_csv('data/112_gsm8k_gpt35_cot_onesent_responses.csv')
+    gpt35_df = pd.read_csv('data/gsm8kTest.csv')
 
     # name2instruct = {"mistral-7b-v0.1":"mistralai/Mistral-7B-Instruct-v0.1"}
     name2base = {"mistral-7b-v0.1":"mistralai/Mistral-7B-v0.1"}
