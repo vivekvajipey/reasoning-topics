@@ -250,12 +250,13 @@ def main():
         print_tensors_on_mps_gpu()
 
     for idx, row in gpt35_df[args.start_row : args.start_row + args.num_rows].iterrows():
-        try:
+        # try:
             start_time = time.time()
 
-            problem_number = row['Problem Number']
+            # problem_number = row['Problem Number']
+            problem_number = row['index']
             # print("CURRENT QUESTION: ", question)
-            sampled_responses = torch.load(f"tensors/{run_name}-gsm8k_p{row['Problem Number']}.pt")
+            sampled_responses = torch.load(f"tensors/{run_name}-gsm8k_p{problem_number}.pt")
             
             for module_name, module in base_model.named_modules():
                 if module_name in base_device_map:
@@ -297,8 +298,8 @@ def main():
                                                                         rk_ai, 
                                                                         ai_mask, 
                                                                         batch_size=args.batch_size, 
-                                                                        run_problem_name=f"{run_name}-gsm8k_p{row['Problem Number']}",
-                                                                        print_logging=True
+                                                                        run_problem_name=f"{run_name}-gsm8k_p{problem_number}",
+                                                                        print_logging=False
                                                                     )
                 print("logprobs_ai_given_rk_q: ", logprobs_ai_given_rk_q)
                 print("norm_logprobs_ai_given_rk_q: ", norm_logprobs_ai_given_rk_q)
@@ -328,8 +329,8 @@ def main():
             norm_entropy = torch.mean(all_norm_surprisals_ai_given_q)
             print(f"Normalized QUESTION {problem_number} ENTROPY: {norm_entropy}")
             log_results_to_csv(idx, base_tokenizer, problem_number, reasoning_steps, answer_statements, all_surprisals_ai_given_q, entropy, norm_entropy,filename=f"logs/{run_name}_logs.csv")
-        except Exception as e:
-            print(f"Error processing row {idx}: {e}")
+        # except Exception as e:
+            # print(f"Error processing row {idx}: {e}")
     print("total time (min): ",  (time.time() - total_start) / 60)
 
 if __name__ == "__main__":
