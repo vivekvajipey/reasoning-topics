@@ -1,0 +1,1916 @@
+<STEP 1>: Find Tina's hourly wage: $18.00 per hour
+
+<STEP 2>: Calculate Tina's overtime wage: $18.00 per hour + 1/2 $18.00 per hour = $27.00 per hour
+
+<STEP 3>: Determine the total number of hours Tina works: 10 hours per day x 5 days = 50 hours
+
+<STEP 4>: Calculate Tina's total earnings for this work period: Hourly wage x total hours worked = $18.00 per hour x 50 hours = $900.00.
+
+<STEP 5>: Calculate Tina's total earnings with overtime: Hourly wage x total hours worked (regular hours) + 1/2 hourly wage x total hours worked (overtime) = $18.00 per hour x 40 hours (regular hours) + 1/2 $18.00 per hour x 10 hours (overtime) = $720.00 (regular earnings) + $990.00 (overtime earnings) = $1,710.00.
+<STEP 1>: Calculate Tina's earnings for regular hours worked.
+- Regular hours: 10 hours/day * 5 days = 50 hours
+- Hourly wage: $18.00/hour
+- Regular earnings: 50 hours * $18.00/hour = $810.00
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked.
+- Overtime hours: 50 hours total - 40 hours regular hours = 10 hours overtime
+- Overtime earnings: 10 hours overtime * ($18.00 + $9.00)/hour = $360.00
+
+<STEP 3>: Add Tina's regular earnings and overtime earnings to find her total earnings for this workweek.
+- Total earnings: $810.00 (regular hours) + $360.00 (overtime hours) = $1,170.00
+<STEP 1>: Calculate Tina's regular hourly wage.
+Tina's hourly wage = $18.00/hour
+
+<STEP 2>: Calculate the number of hours Tina works each day.
+Tina works 10 hours every day
+
+<STEP 3>: Calculate the number of hours Tina works in total for the 5-day period.
+Total hours worked = Hours worked per day * Number of days
+Total hours worked = 10 hours * 5 days
+Total hours worked = 50 hours
+
+<STEP 4>: Calculate the number of hours Tina works in regular hours and in overtime hours during the 5-day period.
+Regular hours worked = Total hours worked - Overtime hours worked
+
+<STEP 5>: Calculate Tina's earnings for regular hours worked during the 5-day period.
+Regular earnings = Regular hours worked * Regular hourly wage
+
+<STEP 6>: Calculate Tina's earnings for overtime hours worked during the 5-day period.
+Overtime earnings = Overtime hours worked * (Regular hourly wage + Overtime pay per hour))
+
+<STEP 7>: Calculate Tina's total earnings for the 5-day period.
+Total earnings = Regular earnings + Overtime earnings
+
+<STEP 8>: Display Tina's total earnings for the 5-day period.
+Total earnings = $XXX.XX (Replace XX with the appropriate number and decimal points.)
+<STEP 1>: Find the hourly wage.
+Tina makes $18.00 an hour.
+
+<STEP 2>: Calculate the regular pay for each shift.
+Tina works for 10 hours every day.
+Regular pay = Hourly wage × Hours worked
+Regular pay = $18.00/hour × 10 hours
+Regular pay = $180.00/shift
+
+<STEP 3>: Calculate the overtime pay for each shift.
+Since Tina works more than 8 hours per shift, she is eligible for overtime.
+Overtime pay = Regular hourly wage × 1.5
+Overtime pay = $18.00/hour × 1.5
+Overtime pay = $27.00/hour
+
+<STEP 4>: Calculate the total pay for 5 days.
+Total pay = (Regular pay + Overtime pay) × Number of days
+Total pay = (($180.00/shift) + ($27.00/hour × (10 hours - 8 hours)))) × 5 days
+Total pay = ($2,125.00 + $885.00) × 5 days
+Total pay = ($3,010.00) × 5 days
+Total pay = $15,050.00
+
+Therefore, Tina makes a total of $15,050.00 for working 10 hours every day for 5 days.
+<STEP 1>: Calculate Tina's earnings for each hour worked during the regular shift.
+- Regular hourly wage: $18.00
+- Hours worked during regular shift: 8 hours
+
+  <STEP 1.1>: Calculate Tina's earnings for regular hours worked.
+  - Regular hourly wage: $18.00
+  - Hours worked during regular shift: 8 hours
+  - Earnings for regular hours: $18.00 * 8 hours = $144.00
+
+  <STEP 2>: Calculate Tina's earnings for any overtime hours worked.
+  - Overtime hourly wage: $18.00 + ($18.00 * 1/2) = $27.00
+  - Overtime hours worked: 2 hours
+  - Earnings for overtime hours: $27.00 * 2 hours = $54.00
+
+  <STEP 3>: Calculate Tina's total earnings for working 10 hours every day for 5 days.
+  - Regular hourly wage: $18.00
+  - Regular hours worked daily: 8 hours
+  - Overtime hourly wage: $27.00
+  - Overtime hours worked daily: 2 hours
+  - Days worked: 5 days
+
+  - Total hours worked: 10 hours/day * 5 days = 50 hours
+
+  - Total earnings for regular hours: $144.00 (calculated in Step 1.1)
+
+  - Total earnings for overtime hours: $54.00 (calculated in Step 2)
+
+  - Total earnings for the entire work period: $252.00 ($144.00 + $54.00)
+<STEP 1>: Calculate Tina's earnings for the regular hours worked.
+
+- Regular hours worked: 10 hours/day * 5 days/week = 50 hours/week
+- Regular earnings: $18.00/hour * 50 hours/week = $900.00/week
+
+ <STEP 2>: Calculate Tina's overtime earnings.
+
+- Overtime hours worked: 50 hours/week - 40 hours/week = 10 hours/week
+- Overtime earnings: ($18.00/hour * 1.5) * 10 hours/week = $900.00/week
+
+ <STEP 3>: Calculate Tina's total earnings for the given workweek.
+
+- Total earnings: Regular earnings + Overtime earnings = $900.00/week + $900.00/week = $1800.00/week.
+<STEP 1>: Find the total number of hours Tina works in a week.
+
+She works 10 hours every day for 5 days. So, the total number of hours she works in a week is:
+
+10 hours/day * 5 days/week = 50 hours/week
+
+ <STEP 2>: Determine how much Tina earns in a week for her regular hours.
+
+Her hourly wage is $18.00/hour. So, her weekly earnings for her regular hours are:
+
+$18.00/hour * 40 hours/week (regular hours) = $720.00/week
+
+ <STEP 3>: Determine the total number of overtime hours Tina works in a week.
+
+Her regular hours are 40 hours/week. She works 50 hours/week in total. So, the total number of overtime hours she works in a week is:
+
+50 hours/week (total hours) - 40 hours/week (regular hours) = 10 hours/week (overtime hours)
+
+ <STEP 4>: Determine how much Tina earns in a week for her overtime hours.
+
+Her hourly wage for overtime is $18.00/hour + 1/2 hourly wage = $27.00/hour. So, her weekly earnings for her overtime hours are:
+
+$27.00/hour * 10 hours/week (overtime hours) = $270.00/week (overtime earnings)
+
+ <STEP 5>: Determine the total amount of money Tina makes in a week for her regular hours and overtime hours combined.
+
+Her weekly earnings for her regular hours are $720.00/week. Her weekly earnings for her overtime hours are $270.00/week. So, her total weekly earnings for her regular hours and overtime hours combined are:
+
+$720.00/week (regular hours earnings) + $270.00/week (overtime hours earnings) = $1,020.00/week (total earnings)
+<STEP 1>: Calculate Tina's regular hourly wage.
+Tina's hourly wage: $18.00/hour
+
+<STEP 2>: Calculate Tina's overtime hourly wage.
+Tina's overtime hourly wage: $18.00/hour + 1/2 * $18.00/hour = $27.00/hour
+
+<STEP 3>: Calculate the number of hours Tina works during the 5-day period.
+Tina works for 5 days, and each day she works for 10 hours. So, she works for a total of 5 days * 10 hours/day = 50 hours.
+
+<STEP 4>: Calculate the amount of money Tina makes during the 5-day period.
+Tina makes $18.00/hour for her regular hours and $27.00/hour for her overtime hours. During the 5-day period, she works for a total of 50 hours. So, she works for 35 hours of regular hours and 15 hours of overtime hours. The amount of money she makes during the 5-day period is $35.00/hour * 35 hours of regular hours + $27.00/hour * 15 hours of overtime hours = $4,375.00.
+<STEP 1>: Calculate Tina's hourly wage: $18.00/hour
+
+<STEP 2>: Determine Tina's overtime wage: $18.00/hour + 1/2 * $18.00/hour = $27.00/hour
+
+<STEP 3>: Calculate the total number of hours Tina works: 10 hours/day * 5 days/week = 50 hours/week
+
+<STEP 4>: Determine Tina's weekly earnings without overtime: $18.00/hour * 40 hours/week = $720.00/week
+
+<STEP 5>: Calculate Tina's weekly earnings with overtime: 50 hours/week * $18.00/hour = $900.00/week
+Overtime hours: 10 hours/day * 5 days/week = 50 hours/week - 40 hours/week = 10 hours/week
+Overtime earnings: 10 hours/week * $18.00/hour = $180.00/week.
+
+<STEP 6>: Combine Tina's weekly earnings without overtime and with overtime to find her total weekly earnings: $720.00/week + $180.00/week = $900.00/week.
+
+Therefore, Tina makes a total of $900.00 every week.
+<STEP 1>: Calculate Tina's earnings for regular hours worked. She works 10 hours every day for 5 days, so she works a total of 50 hours. At $18.00 an hour, her earnings for regular hours worked would be: $50.00 x $18.00 = $900.00
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked. Since she works more than 8 hours per shift, she is eligible for overtime, which is paid by your hourly wage + 1/2 your hourly wage. In this case, her hourly wage is $18.00. So her earnings for overtime hours worked would be: $252.00 ($900.00 total earnings - $648.00 regular hours earnings) x 1/2 = $252.00.
+
+<STEP 3>: Add Tina's earnings for regular hours worked and overtime hours worked to find her total earnings for the week. $900.00 (regular hours) + $252.00 (overtime hours) = $1,152.00 (total earnings for the week).
+<STEP 1>: Calculate Tina's earnings for each hour worked during her regular shift (8 hours).
+
+<STEP 2>: Calculate Tina's earnings for each hour worked during her overtime shift (2 hours, assuming she works 10 hours every day and is therefore eligible for overtime).
+
+<STEP 3>: Calculate Tina's earnings for her regular shift (8 hours).
+
+<STEP 4>: Calculate Tina's earnings for her overtime shift (2 hours).
+
+<STEP 5>: Calculate Tina's total earnings for her 5-day workweek.
+
+<STEP 6>: Display the result of Tina's total earnings for her 5-day workweek.
+
+<STEP 7>: Remember that this answer is only an approximation, as the hourly wage, number of hours worked, and eligibility for overtime may vary from situation to situation.
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00 per hour.
+
+<STEP 2>: Calculate Tina's overtime hourly wage: $18.00 per hour + 1/2($18.00 per hour) = $27.00 per hour.
+
+<STEP 3>: Determine the number of hours Tina works during 5 days: 10 hours per day * 5 days = 50 hours.
+
+<STEP 4>: Calculate the amount of money Tina makes during 5 days, considering both regular hours and overtime hours:
+
+Regular hours: 50 hours - 40 hours (regular hours per shift) = 10 hours of regular hours per shift * $18.00 per hour = $180.00.
+
+Overtime hours: 50 hours - 40 hours (regular hours per shift) = 10 hours of overtime hours per shift * $27.00 per hour = $270.00.
+
+Total earnings: $180.00 (regular hours) + $270.00 (overtime hours) = $450.00.
+
+Therefore, Tina makes a total of $450.00 during 5 days.
+<STEP 1>: Calculate Tina's hourly wage.
+Tina makes $18.00 an hour.
+
+<STEP 2>: Determine if Tina is eligible for overtime.
+Tina works more than 8 hours per shift.
+
+<STEP 3>: Calculate Tina's regular hourly wage.
+Regular hourly wage = $18.00 per hour
+
+<STEP 4>: Calculate Tina's overtime hourly wage.
+Overtime hourly wage = Regular hourly wage + 1/2 Regular hourly wage
+Overtime hourly wage = $18.00 + $9.00
+Overtime hourly wage = $27.00 per hour
+
+<STEP 5>: Calculate the total number of hours Tina works during the given period.
+Tina works 10 hours every day for 5 days.
+Total hours worked = 10 hours/day * 5 days
+Total hours worked = 50 hours
+
+<STEP 6>: Calculate the total amount of money Tina makes during the given period.
+First, calculate the amount of money Tina makes from working regular hours.
+Regular earnings = Total hours worked * Regular hourly wage
+Regular earnings = 50 hours * $18.00/hour
+Regular earnings = $810.00
+
+Next, calculate the amount of money Tina makes from working overtime hours.
+Overtime earnings = Total hours worked * Overtime hourly wage - Regular earnings
+Overtime earnings = 50 hours * $27.00/hour - $810.00
+Overtime earnings = $12,550.00 - $8,100.00
+Overtime earnings = $4,450.00
+
+Finally, calculate the total amount of money Tina makes during the given period.
+Total earnings = Regular earnings + Overtime earnings
+Total earnings = $8,100.00 + $4,450.00
+Total earnings = $12,550.00.
+<STEP 1>: Calculate Tina's earnings per hour.
+Tina makes $18.00 an hour.
+
+<STEP 2>: Determine the number of hours Tina works each day.
+Tina works 10 hours every day.
+
+<STEP 3>: Find out the number of days Tina works.
+Tina works for 5 days.
+
+<STEP 4>: Calculate Tina's earnings for the regular hours she works.
+Tina earns $18.00 per hour.
+She works 10 hours every day for 5 days.
+Total regular hours: 10 hours/day * 5 days = 50 hours.
+Total earnings for regular hours: 50 hours * $18.00/hour = $900.00.
+
+<STEP 5>: Calculate Tina's earnings for the overtime hours she works.
+Tina earns $18.00 per hour.
+She works 10 hours every day for 5 days.
+Total hours worked: 10 hours/day * 5 days = 50 hours.
+Since Tina works more than 8 hours per shift, she is eligible for overtime.
+Total hours of overtime: 50 hours - 8 hours/day * 5 days = 14 hours.
+Total earnings for overtime hours: 14 hours * ($18.00/hour + 1/2 * $18.00/hour)) = $1,162.80.
+
+<STEP 6>: Add Tina's earnings for the regular hours and the overtime hours.
+Total earnings for Tina: $900.00 + $1,162.80 = $2,062.80.
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00 per hour.
+
+<STEP 2>: Determine Tina's overtime hourly wage: $18.00 + ($18.00 * 0.5)) = $27.00 per hour.
+
+<STEP 3>: Calculate the number of hours Tina works in 5 days: 10 hours per day * 5 days = 50 hours.
+
+<STEP 4>: Calculate the amount of money Tina makes from her regular hours: 50 hours * $18.00 per hour = $900.
+
+<STEP 5>: Calculate the amount of money Tina makes from her overtime hours: 10 hours per day * 5 days = 50 hours * (1/2 hourly wage + hourly wage) / (hourly wage + 1/2 hourly wage)): $3,550.
+
+<STEP 6>: Calculate the total amount of money Tina makes in 5 days: $900 (regular hours) + $3,550 (overtime hours) = $4,450.
+<STEP 1>: Find out how much money Tina makes in a regular 8-hour shift.
+
+<STEP 2>: Calculate Tina's hourly wage. Since she makes $18.00 an hour, no further calculations are needed.
+
+<STEP 3>: Determine how much overtime pay Tina is eligible for based on her regular hours and overtime hours.
+
+<STEP 4>: Calculate the total amount of money Tina makes during the 5-day workweek, including both her regular hours and overtime hours.
+
+<STEP 5>: The total amount of money Tina makes during the 5-day workweek, including both her regular hours and overtime hours, can be calculated as follows:
+
+Total earnings = (Regular hours per day * Regular hourly wage) * Number of regular workdays + (Overtime hours per day * Overtime hourly wage) * Number of overtime workdays
+
+Total earnings = ($18.00 * 8) * 5 + ($18.00 * 1.5) * 5)
+
+Total earnings = ($1440) * 5 + ($18.00 * 7.5) * 5)
+
+Total earnings = $7200 + $13687.5
+
+Total earnings = $20887.5.
+<STEP 1>: Calculate Tina's regular hourly wage.
+   Tina makes $18.00 an hour.
+
+  <STEP 2>: Determine the number of hours Tina works per day.
+   Tina works 10 hours every day.
+
+  <STEP 3>: Calculate the number of hours Tina works per week.
+   Tina works 10 hours every day for 5 days. So, she works 10 hours/day * 5 days/week = 50 hours/week.
+
+  <STEP 4>: Determine the number of hours Tina works in overtime each week.
+   Since Tina works more than 8 hours per shift, she is eligible for overtime. Her overtime hours each week would be 50 hours/week - 40 hours/week (standard work week) = 10 hours/week of overtime.
+
+  <STEP 5>: Calculate Tina's earnings from her regular hourly wage and her overtime hourly wage.
+   Tina's regular hourly wage is $18.00/hour.
+   Tina's overtime hourly wage is $18.00/hour + 1/2 * $18.00/hour = $27.00/hour.
+
+   To calculate Tina's earnings from her regular hourly wage, multiply her regular hourly wage by the number of hours she works in a week.
+   Tina's earnings from her regular hourly wage would be $18.00/hour * 40 hours/week = $720.00/week.
+
+   To calculate Tina's earnings from her overtime hourly wage, multiply her overtime hourly wage by the number of hours she works in overtime each week.
+   Tina's earnings from her overtime hourly wage would be $27.00/hour * 10 hours/week = $270.00/week.
+
+   To calculate Tina's total earnings each week, add her earnings from her regular hourly wage and her earnings from her overtime hourly wage.
+   Tina's total earnings each week would be $720.00/
+<STEP 1>: Calculate Tina's regular hourly wage.
+Tina makes $18.00 an hour.
+
+<STEP 2>: Calculate Tina's hourly wage during overtime.
+Tina's hourly wage during overtime = Tina's hourly wage + 1/2 her hourly wage
+Tina's hourly wage during overtime = $18.00 + $9.00 = $27.00
+
+<STEP 3>: Calculate the total number of hours Tina works during the 5-day period.
+Tina works 10 hours every day for 5 days.
+Total number of hours Tina works = 10 hours/day * 5 days/week * 5 weeks/period = 250 hours
+
+<STEP 4>: Calculate the total amount of money Tina earns during the 5-day period.
+Tina's hourly wage during regular hours = $18.00
+Tina's hourly wage during overtime hours = $27.00
+The ratio of regular hours to total hours worked during the 5-day period is 3:5, which can be calculated as follows:
+Number of regular hours = Total number of hours worked * Ratio of regular hours to total hours worked
+Number of regular hours = 250 hours * (3 hours/5 hours) = 105 hours
+The total amount of money Tina earns during the 5-day period is as follows:
+Total earnings = (Number of regular hours * Regular hourly wage) + (Number of overtime hours * Overtime hourly wage))
+Total earnings = (105 hours * $18.00/hour) + (145 hours * $27.00/hour)))
+Total earnings = ($1,981.00) + ($39,545.00)))
+Total earnings = $41,526.00.
+<STEP 1>: Calculate Tina's earnings for regular hours worked.
+
+Regular hours worked: 10 hours/day * 5 days = 50 hours
+
+Regular earnings: $18.00/hour * 50 hours = $900
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked.
+
+Overtime hours worked: 10 hours/day * 5 days - 8 hours/day * 5 days = 2 hours/day * 5 days = 10 hours
+
+Overtime earnings: $18.00/hour * 18 hours (10 hours overtime per day for 5 days) = $324
+
+<STEP 3>: Add Tina's earnings for regular hours and overtime hours to find her total earnings for the given work period.
+
+Total earnings: $900 (regular hours) + $324 (overtime hours) = $1,224
+<STEP 1>: Calculate Tina's hourly wage before overtime.
+Tina's hourly wage = $18.00
+
+<STEP 2>: Calculate Tina's hourly wage with overtime.
+Overtime multiplier = 1.5 (1/2 hourly wage)
+Hourly wage with overtime = Hourly wage * (1 + Overtime multiplier)
+Hourly wage with overtime = $18.00 * (1 + 0.5)
+Hourly wage with overtime = $27.00
+
+<STEP 3>: Calculate the number of hours Tina works every day.
+Tina works 10 hours every day.
+
+<STEP 4>: Calculate the total number of hours Tina works during 5 days.
+Total hours worked = Hours worked per day * Number of days
+Total hours worked = 10 hours * 5 days
+Total hours worked = 50 hours
+
+<STEP 5>: Calculate the total amount of money Tina makes during 5 days.
+Total earnings = Hourly wage * Total hours worked
+Total earnings = $18.00 * 50 hours
+Total earnings = $900.00
+
+So, Tina makes a total of $900.00 during 5 days.
+<STEP 1>: Calculate Tina's hourly wage for regular hours.
+$18.00/hour
+
+<STEP 2>: Calculate Tina's hourly wage for overtime hours.
+$18.00/hour + $9.00/hour (1/2 hourly wage)
+
+<STEP 3>: Calculate Tina's total hours worked in 5 days.
+10 hours/day × 5 days
+50 hours total
+
+<STEP 4>: Calculate Tina's total earnings for regular hours worked.
+50 hours × $18.00/hour
+$900.00
+
+<STEP 5>: Calculate Tina's total earnings for overtime hours worked.
+10 hours/day × 5 days = 50 hours total
+5 hours of overtime (50 hours total - 45 hours regular hours)
+
+$900.00 (regular hours)
+$990.00 (overtime hours)
+
+$1,890.00 (total earnings)
+
+Therefore, Tina makes a total of $1,890.00 for working 10 hours a day for 5 days.
+<STEP 1>: Calculate Tina's earnings for regular hours worked during 5 days.
+    Regular hours worked = 10 hours/day * 5 days = 50 hours
+    Tina's earnings for regular hours = $18.00/hour * 50 hours = $900
+
+  <STEP 2>: Calculate Tina's earnings for overtime hours worked during 5 days.
+    Overtime hours worked = 50 hours (total hours worked) - 40 hours (standard hours worked in a week) = 10 hours
+    Tina's earnings for overtime hours = $18.00/hour * 10 hours = $180
+
+  <STEP 3>: Calculate Tina's total earnings for 5 working days.
+    Tina's total earnings = $900 (regular hours) + $180 (overtime hours) = $1,080. Answer: Tina makes a total of $1,080 for working 5 days, 10 hours each day.
+<STEP 1>: Calculate Tina's regular earnings for each shift, which is 8 hours at $18.00 an hour.
+<STEP 2>: Multiply the number of hours Tina works per shift (8 hours) by her hourly wage ($18.00). This calculation gives Tina's earnings for a regular shift, which is $144.00.
+<STEP 3>: Determine the total number of hours Tina works during the 5-day period. In this scenario, Tina works 10 hours every day, so she works a total of 10 hours/day * 5 days = 50 hours during the 5-day period.
+<STEP 4>: Calculate Tina's earnings for the entire 5-day period. Since Tina works more than 8 hours per shift during this time, she is eligible for overtime pay.
+To calculate Tina's earnings, we first need to determine how many hours she works in regular shifts (8 hours) and how many hours she works in overtime (the remaining hours above 8 hours per shift).
+Let's assume that Tina works 4 regular shifts (8 hours each) and 1 overtime shift (16 hours). This gives her a total of 52 hours of work during the 5-day period.
+Now, let's calculate Tina's earnings for the entire 5-day period.
+<STEP 4.1>: Calculate Tina's earnings for her regular shifts. Since she works 4 regular shifts, and each shift lasts 8 hours, her total earnings for regular shifts are:
+<STEP 4.1.1>: Calculate Tina's earnings for one regular shift:
+Regular shift earnings = Hourly wage * Hours worked per shift
+Regular shift earnings = $18.00/hour * 8 hours/shift
+Regular shift earnings = $144.00
+<STEP 4.1.2>: Calculate Tina's earnings for all 4 regular shifts:
+Total regular shift earnings = Regular shift earnings per shift * Number of regular shifts
+Total regular shift earnings = $144.00/shift * 4 shifts
+Total regular shift earnings = $576.00
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00/hour
+
+<STEP 2>: Calculate Tina's overtime hourly wage: $18.00/hour + ($18.00/2) = $27.00/hour (overtime)
+
+<STEP 3>: Determine how many hours Tina works per day: 10 hours
+
+<STEP 4>: Determine how many days Tina works per week: 5 days
+
+<STEP 5>: Determine the total number of hours Tina works per week: 10 hours/day * 5 days/week = 50 hours/week
+
+<STEP 6>: Determine how many hours Tina works per week that are considered regular hours: 40 hours/week (regular hours)
+
+<STEP 7>: Determine how many hours Tina works per week that are considered overtime hours: 10 hours/week (overtime hours)
+
+<STEP 8>: Determine how much money Tina makes per week from her regular hourly wage: 40 hours/week * $18.00/hour = $720.00/week
+
+<STEP 9>: Determine how much money Tina makes per week from her overtime hourly wage: 10 hours/week * $27.00/hour = $270.00/week
+
+<STEP 10>: Determine the total amount of money Tina makes per week: $720.00/week (regular hours) + $270.00/week (overtime hours) = $1,000.00/week
+
+<STEP 11>: Determine the total amount of money Tina makes for working 10 hours every day for 5 days: $1,000.00 (from Steps 8 and 9)
+<STEP 1>: Calculate Tina's earnings per hour.
+Tina's hourly wage = $18.00
+
+<STEP 2>: Determine Tina's overtime rate.
+Overtime rate = Tina's hourly wage + 1/2 her hourly wage
+Overtime rate = $18.00 + ($18.00 / 2)
+Overtime rate = $18.00 + $9.00
+Overtime rate = $27.00
+
+<STEP 3>: Calculate the number of hours Tina works in total during the given period.
+Total hours worked = 10 hours/day * 5 days
+Total hours worked = 50 hours
+
+<STEP 4>: Calculate the amount of money Tina earns during the given period, considering both her regular wage and overtime pay.
+Total earnings = Regular wage * Total hours worked + Overtime wage * Overtime hours worked
+Total earnings = $18.00/hour * 50 hours + $27.00/hour * (50 hours - 40 hours))
+Total earnings = $900.00 + $2,010.00
+Total earnings = $2,910.00
+
+So, Tina makes a total of $2,910.00 during the given period.
+<STEP 1>: Calculate Tina's regular hourly wage.
+   Tina's hourly wage = $18.00 per hour
+
+  <STEP 2>: Calculate Tina's overtime hourly wage.
+   Tina's hourly wage for overtime = $18.00 per hour + $9.00 per hour (half of her hourly wage)
+    = $27.00 per hour for overtime
+
+  <STEP 3>: Determine the number of hours Tina works in total for this 5-day period.
+   Tina works for 5 days, and she works 10 hours every day.
+    Total hours worked = 5 days * 10 hours/day = 50 hours
+
+  <STEP 4>: Calculate Tina's total earnings for this 5-day period.
+   To calculate Tina's total earnings, we need to find out how many hours she works that are covered by her regular hourly wage, and how many hours are covered by her overtime hourly wage.
+
+   1. Calculate the number of hours Tina works that are covered by her regular hourly wage.
+       Regular hours worked = Total hours worked - Overtime hours worked
+       Regular hours worked = 50 hours - 10 hours (assuming 10 hours of overtime in this 5-day period)
+       Regular hours worked = 40 hours
+
+       Tina earns $18.00 per hour for her regular hours.
+       Tina's earnings for her regular hours = 40 hours * $18.00/hour = $720.00
+
+   2. Calculate the number of hours Tina works that are covered by her overtime hourly wage.
+       Overtime hours worked = Total hours worked - Regular hours worked
+       Overtime hours worked = 50 hours - 40 hours
+       Overtime hours worked = 10 hours
+
+       Tina earns $18.00 per hour for her regular hours and $27.00 per hour for her overtime hours.
+       Tina's earnings for her overtime hours = 10 hours * $27.00/hour = $270.
+<STEP 1>: Calculate Tina's earnings for each hour worked during her regular shift (8 hours).
+
+<STEP 2>: Calculate Tina's earnings for each hour worked during her overtime hours (2 hours x 5 days).
+
+<STEP 3>: Calculate Tina's total earnings during her 10-hour shift for 5 days by adding her earnings during regular hours, overtime hours, and any additional bonuses or pay adjustments.
+
+<STEP 4>: Calculate Tina's total earnings for 5 days by multiplying her total earnings from Step 3 by 5.
+
+<STEP 5>: Report Tina's total earnings for 5 days.
+
+Note: The calculations for Tina's earnings are based on the information provided in the question and may vary depending on the specific circumstances of Tina's employment.
+<STEP 1>: Calculate Tina's earnings for each hour worked at her regular hourly wage.
+
+8 hours per day * $18.00 per hour = $144.00 per day
+
+<STEP 2>: Determine the number of overtime hours Tina works each day.
+
+10 hours per day - 8 hours per day = 2 hours of overtime per day
+
+<STEP 3>: Calculate Tina's earnings for each hour worked at her regular hourly wage, as well as for her overtime hours.
+
+Overtime earnings = Regular hourly wage * 1.5
+= $18.00 per hour * 1.5
+= $27.00 per hour for overtime
+
+Regular hours earnings = Regular hourly wage * Number of regular hours worked
+= $18.00 per hour * 8 hours
+= $144.00 per day
+
+<STEP 4>: Calculate Tina's total earnings for working 10 hours every day for 5 days.
+
+Total earnings = (Regular hours earnings for one day) + (Overtime hours earnings for one day) * Number of days worked
+= ($144.00 per day) + ($(27.00 per hour * 2 hours)) per day) * 5 days
+= ($144.00 per day) + ($54.00 per day) * 5 days
+= $1,220.00 in total earnings for working 10 hours every day for 5 days.
+<STEP 1>: Calculate Tina's earnings for each hour worked during a regular shift (8 hours):
+
+Hourly wage: $18.00/hour
+Regular shift hours: 8 hours
+
+Regular earnings: $18.00/hour × 8 hours = $144.00
+
+<STEP 2>: Calculate Tina's earnings for each hour worked during overtime hours (beyond 8 hours):
+
+Overtime wage: $18.00/hour + ($18.00/hour × 0.5) = $27.00/hour
+Overtime hours: 2 hours/day × 5 days = 10 hours
+
+Overtime earnings: $27.00/hour × 10 hours = $270.00
+
+<STEP 3>: Calculate Tina's total earnings for working 10 hours every day for 5 days:
+
+Total earnings: Regular earnings + Overtime earnings
+
+Total earnings: $144.00 + $270.00 = $414.00
+
+Therefore, Tina makes a total of $414.00 for working 10 hours every day for 5 days.
+<STEP 1>: Calculate Tina's earnings for each hour worked during a regular shift (8 hours).
+
+<STEP 2>: Calculate Tina's earnings for each hour worked during overtime hours (each hour beyond the 8 hours worked per shift).
+
+<STEP 3>: Determine the number of hours Tina works every day. In this example, she works for 10 hours every day.
+
+<STEP 4>: Determine the number of days Tina works during the week. In this example, she works for 5 days.
+
+<STEP 5>: Calculate the total number of hours Tina works during the week. Multiply the number of hours she works every day by the number of days she works during the week.
+
+<STEP 6>: Calculate the total number of hours Tina works during a regular shift (8 hours) and overtime hours (each hour beyond the 8 hours worked per shift).
+
+<STEP 7>: Calculate Tina's earnings during the week. Multiply her hourly wage by the total number of hours she works during the week.
+
+<STEP 8>: Calculate Tina's earnings during the week for regular hours (8 hours per shift) and overtime hours (each hour beyond the 8 hours worked per shift).
+
+<STEP 9>: Calculate the total amount of money Tina makes during the week. Add her earnings for regular hours and overtime hours.
+
+<STEP 10>: The final answer is that Tina makes a total of $XXX.XX during the week. Replace the X's with the appropriate numbers based on the hourly wage and the total number of hours worked during the week.
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00/hour
+
+<STEP 2>: Calculate Tina's overtime hourly wage: $18.00/hour + 1/2 * $18.00/hour = $27.00/hour
+
+<STEP 3>: Calculate Tina's total hours worked: 10 hours/day * 5 days = 50 hours
+
+<STEP 4>: Calculate Tina's total earnings for the week: Regular hours: 40 hours * $18.00/hour = $720 Overtime hours: 10 hours * $27.00/hour = $270 Total earnings: $1,010.
+
+So, Tina makes a total of $1,010 for working 10 hours every day for 5 days.
+<STEP 1>: Calculate Tina's earnings for regular hours worked in a 5-day workweek.
+
+Regular hours worked per day = 8 hours
+Days worked per week = 5 days
+
+Total regular hours worked per week = 8 hours/day * 5 days/week = 40 hours/week
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked in a 5-day workweek.
+
+Overtime hours worked per day = 2 hours (10 hours/day - 8 hours/day)
+Total overtime hours worked per week = 2 hours/day * 5 days/week = 10 hours/week
+
+Total earnings for regular hours worked = Regular hourly wage * Total regular hours worked per week = $18.00/hour * 40 hours/week = $720.00/week
+
+Total earnings for overtime hours worked = Overtime hourly wage * Total overtime hours worked per week = ($18.00/hour + $9.00/hour) * 10 hours/week = $1,980.00/week
+
+<STEP 3>: Calculate Tina's total earnings for a 5-day workweek.
+
+Total earnings for a 5-day workweek = Total earnings for regular hours worked + Total earnings for overtime hours worked
+
+Total earnings for a 5-day workweek = $720.00/week + $1,980.00/week = $2,700.00/week.
+
+Therefore, Tina makes a total of $2,700.00 for a 5-day workweek.
+<STEP 1>: Calculate Tina's regular hourly wage.
+Tina makes $18.00 an hour.
+
+<STEP 2>: Calculate Tina's overtime hourly wage.
+Overtime is paid by your hourly wage + 1/2 your hourly wage.
+Tina's hourly wage is $18.00, so her overtime hourly wage is $18.00 + ($18.00 * 0.5)) = $27.00.
+
+<STEP 3>: Calculate the number of hours Tina works in 5 days.
+Tina works 10 hours every day for 5 days, so she works a total of 10 hours/day * 5 days = 50 hours.
+
+<STEP 4>: Calculate the amount of money Tina makes from her regular hours and overtime hours in 5 days.
+Tina makes $18.00 an hour from her regular hours and $27.00 an hour from her overtime hours.
+Tina works a total of 50 hours in 5 days, so she works a total of 40 hours of regular hours and 10 hours of overtime hours.
+Tina makes $18.00 an hour from her regular hours, so she makes a total of $18.00/hour * 40 hours = $720.00 from her regular hours.
+Tina makes $27.00 an hour from her overtime hours, so she makes a total of $27.00/hour * 10 hours = $270.00 from her overtime hours.
+Tina makes a total of $720.00 from her regular hours and $270.00 from her overtime hours, so she makes a total of $1,020.00 in 5 days.
+<STEP 1>: Find out how much Tina makes in a regular 8-hour shift.
+
+- Hourly wage: $18.00
+- Hours worked in a regular shift: 8
+- Regular pay: $18.00/hour × 8 hours = $144.00
+
+<STEP 2>: Calculate how much Tina makes for each hour worked beyond 8 hours in a shift.
+
+- Hourly wage for overtime: $18.00 + ($18.00 × 0.5) = $27.00
+
+<STEP 3>: Determine the number of hours Tina works in a 5-day workweek.
+
+- Days worked per week: 5
+- Hours worked per day: 10
+- Total hours worked per week: 5 × 10 = 50 hours
+
+<STEP 4>: Calculate the amount of regular pay Tina earns for the 50 hours worked in a week.
+
+- Regular pay per hour: $18.00
+- Total hours worked per week: 50 hours
+- Total regular pay per week: $18.00/hour × 50 hours = $900.00
+
+<STEP 5>: Calculate the number of hours Tina works in overtime during a week.
+
+- Regular hours worked per week: 40 hours
+- Overtime hours worked per week: 50 hours - 40 hours = 10 hours
+
+<STEP 6>: Calculate the amount of overtime pay Tina earns for the 10 hours worked in overtime during a week.
+
+- Overtime pay per hour: $27.00
+- Total hours worked in overtime per week: 10 hours
+- Total overtime pay per week: $27.00/hour × 10 hours = $270.00
+
+<STEP 7>: Determine the total amount of pay Tina earns in a week.
+
+- Total regular pay per week: $900.00
+- Total overtime pay per week: $270.00
+- Total pay per week: $900.00 +
+<STEP 1>: Calculate Tina's earnings for regular hours worked.
+
+- Regular hours worked: 10 hours/day * 5 days = 50 hours
+- Hourly wage: $18.00/hour
+
+ <STEP 2>: Calculate Tina's earnings for overtime hours worked.
+
+- Overtime hours worked: 50 hours (total hours worked) - 40 hours (regular hours worked per shift) * 5 days = 10 hours
+- Hourly wage: $18.00/hour
+- Overtime pay: $18.00/hour + 1/2 * $18.00/hour = $27.00/hour
+- Overtime hours earned: 10 hours * $27.00/hour = $270.00
+
+ <STEP 3>: Calculate Tina's total earnings for the workweek.
+
+- Regular hours earnings: 50 hours * $18.00/hour = $900.00
+- Overtime hours earnings: $270.00
+- Total earnings for the workweek: $900.00 + $270.00 = $1,170.00.
+<STEP 1>: Calculate Tina's earnings for regular hours worked.
+- Regular hours: 10 hours/day * 5 days/week = 50 hours/week
+- Hourly wage: $18.00/hour
+- Regular earnings: 50 hours/week * $18.00/hour = $900.00/week
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked.
+- Overtime hours: 50 hours/week - 40 hours/week = 10 hours/week * 5 days/week = 50 hours/month
+- Overtime earnings: 50 hours/month * $18.00/hour * 1.5 = $4,590.00/month
+
+<STEP 3>: Calculate Tina's total earnings for a month.
+- Total earnings: Regular earnings + Overtime earnings = $900.00/week * 4 weeks/month + $4,590.00/month = $12,110.00/month
+<STEP 1>: Calculate Tina's earnings for each regular hour worked.
+Regular hourly wage: $18.00
+
+<STEP 2>: Calculate the number of regular hours Tina works in 5 days, given that she works 10 hours every day.
+
+Number of regular hours worked per day: 10 hours
+Number of regular hours worked per week: 10 hours/day × 7 days/week = 70 hours/week
+Number of regular hours worked in 5 days: 5 days × 10 hours/day = 50 hours
+
+<STEP 3>: Calculate Tina's earnings for each regular hour worked during the 5-day period.
+
+Earnings for each regular hour worked: $18.00/hour
+
+<STEP 4>: Calculate Tina's earnings for each overtime hour worked during the 5-day period.
+
+Since Tina works more than 8 hours per shift, she is eligible for overtime. The overtime rate is calculated as follows:
+
+Hourly wage for overtime hours: Regular hourly wage + 1/2 regular hourly wage
+
+Regular hourly wage: $18.00/hour
+1/2 regular hourly wage: $18.00/hour ÷ 2 = $9.00/hour
+
+Overtime hourly wage: Regular hourly wage + 1/2 regular hourly wage = $18.00/hour + $9.00/hour = $27.00/hour
+
+Now that we have the hourly wage for overtime hours, we can calculate Tina's earnings for each overtime hour worked during the 5-day period.
+
+Since Tina works 10 hours every day for 5 days, she works a total of 50 hours during the 5-day period. Of these 50 hours, 20 hours are overtime hours because she works more than 8 hours per shift.
+
+Tina's earnings for each overtime hour worked: $27.00/hour
+
+<STEP 5>: Calculate Tina's total earnings during the 5-day period.
+
+Total earnings for regular hours worked: $18.
+<STEP 1>: Calculate Tina's regular hourly wage.
+- Tina makes $18.00 an hour.
+
+ <STEP 2>: Determine Tina's overtime hourly wage.
+- Regular hourly wage = $18.00
+- Overtime hourly wage = Regular hourly wage + 1/2 Regular hourly wage
+- Overtime hourly wage = $18.00 + ($18.00/2)
+
+ <STEP 3>: Calculate the number of hours Tina works in total during the 5-day period.
+- Tina works 10 hours every day for 5 days.
+- Total hours worked = 10 hours/day * 5 days
+
+ <STEP 4>: Determine the amount of regular wages Tina earns during the 5-day period.
+- Regular hourly wage = $18.00
+- Total hours worked = 50 hours
+- Regular wages earned = Regular hourly wage * Total hours worked
+
+ <STEP 5>: Determine the amount of overtime wages Tina earns during the 5-day period.
+- Regular hourly wage = $18.00
+- Overtime hourly wage = $30.60
+- Total hours worked = 50 hours
+- Overtime hours worked = Total hours worked - Regular hours worked per day * Number of days
+- Overtime hours worked = 50 hours - (8 hours/day * 5 days)
+- Overtime hours worked = 50 hours - (40 hours)
+- Overtime hours worked = 10 hours
+- Overtime wages earned = Overtime hourly wage * Overtime hours worked
+
+ <STEP 6>: Determine the total amount of wages Tina earns during the 5-day period.
+- Regular wages earned = $18.00/hour * 40 hours/week * 5 weeks
+- Regular wages earned = $18.00/hour * 40 hours/week * 5
+- Regular wages earned = $18.00/hour * 200 hours/5 weeks
+- Regular wages earned = $32,400.00
+- Overtime wages earned = $30.60
+<STEP 1>: Calculate Tina's hourly wage. Tina makes $18.00 an hour.
+
+  <STEP 2>: Determine Tina's overtime wage. Since Tina works more than 8 hours per shift, she is eligible for overtime, which is paid by your hourly wage + 1/2 your hourly wage. $18.00 + ($18.00 * 1/2) = $27.00.
+
+  <STEP 3>: Calculate Tina's total earnings for working 10 hours every day for 5 days. Tina earns $18.00 an hour, so she earns $180.00 for working 10 hours every day for 1 day. Since she works for 5 days, her total earnings are $900.00 ($180.00 x 5).
+
+  <STEP 4>: Calculate Tina's overtime earnings for working more than 8 hours per shift for 5 days. Since Tina earns $18.00 an hour, but she earns $27.00 an hour for overtime hours, her total overtime earnings for working 10 hours every day for 5 days are $2,700.00 ($27.00 x 10 hours x 5 days).
+
+  <STEP 5>: Calculate Tina's total earnings for working 10 hours every day for 5 days, including both her regular hourly wage and her overtime hourly wage. Tina earns $18.00 an hour for regular hours, but she earns $27.00 an hour for overtime hours. Since Tina works 10 hours every day for 5 days, her total regular hourly wage earnings are $900.00 ($18.00 x 10 hours x 5 days). Her total overtime hourly wage earnings are $2,700.00 ($27.00 x 10 hours x 5 days). Her total earnings for working 10 hours every day for 5 days are $3,600.00 ($900.00 + $2,700.
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00/hour
+
+<STEP 2>: Calculate Tina's overtime hourly wage: $18.00/hour + $9.00/hour (1/2 hourly wage) = $27.00/hour
+
+<STEP 3>: Determine the number of hours Tina works each day: 10 hours
+
+<STEP 4>: Determine the number of days Tina works each week: 5 days
+
+<STEP 5>: Calculate the total number of hours Tina works each week: 10 hours/day × 5 days/week = 50 hours/week
+
+<STEP 6>: Determine the number of hours Tina works each week that qualify for overtime: 50 hours/week - 40 hours/week (regular hours) = 10 hours/week
+
+<STEP 7>: Calculate the total amount of money Tina earns each week: 40 hours/week × $18.00/hour = $720.00/week
+
+<STEP 8>: Calculate the total amount of money Tina earns each week for regular hours and overtime hours combined: 40 hours/week × $18.00/hour = $720.00/week + 10 hours/week × $27.00/hour = $270.00/week = $990.00/week
+
+Therefore, Tina makes a total of $990.00 each week.
+<STEP 1>: Calculate Tina's regular hourly wage.
+- Tina makes $18.00 an hour.
+
+<STEP 2>: Calculate Tina's overtime hourly wage.
+- Overtime is paid by your hourly wage + 1/2 your hourly wage.
+- Regular hourly wage: $18.00/hour
+- Overtime hourly wage: $18.00/hour + ($18.00/2) = $22.50/hour
+
+<STEP 3>: Calculate the number of hours Tina works in a week.
+- Tina works 10 hours every day for 5 days.
+- Total hours worked in a week: 10 hours/day * 5 days/week = 50 hours/week
+
+<STEP 4>: Calculate the total amount of money Tina makes in a week.
+- Regular hourly wage: $18.00/hour
+- Overtime hourly wage: $22.50/hour
+- Total hours worked in a week: 50 hours/week
+
+<STEP 5>: Calculate the total amount of money Tina makes from her regular wage in a week.
+- Regular hourly wage: $18.00/hour
+- Total hours worked in regular hours: 50 hours/week * (2/3) = 33.33 hours/week (rounded down to 33 hours)
+- Regular wage for the week: 33 hours * $18.00/hour = $612.00
+
+<STEP 6>: Calculate the total amount of money Tina makes from her overtime wage in a week.
+- Total hours worked in overtime hours: 50 hours/week * (1/3) = 16.67 hours/week (rounded up to 17 hours)
+- Overtime wage for the week: 17 hours * $22.50/hour = $388.55
+
+<STEP 7>: Calculate the total amount of money Tina makes in a week.
+- Regular wage for the week: $612.00
+- Overtime wage for the week: $
+<STEP 1>: Calculate Tina's earnings for each hour worked during a regular shift (8 hours).
+
+<STEP 2>: Multiply Tina's hourly wage ($18.00) by the number of hours worked during a regular shift (8 hours).
+
+<STEP 3>: Calculate Tina's earnings for each hour worked during an overtime shift (2 hours).
+
+<STEP 4>: Multiply Tina's hourly wage ($18.00) by the number of hours worked during an overtime shift (2 hours).
+
+<STEP 5>: Calculate the total number of hours Tina works during 5 days of work.
+
+<STEP 6>: Calculate the total number of hours Tina works during each shift (regular and overtime shifts).
+
+<STEP 7>: Use the information calculated in the previous steps to determine the total amount of money Tina makes during 5 days of work.
+<STEP 1>: Calculate Tina's hourly wage before overtime.
+Tina's hourly wage = $18.00
+
+<STEP 2>: Calculate the number of regular hours Tina works in five days.
+Regular hours worked = 8 hours/shift * 5 days
+
+<STEP 3>: Calculate the amount of money Tina earns from her regular hours in five days.
+Regular earnings = Hourly wage * Regular hours worked
+
+<STEP 4>: Calculate the number of overtime hours Tina works in five days.
+Overtime hours worked = Total hours worked - Regular hours worked
+
+<STEP 5>: Calculate the amount of money Tina earns from her overtime hours in five days.
+Overtime earnings = Hourly wage * Overtime hours worked + (Hourly wage * Overtime hours worked) * 0.5
+
+<STEP 6>: Calculate Tina's total earnings from her regular hours and overtime hours in five days.
+Total earnings = Regular earnings + Overtime earnings
+<STEP 1>: Calculate Tina's earnings for regular hours worked (8 hours per day for 5 days).
+
+Regular hours worked = 8 hours/day * 5 days
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked (2 hours/day for 5 days).
+
+Overtime hours worked = 2 hours/day * 5 days
+
+<STEP 3>: Calculate Tina's total earnings for the week by adding her earnings for regular hours, overtime hours, and any additional wages (commissions, bonuses, etc.).
+
+Total earnings = Earnings for regular hours + Earnings for overtime hours + Any additional wages
+
+By following these steps, you can accurately calculate Tina's total earnings for the week based on the information provided in the question.
+<STEP 1>: Calculate Tina's hourly wage before overtime.
+Tina makes $18.00 an hour.
+
+<STEP 2>: Calculate Tina's hourly wage with overtime.
+Tina is eligible for overtime when she works more than 8 hours per shift.
+The formula for overtime pay is: Hourly wage * (1.5) = Overtime wage
+So Tina's hourly wage with overtime is: $18.00 * (1.5) = $27.00
+
+<STEP 3>: Calculate the number of hours Tina works in 5 days.
+Tina works 10 hours every day for 5 days.
+So the total number of hours Tina works in 5 days is: 10 hours/day * 5 days = 50 hours
+
+<STEP 4>: Calculate the total amount of money Tina makes in 5 days.
+To calculate the total amount of money Tina makes in 5 days, we need to multiply the number of hours she works each day by her hourly wage (including overtime), and then multiply that daily amount by the number of days she works in 5 days.
+
+So the total amount of money Tina makes in 5 days is: (50 hours / 5 days) * ($27.00 hourly wage + $11.00 hourly overtime) = $3,500.00.
+<STEP 1>: Calculate Tina's hourly wage: $18.00/hour
+
+ <STEP 2>: Calculate Tina's overtime hourly wage: $18.00/hour + 1/2 * $18.00/hour = $27.00/hour
+
+ <STEP 3>: Determine the number of hours Tina works per shift: 10 hours
+
+ <STEP 4>: Determine the number of shifts Tina works per week: 5 shifts
+
+ <STEP 5>: Calculate the total number of hours Tina works per week: 10 hours/shift * 5 shifts/week = 50 hours/week
+
+ <STEP 6>: Determine the number of hours Tina works per week that are overtime hours: 50 hours/week - 40 hours/week (standard hours) = 10 hours/week of overtime hours.
+
+ <STEP 7>: Calculate the total amount of money Tina makes per week: 40 hours/week * $18.00/hour = $720.00/week.
+
+ <STEP 8>: Calculate the total amount of money Tina makes per week from her regular hourly wage: $720.00/week.
+
+ <STEP 9>: Calculate the total amount of money Tina makes per week from her overtime hourly wage: 10 hours/week of overtime hours * ($18.00/hour + $9.00/hour) = $540.00/week.
+
+ <STEP 10>: Calculate the total amount of money Tina makes per week: $720.00/week (regular hourly wage) + $540.00/week (overtime hourly wage) = $1,260.00/week.
+<STEP 1>: Calculate Tina's hourly wage, which is $18.00 an hour.
+
+  <STEP 2>: Determine Tina's overtime hourly wage, which is $18.00 + 1/2 * $18.00 = $27.00 an hour.
+
+  <STEP 3>: Calculate Tina's earnings for each hour she works during the 5-day period.
+
+  <STEP 4>: Determine the total number of hours Tina works during the 5-day period. She works 10 hours every day, so she works a total of 10 hours/day * 5 days = 50 hours during the 5-day period.
+
+  <STEP 5>: Calculate Tina's total earnings during the 5-day period. She earns $18.00 an hour, so she earns a total of $18.00/hour * 50 hours = $900.00 during the 5-day period.
+
+  <STEP 6>: Check to see if Tina receives any additional compensation for working overtime. Since the problem states that Tina is eligible for overtime, but it doesn't provide any information about whether or not she actually receives any additional compensation for working overtime, we cannot include any additional compensation in our calculation of Tina's total earnings during the 5-day period. Therefore, her total earnings during the 5-day period are $900.00.
+<STEP 1>: Calculate Tina's earnings for regular hours worked in 5 days.
+
+Regular hours per day = 8 hours
+Total hours worked in 5 days = 10 hours/day * 5 days = 50 hours
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked in 5 days.
+
+Overtime hours worked in 5 days = 50 hours - 8 hours/day * 5 days = 14 hours
+
+<STEP 3>: Calculate Tina's earnings for regular hours.
+
+Earnings for regular hours = Hourly wage * Regular hours worked
+
+Earnings for regular hours = $18.00/hour * 40 hours/week * 5 weeks = $4,500
+
+<STEP 4>: Calculate Tina's earnings for overtime hours.
+
+Earnings for overtime hours = Hourly wage * Overtime hours worked
+
+Earnings for overtime hours = $18.00/hour * 1.5 * 14 hours = $3,360
+
+<STEP 5>: Calculate Tina's total earnings for the 5-day period.
+
+Total earnings = Earnings for regular hours + Earnings for overtime hours
+
+Total earnings = $4,500 + $3,360 = $7,860
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00/hour
+
+ <STEP 2>: Determine Tina's overtime hourly wage: $18.00/hour + 1/2 $18.00/hour = $27.00/hour (overtime)
+
+ <STEP 3>: Calculate the number of hours Tina works during the 5-day period: 10 hours/day * 5 days = 50 hours
+
+ <STEP 4>: Determine the amount of money Tina makes from her regular wages: 50 hours * $18.00/hour = $900
+
+ <STEP 5>: Determine the amount of money Tina makes from her overtime wages: 10 hours * $27.00/hour = $270
+
+ <STEP 6>: Calculate the total amount of money Tina makes during the 5-day period: $900 (regular wages) + $270 (overtime wages) = $1,170
+<STEP 1>: Find out how much money Tina makes in a regular 8-hour shift.
+
+<STEP 2>: Calculate Tina's hourly wage: $18.00/hour
+
+<STEP 3>: Determine how much money Tina makes for working 10 hours every day for 5 days.
+
+<STEP 4>: Calculate Tina's earnings for the regular 8-hour shifts: 8 hours/day * 5 days = 40 hours.
+
+<STEP 5>: Determine how many overtime hours Tina works during this period: 10 hours/day - 8 hours/day = 2 hours/day * 5 days = 10 overtime hours.
+
+<STEP 6>: Calculate Tina's earnings for the regular 8-hour shifts: $18.00/hour * 8 hours = $144.00.
+
+<STEP 7>: Calculate Tina's earnings for the overtime hours: $18.00/hour * 1 hour = $18.00. For the overtime rate: $18.00/hour + ($18.00/hour * 0.5)) = $27.00/hour. Then, calculate Tina's earnings for the overtime hours: $27.00/hour * 10 hours = $270.00.
+
+<STEP 8>: Calculate Tina's total earnings for the 5-day period: $144.00 + $270.00 = $414.00.
+<STEP 1>: Calculate Tina's regular hourly wage.
+   Tina makes $18.00 an hour.
+
+  <STEP 2>: Calculate Tina's overtime hourly wage.
+  Tina's hourly wage is $18.00.
+  Tina is eligible for overtime, which is paid by your hourly wage + 1/2 your hourly wage.
+  So, Tina's overtime hourly wage is $18.00 + ($18.00 x 1/2) = $27.30 an hour.
+
+  <STEP 3>: Calculate the number of hours Tina works in 5 days.
+  Tina works 10 hours every day for 5 days.
+  So, Tina works a total of 10 hours/day x 5 days = 50 hours in 5 days.
+
+  <STEP 4>: Calculate the amount of money Tina makes from her regular hourly wage and overtime hourly wage.
+  Tina's regular hourly wage is $18.00.
+  Tina works a total of 50 hours in 5 days, out of which 30 hours are regular hours and 20 hours are overtime hours.
+  So, Tina makes a total of $900 from her regular hourly wage and overtime hourly wage.
+
+  <STEP 5>: Verify the accuracy of the calculations.
+  In this case, the calculations were done step by step, and each calculation was based on the previous calculation. Therefore, the calculations are likely to be accurate. However, it's always a good idea to double-check the calculations to ensure their accuracy.
+<STEP 1>: Calculate Tina's earnings for regular hours worked in 5 days.
+
+Regular hours per day = 8 hours
+Total hours worked in 5 days = 8 hours/day * 5 days = 40 hours
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked in 5 days.
+
+Overtime hours worked in 5 days = 40 hours - 8 hours/day * 5 days = 12 hours
+
+Hourly wage for overtime = $18.00/hour + 1/2 * $18.00/hour = $27.00/hour
+
+Overtime hours earned in 5 days = 12 hours
+
+Total overtime hours earned and pay in 5 days = 12 hours * $27.00/hour = $324.00
+
+<STEP 3>: Calculate Tina's total earnings for regular hours and overtime hours worked in 5 days.
+
+Total earnings for regular hours worked in 5 days = $400.00
+
+Total earnings for overtime hours worked in 5 days = $324.00
+
+Total earnings for regular hours and overtime hours worked in 5 days = $724.00.
+<STEP 1>: Calculate Tina's earnings for regular hours worked in a 5-day workweek.
+
+   Regular hours worked per day = 8 hours
+   Days worked per week = 5
+
+   Total regular hours worked per week = 8 hours/day * 5 days/week = 40 hours/week
+
+ <STEP 2>: Calculate Tina's earnings for overtime hours worked in a 5-day workweek.
+
+   Overtime hours worked per day = 2 hours
+   Days worked per week = 5
+
+   Total overtime hours worked per week = 2 hours/day * 5 days/week = 10 hours/week
+
+ <STEP 3>: Calculate Tina's earnings for regular hours worked, overtime hours worked, and total hours worked in a 5-day workweek.
+
+   Hourly wage = $18.00/hour
+
+   Regular hours earnings per week = Hourly wage * Regular hours worked per week = $18.00/hour * 40 hours/week = $720.00/week
+
+   Overtime hours earnings per week = Hourly wage * Overtime hours worked per week = $18.00/hour * 10 hours/week = $1,800.00/week
+
+   Total earnings per week = Regular hours earnings per week + Overtime hours earnings per week = $720.00/week + $1,800.00/week = $2,520.00/week
+
+ <STEP 4>: Multiply Tina's weekly earnings by the number of weeks in her work schedule to determine her total earnings for the work schedule.
+
+   Total earnings for the work schedule = Weekly earnings * Number of weeks = $2,520.00/week * 5 weeks = $12,600.00
+<STEP 1>: Calculate Tina's regular hourly wage.
+Tina's hourly wage = $18.00/hour
+
+<STEP 2>: Determine how many hours Tina works per day.
+Tina works 10 hours every day.
+
+<STEP 3>: Calculate the number of hours Tina works in 5 days.
+Total hours worked in 5 days = 10 hours/day * 5 days
+
+<STEP 4>: Determine if Tina is eligible for overtime pay. Since she works more than 8 hours per shift, she is eligible for overtime pay.
+
+<STEP 5>: Calculate Tina's total earnings for the 5-day period, including both regular hours and overtime hours.
+To calculate Tina's total earnings for the 5-day period:
+
+Total regular hours worked in 5 days = 10 hours/day * 5 days = 50 hours
+
+Total overtime hours worked in 5 days = (10 hours/day - 8 hours/day) * 5 days = 14 hours
+
+Total earnings for regular hours worked in 5 days = 50 hours * $18.00/hour = $900.00
+
+Total earnings for overtime hours worked in 5 days = 14 hours * ($18.00/hour + $9.00/hour) = $1,382.00
+
+Total earnings for the 5-day period = $900.00 + $1,382.00 = $2,282.00
+<STEP 1>: Calculate Tina's earnings for regular hours worked (8 hours per day for 5 days).
+
+Regular hours = 8 hours/day * 5 days = 40 hours
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked (2 hours per day for 5 days).
+
+Overtime hours = 2 hours/day * 5 days = 10 hours
+
+<STEP 3>: Calculate Tina's earnings for regular hours and overtime hours combined.
+
+Total hours = 40 hours + 10 hours = 50 hours
+
+Total earnings = $18.00/hour * 50 hours = $900.00.
+<STEP 1>: Calculate Tina's earnings for regular hours worked (8 hours per day for 5 days):
+Regular hours worked = 8 hours/day * 5 days
+Regular hours worked = 40 hours
+
+Tina's earnings for regular hours worked = $18.00/hour * 40 hours
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked (2 hours per day for 5 days):
+Overtime hours worked = 2 hours/day * 5 days
+Overtime hours worked = 10 hours
+
+Tina's earnings for overtime hours worked = $18.00/hour * 10 hours + ($18.00/hour * 1 hour) * 10 hours
+
+<STEP 3>: Calculate Tina's total earnings for the given work period:
+Tina's total earnings = Tina's earnings for regular hours worked + Tina's earnings for overtime hours worked
+
+Tina's total earnings = $<insert the calculated value from Step 1 and Step 2> >
+
+Therefore, Tina makes a total of $<insert the calculated value from Step 1 and Step  2}> for working 10 hours every day for 5 days.
+<STEP 1>: Find the regular hourly wage.
+Tina makes $18.00 an hour.
+
+<STEP 2>: Determine the number of hours Tina works each day.
+Tina works 10 hours every day.
+
+<STEP 3>: Calculate the earnings from regular hours worked each day.
+Regular hourly wage = $18.00
+Hours worked each day = 10
+Earnings from regular hours = Regular hourly wage * Hours worked each day
+= $18.00 * 10
+= $180.00
+
+<STEP 4>: Calculate the number of hours Tina works each shift in excess of the standard 8 hours per shift.
+Tina works 10 hours every day for 5 days, which sums up to 50 hours. The standard number of hours worked per shift is 8 hours. So, Tina works 5 hours every shift in excess of the standard 8 hours per shift.
+
+<STEP 5>: Calculate the earnings from overtime hours worked each shift.
+Regular hourly wage = $18.00
+Overtime hourly wage = Regular hourly wage + 1/2 regular hourly wage
+= $18.00 + 1/2 * $18.00
+= $18.00 + $9.00
+= $27.00
+Hours worked in excess of standard 8 hours per shift = 5 hours
+Earnings from overtime hours = Overtime hourly wage * Hours worked in excess of standard 8 hours per shift
+= $27.00 * 5
+= $135.00
+
+<STEP 6>: Calculate the total earnings from both regular and overtime hours worked each day for the specified number of days.
+Total earnings from regular hours = Earnings from regular hours * Number of days
+= $180.00 * 5
+= $900.00
+
+Total earnings from overtime hours = Earnings from overtime hours * Number of days
+= $135.00 * 5
+= $675.00
+
+Total earnings from both regular and overtime hours = Total earnings from regular hours
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00 per hour.
+
+<STEP 2>: Calculate Tina's overtime hourly wage: $18.00 per hour + (1/2) x $18.00 per hour = $27.00 per hour.
+
+<STEP 3>: Calculate the number of hours Tina works during the 5-day period: 10 hours per day x 5 days = 50 hours.
+
+<STEP 4>: Calculate the amount of money Tina earns during the 5-day period: Regular hours: 40 hours x $18.00 per hour = $720.00 Overtime hours: 10 hours x $27.00 per hour = $270.00 Total earnings: $720.00 + $270.00 = $990.00 
+
+So, Tina makes a total of $990.00 during the 5-day period.
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00/hour.
+
+<STEP 2>: Calculate Tina's overtime hourly wage: $18.00/hour + 1/2($18.00/hour) = $27.00/hour.
+
+<STEP 3>: Calculate the total number of hours Tina works during the 5-day period: 10 hours/day * 5 days = 50 hours.
+
+<STEP 4>: Calculate the total amount of money Tina makes during the 5-day period. She earns $18.00/hour for regular hours and $27.00/hour for overtime hours: 50 hours * ($18.00/hour for regular hours + $27.00/hour for overtime hours)) = $1,565.00.
+<STEP 1>: Calculate Tina's regular hourly wage. Tina makes $18.00 an hour.
+
+  <STEP 2>: Determine how many hours Tina works in total during the 5-day workweek. Tina works 10 hours every day for 5 days, so she works a total of 50 hours during this workweek.
+
+  <STEP 3>: Calculate how many hours Tina works during her shifts that are not subject to overtime pay. Tina is eligible for overtime pay if she works more than 8 hours per shift. Since Tina works 10 hours every day, her shifts are always longer than 8 hours. However, the first 8 hours of her shifts are not subject to overtime pay. Therefore, during each 5-day workweek, Tina works a total of 40 hours (8 hours per day for 5 days) that are not subject to overtime pay.
+
+  <STEP 4>: Calculate how many hours Tina works during her shifts that are subject to overtime pay. Since Tina works 10 hours every day, her shifts are always longer than 8 hours. However, only the hours worked beyond 8 hours per shift are subject to overtime pay. Therefore, during each 5-day workweek, Tina works a total of 20 hours (2 hours per day for 5 days) that are subject to overtime pay.
+
+  <STEP 5>: Calculate Tina's total earnings during the 5-day workweek. To calculate Tina's total earnings during the 5-day workweek, we need to consider both the hours she works that are not subject to overtime pay and the hours she works that are subject to overtime pay, and calculate her earnings for each of those categories separately, and then add those two amounts together to find her total earnings during the 5-day workweek.
+
+  Tina works a total of 50 hours during the 5-day workweek (10 hours every day for 5 days). Of those 50 hours, 40 hours are not subject to overtime pay (8 hours per day for 5 days), and 20 hours are subject to overtime pay (2 hours per day for 5 days).
+
+  To calculate T
+<STEP 1>: Calculate Tina's regular hourly wage.
+Tina's hourly wage = $18.00
+
+<STEP 2>: Determine the number of hours Tina works per day.
+Tina's hours worked per day = 10 hours
+
+<STEP 3>: Calculate the number of hours Tina works per week.
+Tina's hours worked per week = 10 hours/day * 5 days/week = 50 hours/week
+
+<STEP 4>: Determine the number of hours Tina works in overtime per week.
+Tina's hours worked in overtime per week = Tina's total hours worked per week - 40 hours = 50 hours/week - 40 hours/week = 10 hours/week
+
+<STEP 5>: Calculate Tina's earnings from her regular wage for the hours she works per week.
+Tina's earnings from her regular wage = Tina's hourly wage * Tina's hours worked per week = $18.00/hour * 50 hours/week = $900.00/week
+
+<STEP 6>: Calculate Tina's earnings from overtime pay for the hours she works in overtime per week.
+Tina's earnings from overtime pay = Tina's hourly wage for overtime * Tina's hours worked in overtime per week
+Tina's hourly wage for overtime = $18.00/hour + ($18.00/hour * 0.5)) = $18.00/hour + $9.00/hour = $27.00/hour
+Tina's hours worked in overtime per week = 10 hours/week
+Tina's earnings from overtime pay = $27.00/hour * 10 hours/week = $270.00/week
+
+<STEP 7>: Calculate Tina's total earnings per week.
+Tina's total earnings per week = Tina's earnings from her regular wage + Tina's earnings from overtime pay
+Tina's earnings from her regular wage = $900.00/
+<STEP 1>: Calculate Tina's hourly wage: $18.00/hour
+
+<STEP 2>: Determine Tina's overtime rate: $18.00/hour + ($18.00/2) = $27.36/hour
+
+<STEP 3>: Calculate the number of hours Tina works during the 5-day period: 5 days * 10 hours/day = 50 hours
+
+<STEP 4>: Determine the amount of money Tina makes during the 5-day period: 50 hours * $18.00/hour = $900.00.
+
+To calculate the total amount of money Tina makes during the 5-day period, including the overtime hours, you need to calculate the number of overtime hours and the corresponding amount of money.
+
+<STEP 5>: Determine the number of overtime hours Tina works during the 5-day period: 50 hours - 40 hours (8 hours per day for 5 days) = 10 hours overtime.
+
+<STEP 6>: Calculate the amount of money Tina makes during the 5-day period, including the overtime hours: 40 hours * $18.00/hour = $720.00 + 10 hours * ($18.00/hour + $9.68/hour) = $1,240.00.
+
+Therefore, Tina makes a total of $1,240.00 during the 5-day period.
+<STEP 1>: Calculate Tina's earnings for regular hours worked.
+Regular hours: 10 hours/day * 5 days = 50 hours
+Regular earnings: $18.00/hour * 50 hours = $900
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked.
+Overtime hours: 50 hours (total hours) - 40 hours (regular hours) = 10 hours
+Overtime earnings: ($18.00/hour + $9.00/hour (1/2 overtime hourly wage)) * 10 hours = $360
+
+<STEP 3>: Calculate Tina's total earnings for the 5-day workweek.
+Total earnings: Regular earnings + Overtime earnings = $900 + $360 = $1,260.
+
+Therefore, Tina makes a total of $1,260 during the 5-day workweek.
+<STEP 1>: Calculate Tina's hourly wage.
+   Tina's hourly wage is $18.00.
+
+ <STEP 2>: Calculate Tina's regular pay for working 10 hours per day for 5 days.
+   Tina works 10 hours per day for 5 days, so she works a total of 50 hours.
+   Tina's regular pay for these hours is calculated as follows:
+   Regular pay = Hourly wage * Hours worked
+   Regular pay = $18.00/hour * 50 hours
+   Regular pay = $900.00
+
+ <STEP 3>: Calculate Tina's overtime pay for working more than 8 hours per shift for 5 days.
+   Tina works more than 8 hours per shift for 5 days, so she is eligible for overtime pay.
+   Tina's overtime pay for these hours is calculated as follows:
+   Overtime pay = Hourly wage * Overtime hours worked
+   Overtime pay = $18.00/hour * (50 hours - 40 hours))
+   Overtime pay = $18.00/hour * 10 hours
+   Overtime pay = $180.00
+
+ <STEP 4>: Calculate Tina's total pay for working 10 hours every day for 5 days.
+   Tina's total pay for these hours is calculated as follows:
+   Total pay = Regular pay + Overtime pay
+   Total pay = $900.00 + $180.00
+   Total pay = $1,080.00. Answer: Tina makes a total of $1,080.00 for working 10 hours every day for 5 days.
+<STEP 1>: Calculate Tina's hourly wage: $18.00 per hour.
+
+<STEP 2>: Calculate Tina's overtime hourly wage: $18.00 + ($18.00 * 0.5)) = $27.00 per hour (overtime).
+
+<STEP 3>: Calculate the number of hours Tina works in 5 days: 10 hours per day * 5 days = 50 hours.
+
+<STEP 4>: Calculate the amount of money Tina makes for working 50 hours: 50 hours * $18.00 per hour = $900.00.
+
+<STEP 5>: Calculate the amount of money Tina makes for working 50 hours and being eligible for overtime: 10 hours * $18.00 per hour = $180.00 (regular hours). 
+50 hours - 40 hours (regular hours) = 10 hours (overtime hours). 
+$18.00 per hour (hourly wage) + ($18.00 * 0.5)) per hour (overtime wage) = $27.00 per hour. 
+10 hours (overtime hours) * $27.00 per hour = $270.00. 
+Total amount of money Tina makes for working 50 hours: $900.00 (regular hours) + $270.00 (overtime hours) = $1,170.00.
+<STEP 1>: Calculate Tina's hourly wage. Tina makes $18.00 an hour.
+
+<STEP 2>: Calculate Tina's overtime wage. Since Tina works more than 8 hours per shift, she is eligible for overtime. Her overtime wage is her hourly wage + 1/2 her hourly wage.
+
+<STEP 3>: Calculate Tina's total wage for working 10 hours every day for 5 days. First, calculate how many hours she works in total: 10 hours/day * 5 days = 50 hours.
+
+Next, calculate how many hours she works at her regular hourly wage, and how many hours she works at her overtime hourly wage:
+
+- Regular hours: 50 hours - 40 hours (8 hours/day * 5 days) = 10 hours
+- Overtime hours: 10 hours
+
+Finally, calculate Tina's total wage:
+
+- Regular hours wage: 10 hours * $18.00/hour = $180.00
+- Overtime hours wage: 10 hours * ($18.00/hour + $9.00/hour) = $1,080.00
+- Total wage: $180.00 + $1,080.00 = $1,260.00.
+
+Therefore, Tina makes a total of $1,260.00 for working 10 hours every day for 5 days.
+<STEP 1>: Calculate Tina's regular hourly wage.
+Tina's hourly wage = $18.00
+
+<STEP 2>: Determine the number of regular hours Tina works in a week (assuming she works 5 days a week).
+Regular hours per week = 8 hours/day * 5 days/week
+
+<STEP 3>: Calculate the number of overtime hours Tina works in a week.
+Overtime hours per week = (Number of hours worked per day - Regular hours per day) * Number of days worked per week
+Overtime hours per week = (10 hours/day - 8 hours/day) * 5 days/week
+Overtime hours per week = 2 hours/day * 5 days/week
+Overtime hours per week = 10 hours/week
+
+<STEP 4>: Calculate Tina's total earnings for working 10 hours every day for 5 days.
+Total earnings = (Regular hourly wage * Regular hours per week) + (Overtime hourly wage * Overtime hours per week))
+Total earnings = ($18.00/hour * 40 hours/week) + ($18.00/hour * 1.5 * 10 hours/week))
+Total earnings = ($720.00/week) + ($324.00/week))
+Total earnings = $1,044.00/week or $41,776.00/year.
+<STEP 1>: Calculate Tina's hourly wage.
+Tina's hourly wage = $18.00/hour
+
+<STEP 2>: Determine Tina's overtime rate.
+Tina's overtime rate = Tina's hourly wage + 1/2 Tina's hourly wage
+Tina's overtime rate = $18.00/hour + $9.00/hour
+Tina's overtime rate = $27.00/hour
+
+<STEP 3>: Calculate the number of hours Tina works during the 5-day period.
+Total hours worked = Number of hours worked per day × Number of days
+Total hours worked = 10 hours/day × 5 days
+Total hours worked = 50 hours
+
+<STEP 4>: Determine the amount of regular pay Tina earns during the 5-day period.
+Regular pay = Hourly wage × Total hours worked
+Regular pay = $18.00/hour × 50 hours
+Regular pay = $900.00
+
+<STEP 5>: Determine the amount of overtime pay Tina earns during the 5-day period.
+Overtime pay = Overtime hourly wage × Total hours worked overtime
+Overtime pay = $27.00/hour × 5 hours
+Overtime pay = $136.50
+
+<STEP 6>: Determine the total amount of money Tina makes during the 5-day period.
+Total earnings = Regular pay + Overtime pay
+Total earnings = $900.00 + $136.50
+Total earnings = $1,036.50
+<STEP 1>: Calculate Tina's earnings for regular hours worked in a week.
+
+- Regular hours worked per day = 8 hours
+- Days worked per week = 5 days
+
+Thus, Tina works a total of 40 hours in a week.
+
+ <STEP 2>: Calculate Tina's earnings for overtime hours worked in a week.
+
+- Overtime hours worked per day > 8 hours
+- Weekly overtime hours worked = (1.5 * Number of hours worked per day)) * Number of days worked per week
+
+Since Tina works 10 hours every day for 5 days, her weekly overtime hours worked will be:
+
+ (1.5 * 10 hours)) * 5 days = 75 hours.
+
+ <STEP 3>: Calculate Tina's earnings for regular hours worked in a week.
+
+- Regular hourly wage = $18.00/hour
+- Regular hours worked per week = 40 hours
+
+Thus, Tina earns $720.00 for regular hours worked in a week.
+
+ <STEP 4>: Calculate Tina's earnings for overtime hours worked in a week.
+
+- Overtime hourly wage = $18.00/hour + ($18.00/hour * 0.5))
+- Overtime hours worked per week = 75 hours
+
+Thus, Tina earns $4,715.00 for overtime hours worked in a week.
+
+ <STEP 5>: Calculate Tina's total earnings for a week.
+
+- Total earnings for a week = Regular earnings + Overtime earnings
+
+Thus, Tina earns a total of $11,435.00 for a week.
+<STEP 1>: Calculate Tina's hourly wage for regular hours. $18.00/hour
+
+ <STEP 2>: Calculate Tina's hourly wage for overtime hours. $18.00/hour + $9.00/hour = $27.00/hour
+
+ <STEP 3>: Calculate the total number of hours Tina works during the 5-day period. 10 hours/day * 5 days = 50 hours
+
+ <STEP 4>: Calculate the total amount of money Tina makes during the 5-day period. Regular hours: 50 hours * $18.00/hour = $900.00 Overtime hours: 5 hours * $27.00/hour + 5 hours * $27.00/hour = $684.00 Total: $1584.00
+
+ Therefore, Tina makes a total of $1,584.00 during the 5-day period.
+<STEP 1>: Calculate Tina's regular hourly wage.
+Tina makes $18.00 an hour.
+
+<STEP 2>: Determine Tina's overtime hourly wage.
+Tina's regular hourly wage is $18.00.
+Overtime pay is 1.5 times your regular hourly wage.
+
+<STEP 3>: Calculate Tina's total earnings for working 10 hours a day for 5 days.
+Tina works 10 hours a day for 5 days.
+Total hours worked = 10 hours/day × 5 days = 50 hours
+
+<STEP 4>: Calculate Tina's earnings for the regular hours worked.
+Total hours worked = 50 hours
+Tina's regular hourly wage is $18.00.
+Regular earnings = Total hours worked × Regular hourly wage
+
+<STEP 5>: Calculate Tina's earnings for the overtime hours worked.
+Total hours worked = 50 hours
+Overtime hours worked = Total hours worked - Regular hours worked
+Regular hours worked = 40 hours (assuming an 8-hour workday with no overtime)
+Overtime hours worked = 50 hours - 40 hours = 10 hours
+
+Tina's regular hourly wage is $18.00.
+Overtime hourly wage = Regular hourly wage × 1.5
+
+<STEP 6>: Calculate Tina's earnings for the overtime hours worked.
+Overtime hours worked = 10 hours
+Overtime hourly wage = $18.00 × 1.5 = $27.00
+Overtime earnings = Overtime hours worked × Overtime hourly wage
+
+<STEP 7>: Calculate Tina's total earnings for the 5-day workweek.
+Total earnings = Regular earnings + Overtime earnings
+Regular earnings = 40 hours × $18.00/hour = $720.00
+Overtime earnings = 10 hours × $27.00/hour = $270.00
+Total earnings = $720.00 + $270.00 = $99
+<STEP 1>: Find out how much money Tina makes for working 8 hours at her hourly wage.
+   Tina makes $18.00 an hour.
+   So, for working 8 hours:
+   $18.00/hour × 8 hours = $144.00
+
+  <STEP 2>: Find out how much money Tina makes for working 2 hours of overtime at her hourly wage plus half of her hourly wage.
+   Overtime pay = $18.00/hour + ($18.00/hour × 1/2)
+                  = $18.00/hour + ($9.00/hour)
+                  = $27.00/hour for overtime
+
+   Tina works 2 hours of overtime every day for 5 days.
+   So, for working 2 hours of overtime every day for 5 days:
+   $27.00/hour × 2 hours × 5 days = $684.00
+
+  <STEP 3>: Find out how much money Tina makes in total for working 8 hours every day for 5 days and 2 hours of overtime every day for 5 days.
+   Tina makes $144.00 for working 8 hours every day for 5 days.
+   Tina makes $684.00 for working 2 hours of overtime every day for 5 days.
+   So, for working 8 hours every day for 5 days and 2 hours of overtime every day for 5 days:
+   $144.00 (base pay) + $684.00 (overtime pay) = $828.00
+
+   Therefore, Tina makes a total of $828.00 for working 8 hours every day for 5 days and 2 hours of overtime every day for 5 days.
+<STEP 1>: Find the base pay for Tina for working 10 hours a day. This is calculated by multiplying her hourly wage by the number of hours worked in a day.
+
+<STEP 2>: Calculate the overtime pay for Tina for working more than 8 hours a day. This is calculated by multiplying her hourly wage by 1.5 (which is the overtime rate of pay) and then multiplying that by the number of hours worked in overtime.
+
+<STEP 3>: Calculate the total pay for Tina for working 10 hours every day for 5 days. This is calculated by adding the base pay for all the days to the overtime pay for all the days when Tina worked more than 8 hours a day.
+<STEP 1>: Calculate Tina's earnings per hour.
+Tina earns $18.00 per hour.
+
+<STEP 2>: Determine Tina's earnings per overtime hour.
+Tina's hourly wage is $18.00. For overtime hours, she earns an additional 1/2 her hourly wage. So her earnings per overtime hour is $18.00 + $9.00 = $27.00.
+
+<STEP 3>: Calculate the number of hours Tina works during her 5-day workweek.
+Tina works 10 hours every day for 5 days. So she works a total of 10 hours/day × 5 days/week × 5 weeks/month = 250 hours/month.
+
+<STEP 4>: Calculate Tina's earnings during her 5-day workweek.
+During her 5-day workweek, Tina works a total of 10 hours/day × 5 days/week = 50 hours.
+Since Tina earns $18.00 per hour, her earnings during her 5-day workweek would be $18.00/hour × 50 hours = $900.
+
+<STEP 5>: Calculate the amount of overtime pay Tina receives during her 5-day workweek.
+During her 5-day workweek, Tina works a total of 50 hours. Out of these 50 hours, 10 hours are considered regular hours, while the remaining 40 hours are considered overtime hours.
+
+To calculate the amount of overtime pay Tina receives during her 5-day workweek, we need to apply the overtime pay rate.
+
+As we determined earlier, Tina's hourly wage is $18.00. For overtime hours, she earns an additional 1/2 her hourly wage. So her overtime pay rate is $18.00/hour + $9.00/hour = $27.00/hour.
+
+Now we can calculate the amount of overtime pay Tina receives during her 5-day workweek.
+
+The total number of overtime hours T
+<STEP 1>: Calculate Tina's hourly wage for regular hours: $18.00/hour
+
+<STEP 2>: Determine the hourly wage for overtime hours: $18.00/hour + 1/2 $18.00/hour = $27.00/hour
+
+<STEP 3>: Calculate the number of regular hours Tina works during the 5-day period: 10 hours/day * 5 days = 50 hours
+
+<STEP 4>: Determine the number of overtime hours Tina works during the 5-day period: 50 hours - 8 hours/day * 5 days = 14 hours
+
+<STEP 5>: Calculate Tina's total earnings for regular hours during the 5-day period: 50 hours * $18.00/hour = $900.00
+
+<STEP 6>: Calculate Tina's total earnings for overtime hours during the 5-day period: 14 hours * $27.00/hour = $378.00
+
+<STEP 7>: Calculate Tina's total earnings during the 5-day period: $900.00 + $378.00 = $1,278.00
+
+Therefore, Tina makes a total of $1,278.00 during the 5-day period.
+<STEP 1>: Calculate Tina's regular earnings for each shift. Since she works 10 hours every day, her regular earnings are:
+
+$18.00/hour * 10 hours/shift * 5 days/week = $900.00/week
+
+<STEP 2>: Calculate Tina's overtime earnings for each shift. Since she works more than 8 hours per shift, she is eligible for overtime. Her overtime earnings are:
+
+$18.00/hour * 10 hours/shift * 2 hours/shift (overtime) * 5 days/week = $1,890.00/week
+
+<STEP 3>: Calculate Tina's total earnings for each week. Her total earnings are the sum of her regular earnings and her overtime earnings:
+
+$900.00/week (regular earnings) + $1,890.00/week (overtime earnings) = $2,890.00/week (total earnings)
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00/hour
+
+<STEP 2>: Calculate Tina's overtime hourly wage: $18.00/hour + ($18.00/2) = $27.12/hour
+
+<STEP 3>: Determine the total number of hours Tina works during the 5-day period: 5 days x 10 hours/day = 50 hours
+
+<STEP 4>: Calculate Tina's total earnings during the 5-day period: 50 hours x $18.00/hour = $900.00
+
+<STEP 5>: Determine the number of overtime hours Tina works during the 5-day period: 50 hours - 40 hours (the maximum number of hours she can work within an 8-hour shift) = 10 hours
+
+<STEP 6>: Calculate Tina's total earnings during the 5-day period, including overtime pay: 40 hours x $18.00/hour = $720.00 10 hours x $27.12/hour = $271.20  total earnings = $720.00 + $271.20 = $991.20  Therefore, Tina makes a total of $991.20 during the 5-day period.
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00/hour
+
+<STEP 2>: Determine Tina's overtime hourly wage: $18.00/hour + 1/2($18.00/hour) = $27.00/hour
+
+<STEP 3>: Calculate the number of hours Tina works during the 5-day period: 5 days * 10 hours/day = 50 hours
+
+<STEP 4>: Calculate Tina's total earnings during the 5-day period: Regular hours earnings: 50 hours * $18.00/hour = $900.00 Overtime hours earnings: 5 hours * 2 hours/day * ($18.00/hour + $9.00/hour) = $360.00 Total earnings: $900.00 + $360.00 = $1,260.00 
+
+Therefore, Tina makes a total of $1,260.00 during the 5-day period.
+<STEP 1>: Calculate Tina's earnings for regular hours worked in 5 days.
+
+Regular hours per day: 8 hours
+Days worked: 5
+
+Total regular hours: 8 hours/day * 5 days = 40 hours
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked in 5 days.
+
+Overtime hours per day: 2 hours
+Days worked: 5
+
+Total overtime hours: 2 hours/day * 5 days = 10 hours
+
+<STEP 3>: Calculate Tina's earnings for regular hours, then add her earnings for overtime hours.
+
+Regular hours pay: $18.00/hour
+Regular hours worked: 40 hours
+
+Regular hours pay: $18.00/hour * 40 hours = $720.00
+
+Overtime hours pay: $18.00/hour + ($18.00/hour * 1/2) = $27.00/hour
+Overtime hours worked: 10 hours
+
+Overtime hours pay: $27.00/hour * 10 hours = $270.00
+
+Total earnings: $720.00 (regular hours) + $270.00 (overtime hours) = $990.00
+<STEP 1>: Calculate Tina's earnings for each hour worked at her regular hourly wage.
+
+Regular hourly wage: $18.00
+
+Number of hours worked for the regular wage: 8 hours
+
+ <STEP 2>: Calculate Tina's earnings for the overtime hours worked at her regular hourly wage plus one-half of her hourly wage.
+
+Regular hourly wage: $18.00
+
+Hourly wage for overtime: $18.00 + $9.00 = $27.00
+
+Number of hours worked for overtime: 2 hours
+
+ <STEP 3>: Calculate Tina's total earnings for the given work schedule.
+
+Regular hourly wage: $18.00
+Overtime hourly wage: $27.00
+
+Number of regular hours worked: 8 hours * 5 days = 40 hours
+Number of overtime hours worked: 2 hours * 5 days = 10 hours
+
+Total earnings for regular hours: $18.00 * 40 hours = $720.00
+Total earnings for overtime hours: $27.00 * 10 hours = $270.00
+
+Total earnings for the given work schedule: $720.00 + $270.00 = $1,010.00
+<STEP 1>: Calculate Tina's hourly wage.
+Tina's hourly wage = $18.00/hour
+
+<STEP 2>: Determine the number of hours Tina works every day.
+Tina works 10 hours every day.
+
+<STEP 3>: Find out how many days Tina works in a week.
+Tina works for 5 days in a week.
+
+<STEP 4>: Calculate the total number of hours Tina works in a week.
+Total hours worked in a week = Hours worked per day * Number of days in a week
+Total hours worked in a week = 10 hours/day * 5 days/week
+Total hours worked in a week = 50 hours/week
+
+<STEP 5>: Calculate the total amount of money Tina makes in a week.
+Total earnings in a week = Hourly wage * Total hours worked in a week
+Total earnings in a week = $18.00/hour * 50 hours/week
+Total earnings in a week = $900.00/week
+
+Therefore, Tina makes a total of $900.00 in a week.
+<STEP 1>: Calculate Tina's regular earnings for each shift. She works 10 hours every day for 5 days, so she works a total of 50 hours during this period.
+
+ <STEP 2>: Determine how many hours Tina works in regular time and how many hours she works in overtime. Since she works 10 hours every day, she works 10 hours in regular time each day. She works 5 days in a row, so she works a total of 50 hours during this period. Since she works more than 8 hours per shift, she is eligible for overtime, which is paid by your hourly wage + 1/2 your hourly wage. In this case, Tina earns $18.00 an hour in regular time and she earns an additional $27.00 an hour in overtime.
+
+ <STEP 3>: Calculate the total amount of money Tina earns during this period. She earns $18.00 an hour in regular time, so she earns a total of $18.00 x 10 = $180.00 in regular time during this period. She earns an additional $27.00 an hour in overtime, so she earns a total of $27.00 x 12 = $324.00 in overtime during this period. Therefore, Tina earns a total of $180.00 + $324.00 = $504.00 during this period.
+<STEP 1>: Calculate Tina's earnings for each hour worked during her 10-hour shifts.
+
+- Regular hours: $18.00/hour
+- Number of regular hours: 10 hours
+
+<STEP 2>: Calculate Tina's earnings for each overtime hour worked during her 10-hour shifts.
+
+- Overtime hours: 2 hours
+- Regular hourly wage: $18.00
+- Overtime hourly wage: $18.00 + ($18.00 * 0.5)) = $27.00
+
+<STEP 3>: Calculate Tina's total earnings for 5 workdays, consisting of regular hours, overtime hours, and total hours.
+
+- Regular hours: 5 * 10 = 50 hours
+- Overtime hours: 5 * 2 = 10 hours
+- Total hours: 50 hours + 10 hours = 60 hours
+- Regular earnings: $18.00/hour * 50 hours = $900.00
+- Overtime earnings: $27.00/hour * 10 hours = $270.00
+- Total earnings: $900.00 + $270.00 = $1,170.00
+
+<STEP 4>: The final answer is that Tina makes a total of $1,170.00 for working 5 days, consisting of 50 hours of regular hours, 10 hours of overtime hours, and 60 hours in total.
+<STEP 1>: Calculate Tina's regular wage for working 10 hours a day for 5 days.
+
+Regular wage = Hourly wage * Hours worked per day * Number of workdays
+
+Regular wage = $18.00 * 10 * 5
+
+<STEP 2>: Calculate Tina's overtime wage for working more than 8 hours per shift for 5 days.
+
+Overtime hours = Total hours worked - Hours worked in regular hours
+
+Overtime hours = (10 hours/day * 5 days/week) - (8 hours/day * 5 days/week))
+
+Overtime hours = 50 hours - 40 hours
+
+Overtime hours = 10 hours
+
+Overtime wage = Hourly wage * (1 + Overtime pay percentage)
+
+Overtime wage = $18.00 * (1 + 0.5)
+
+<STEP 3>: Calculate Tina's total wage for working 10 hours every day for 5 days, including both her regular wage and her overtime wage.
+
+Total wage = Regular wage + Overtime wage
+
+Total wage = ($18.00 * 10 * 5) + ($18.00 * 1.5 * 10 * 5))
+
+Total wage = $18.00 * (10 * 5 + 1.5 * 10 * 5))
+
+Total wage = $18.00 * (50 + 75))
+
+Total wage = $18.00 * (125))
+
+Total wage = $2,250.00.
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00/hour
+
+<STEP 2>: Determine Tina's overtime hourly wage: $18.00/hour + 1/2 * $18.00/hour = $27.00/hour
+
+<STEP 3>: Find out how many hours Tina works every day: 10 hours
+
+<STEP 4>: Calculate how many hours Tina works in 5 days: 10 hours/day * 5 days = 50 hours
+
+<STEP 5>: Determine how much money Tina makes from her regular wage during the 50 hours: $18.00/hour * 50 hours = $900.00
+
+<STEP 6>: Determine how much money Tina makes from her overtime wage during the 50 hours: ($18.00/hour + $9.00/hour) * 10 hours/day * 5 days/week = $3,960.00
+
+<STEP 7>: Add the amount of money Tina makes from her regular wage and her overtime wage during the 50 hours: $900.00 + $3,960.00 = $4,860.00
+
+<STEP 8>: Therefore, Tina makes a total of $4,860.00 when she works 10 hours every day for 5 days.
+<STEP 1>: Calculate Tina's earnings for each hour worked during a regular shift (8 hours).
+
+    Tina's hourly wage: $18.00
+
+    Regular shift hours: 8 hours
+
+    Regular shift earnings: $18.00/hour × 8 hours = $144.00
+
+ <STEP 2>: Calculate Tina's earnings for each hour worked during an overtime shift (hours beyond 8 per shift).
+
+    Overtime wage: $18.00/hour × 1.5 = $27.00/hour
+
+ <STEP 3>: Calculate Tina's earnings for working 10 hours every day for 5 days. First, calculate her earnings for each day, and then multiply it by the number of days.
+
+    Hours worked per day: 10 hours
+    Number of days: 5 days
+
+    Daily earnings: $144.00 (for regular hours) + $270.00 (for overtime hours) = $414.00)
+
+    Total earnings for 5 days: $414.00/day × 5 days = $2,070.00.
+
+  Therefore, Tina makes a total of $2,070.00 for working 10 hours every day for 5 days.
+<STEP 1>: Calculate Tina's earnings for each hour worked during a regular shift (8 hours).
+
+- Tina's hourly wage: $18.00
+- Hours worked during a regular shift: 8
+
+<STEP 2>: Calculate Tina's earnings for the regular shifts (8 hours each) she works during the 5-day workweek.
+
+- Hours worked during regular shifts in a 5-day workweek: 8 hours/day * 5 days = 40 hours
+
+<STEP 3>: Calculate Tina's earnings for the overtime hours she works during the 5-day workweek.
+
+- Hours worked during overtime hours in a 5-day workweek: 2 hours/day * 5 days = 10 hours
+
+<STEP 4>: Calculate Tina's earnings for the regular shifts.
+
+- Hours worked during regular shifts: 40 hours
+- Earnings for regular shifts: 40 hours * $18.00/hour = $720.00
+
+<STEP 5>: Calculate Tina's earnings for the overtime hours.
+
+- Hours worked during overtime hours: 10 hours
+- Earnings for overtime hours: 10 hours * $18.00/hour + 1/2 * 10 hours * $18.00/hour = $1,980.00
+
+<STEP 6>: Calculate Tina's total earnings for the 5-day workweek.
+
+- Earnings for regular shifts: $720.00
+- Earnings for overtime hours: $1,980.00
+- Total earnings for the 5-day workweek: $720.00 + $1,980.00 = $2,700.00
+<STEP 1>: Calculate Tina's regular hourly wage.
+Tina makes $18.00 an hour.
+
+<STEP 2>: Calculate Tina's overtime hourly wage.
+Tina's regular hourly wage is $18.00.
+Overtime is paid by your hourly wage + 1/2 your hourly wage.
+So, Tina's overtime hourly wage is $18.00 + $9.00 = $27.00.
+
+<STEP 3>: Calculate the number of hours Tina works in total during the 5-day period.
+Tina works 10 hours every day for 5 days.
+So, Tina works a total of 10 hours/day * 5 days = 50 hours during the 5-day period.
+
+<STEP 4>: Calculate the amount of money Tina makes from her regular wage during the 5-day period.
+Tina's regular hourly wage is $18.00.
+So, Tina makes a total of $18.00/hour * 50 hours = $900.00 from her regular wage during the 5-day period.
+
+<STEP 5>: Calculate the amount of money Tina makes from her overtime wage during the 5-day period.
+Tina's overtime hourly wage is $27.00.
+So, Tina makes a total of $27.00/hour * 10 hours = $270.00 from her overtime wage during the 5-day period.
+
+<STEP 6>: Calculate the total amount of money Tina makes during the 5-day period.
+Tina makes a total of $900.00 from her regular wage during the 5-day period.
+Tina makes a total of $270.00 from her overtime wage during the 5-day period.
+So, Tina makes a total of $900.00 + $270.00 = $1,170.00 during the 5-day period.
+<STEP 1>: Calculate Tina's hourly wage: $18.00/hour
+
+<STEP 2>: Determine Tina's overtime rate: $18.00/hour + ($18.00/2) = $27.00/hour
+
+<STEP 3>: Calculate the number of hours Tina works in 5 days: 10 hours/day × 5 days = 50 hours
+
+<STEP 4>: Determine the amount Tina makes from her regular hours: 50 hours × $18.00/hour = $900.00
+
+<STEP 5>: Calculate the amount Tina makes from her overtime hours: 10 hours/day × 5 days = 50 hours × $27.00/hour = $1,365.00
+
+<STEP 6>: Determine the total amount Tina makes from working 10 hours every day for 5 days: $900.00 + $1,365.00 = $2,265.00
+<STEP 1>: Calculate Tina's hourly wage without overtime.
+Tina's hourly wage = $18.00/hour
+
+<STEP 2>: Calculate the hourly wage with overtime.
+Overtime hourly wage = $18.00/hour + 1/2 * $18.00/hour
+Overtime hourly wage = $18.00/hour + $9.00/hour
+Overtime hourly wage = $27.00/hour
+
+<STEP 3>: Calculate the number of hours Tina works in 5 days.
+Number of hours worked = 10 hours/day * 5 days
+Number of hours worked = 50 hours
+
+<STEP 4>: Calculate the total amount of money Tina makes in 5 days, considering both regular hours and overtime hours.
+Total amount of money made = (Regular hours worked * Regular hourly wage) + (Overtime hours worked * Overtime hourly wage))
+Total amount of money made = (50 hours * $18.00/hour)) + ((50 hours - 40 hours) * $27.00/hour))
+Total amount of money made = $1,800.00 + $3,360.00
+Total amount of money made = $5,160.00
+
+So, Tina makes a total of $5,160.00 in 5 days.
+<STEP 1>: Calculate Tina's regular hourly wage.
+Tina's hourly wage: $18.00/hour
+
+<STEP 2>: Calculate Tina's overtime hourly wage.
+Regular hourly wage: $18.00/hour
+Overtime hourly wage: $18.00/hour + 1/2 * $18.00/hour = $27.00/hour
+
+<STEP 3>: Calculate Tina's total hours worked during the given period.
+Tina works 10 hours every day for 5 days:
+Total hours worked: 10 hours/day * 5 days = 50 hours
+
+<STEP 4>: Calculate Tina's total earnings during the given period, including both regular wages and overtime wages.
+Total hours worked: 50 hours
+Regular hourly wage: $18.00/hour
+Total earnings from regular wages: 50 hours * $18.00/hour = $900.00
+
+Total hours worked for overtime: 50 hours - 8 hours (hours worked in a regular shift) = 42 hours
+Total earnings from overtime wages: 42 hours * $27.00/hour = $1146.00
+
+Total earnings during the given period: $900.00 (regular wages) + $1146.00 (overtime wages) = $2046.00
+<STEP 1>: Calculate Tina's hourly wage before overtime.
+   $18.00 an hour
+
+ <STEP 2>: Calculate Tina's hourly wage with overtime.
+   $18.00 an hour + 1/2 $18.00 an hour = $27.00 an hour for overtime hours.
+
+ <STEP 3>: Determine the number of hours Tina works in total during the 5-day period.
+   10 hours per day for 5 days = 50 hours in total.
+
+ <STEP 4>: Determine the number of hours Tina works that are considered overtime hours.
+   50 hours in total - 8 hours per day that are not overtime hours = 34 overtime hours in total.
+
+ <STEP 5>: Calculate Tina's total earnings during the 5-day period.
+   Number of hours worked during the 5-day period: 50 hours
+   Number of hours worked that are overtime hours: 34 hours
+   
+   Total earnings for regular hours worked: 50 hours * $18.00 an hour = $900.00
+   
+   Total earnings for overtime hours worked: 34 hours * ($18.00 an hour + 1/2 * $18.00 an hour)) = 34 hours * ($33.60 an hour) = $1142.24
+   
+   Total earnings for the 5-day period: $900.00 + $1142.24 = $2042.24.
+<STEP 1>: Calculate Tina's hourly wage: $18.00
+
+  <STEP 2>: Determine Tina's overtime wage: $18.00 + $9.00 (1/2 hourly wage) = $27.00
+
+  <STEP 3>: Calculate Tina's earnings for working 10 hours a day for 5 days:
+
+  Days worked = 5
+
+  Hours worked per day = 10
+
+  Total hours worked = Days worked * Hours worked per day = 5 * 10 = 50 hours
+
+  To calculate Tina's earnings, we need to consider both her regular hourly wage and her overtime hourly wage.
+
+  Regular earnings = Hourly wage * Hours worked without overtime = $18.00 * (50 - 8 * 5)) = $18.00 * 34 = $636.00
+
+  Overtime earnings = Hourly wage for overtime * Hours worked with overtime = $27.00 * 12 = $324.00
+
+  Total earnings = Regular earnings + Overtime earnings = $636.00 + $324.00 = $960.00. 
+
+  Therefore, Tina makes a total of $960.00 for working 10 hours every day for 5 days.
+<STEP 1>: Calculate Tina's hourly wage without overtime.
+Tina's hourly wage = $18.00/hour
+
+<STEP 2>: Calculate Tina's hourly wage with overtime.
+Tina's hourly wage with overtime = $18.00/hour + $9.00/hour (1/2 hourly wage)
+
+<STEP 3>: Calculate the number of hours Tina works during the 5-day period.
+Total hours worked = 10 hours/day * 5 days
+
+<STEP 4>: Determine how many hours Tina works within the 8-hour shift limit, and how many hours she works with overtime.
+Hours worked within 8-hour shift limit = Min(10 hours/day, 8 hours/day) * 5 days
+Hours worked with overtime = Total hours worked - Hours worked within 8-hour shift limit
+
+<STEP 5>: Calculate the total amount of money Tina earns during the 5-day period.
+Total earnings = (Hours worked within 8-hour shift limit * $18.00/hour)) + (Hours worked with overtime * ($18.00/hour + $9.00/hour))))
+<STEP 1>: Calculate Tina's earnings for each hour worked at her regular hourly wage.
+
+8 hours * $18.00/hour = $144.00
+
+<STEP 2>: Determine how many hours are considered overtime hours in Tina's situation.
+
+Total hours worked = 8 hours (regular shift) + 2 hours (overtime)
+
+<STEP 3>: Calculate Tina's earnings for each hour worked at her regular hourly wage, plus the additional amount she receives for each overtime hour worked.
+
+Regular wage per hour = $18.00
+Overtime wage per hour = $18.00 + $9.00 = $27.00
+
+Number of regular hours worked = 8 hours
+Number of overtime hours worked = 2 hours
+
+Total earnings for regular hours worked = 8 hours * $18.00/hour = $144.00
+
+Total earnings for overtime hours worked = 2 hours * $27.00/hour = $54.00
+
+Total earnings for the entire work period = $144.00 + $54.00 = $198.00.
+
+Therefore, Tina makes a total of $198.00 when she works 10 hours every day for 5 days.
+<STEP 1>: Calculate Tina's regular wage for working 10 hours per day for 5 days.
+- Regular wage = Hourly wage * Hours worked per day * Number of days
+- Regular wage = $18.00 * 10 * 5
+- Regular wage = $9,000
+
+<STEP 2>: Calculate Tina's overtime wage for working more than 8 hours per shift for 5 days.
+- Overtime hours = Total hours worked - Regular hours
+- Overtime hours = (10 hours/day * 5 days) - (8 hours/day * 5 days)
+- Overtime hours = 50 hours
+- Overtime wage = Regular wage + 1/2 regular wage for overtime hours
+- Overtime wage = $18.00 + ($18.00 * 1/2) for 50 hours overtime
+
+<STEP 3>: Calculate Tina's total earnings for working 10 hours every day for 5 days.
+- Total earnings = Regular earnings + Overtime earnings
+- Total earnings = $9,000 + $13,220
+- Total earnings = $22,220
+
+So, Tina makes a total of $22,220 for working 10 hours every day for 5 days.
+<STEP 1>: Calculate Tina's regular hourly wage: $18.00/hour
+
+  <STEP 2>: Determine the number of hours Tina works per day: 10 hours
+
+  <STEP 3>: Calculate the number of hours Tina works per week: 10 hours/day * 5 days/week = 50 hours/week
+
+  <STEP 4>: Determine the number of hours Tina works per shift when she is eligible for overtime: more than 8 hours/shift
+
+  <STEP 5>: Calculate Tina's total weekly earnings, including both regular hours and overtime hours:
+
+    - Regular hours earnings per week: $18.00/hour * 50 hours/week = $900.00/week
+    - Overtime hours earnings per week: Assuming that Tina works 2 hours of overtime per day for 5 days, the total number of overtime hours per week would be: 2 hours/day * 5 days/week = 10 hours/week
+
+      Overtime hours earnings per week: $18.00/hour * 10 hours/week = $180.00/week
+
+  <STEP 6>: Calculate Tina's total weekly earnings: $900.00/week (regular hours) + $180.00/week (overtime hours) = $1,080.00/week. Answer: Tina makes $1,080.00 per week.
+<STEP 1>: Calculate Tina's earnings per hour.
+Tina's hourly wage: $18.00
+
+<STEP 2>: Determine Tina's overtime hourly wage.
+Tina's regular hourly wage: $18.00
+Overtime hourly wage multiplier: 1.5
+
+Tina's overtime hourly wage: $18.00 * 1.5 = $27.00
+
+<STEP 3>: Calculate the number of hours Tina works during the 5-day period.
+Tina works 10 hours every day for 5 days.
+
+Total hours worked: 10 hours/day * 5 days = 50 hours
+
+<STEP 4>: Calculate Tina's earnings during the 5-day period.
+First, determine how many hours are regular hours (8 hours/day * 5 days = 40 hours).
+
+Regular hours worked: 40 hours
+Regular earnings: $18.00/hour * 40 hours = $720.00
+
+Next, calculate the overtime hours worked and the corresponding earnings.
+
+Overtime hours worked: 50 hours (total hours worked) - 40 hours (regular hours worked) = 10 hours/day * 5 days = 50 hours
+
+Overtime earnings: $18.00/hour * 10 hours/day * 5 days = $900.00
+
+Finally, add the regular earnings and overtime earnings to find Tina's total earnings during the 5-day period.
+
+Total earnings: $720.00 (regular earnings) + $900.00 (overtime earnings) = $1,620.00
+<STEP 1>: Calculate the earnings from each hour worked during the regular shift.
+
+Tina earns $18.00 an hour. Since she works for 8 hours a day during her regular shift, her earnings from this part of her work are:
+
+$18.00/hour * 8 hours = $144.00 per day
+
+<STEP 2>: Calculate the number of overtime hours worked during the workweek, and the earnings from this overtime work.
+
+During her workweek, Tina works for 10 hours every day for 5 days. Since she works more than 8 hours a day during her shifts, she is eligible for overtime pay.
+
+The total number of hours Tina works during her workweek is:
+
+10 hours/day * 5 days = 50 hours
+
+Since Tina works for more than 8 hours a day during her shifts, the additional 2 hours each day are considered overtime hours. During her workweek, Tina works for a total of 30 overtime hours (2 hours of overtime per day * 5 days).
+
+The earnings from each hour of overtime work are:
+
+$18.00/hour + $9.00/hour (1/2 the hourly wage for overtime pay) = $27.00/hour
+
+The total earnings from Tina's overtime work during her workweek are:
+
+$27.00/hour * 30 hours = $810.00
+
+<STEP 3>: Calculate the total earnings from Tina's work during her workweek, including both her regular hourly wages and the overtime pay she received.
+
+The total earnings from Tina's regular hourly wages during her workweek are:
+
+$144.00/day * 5 days = $720.00
+
+The total earnings from Tina's overtime pay during her workweek are:
+
+$810.00
+
+The total earnings from Tina's work during her workweek are:
+
+$720.00 + $810.00 = $1,530.00. 
+
+Therefore, Tina makes a
+<STEP 1>: Calculate Tina's earnings for regular hours worked.
+Regular hours: 10 hours/day * 5 days = 50 hours
+Regular earnings: 50 hours * $18.00/hour = $900
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked.
+Overtime hours: 10 hours/day * 5 days = 50 hours (since Tina works more than 8 hours per shift)
+Overtime earnings: 50 hours * ($18.00/hour + 1/2 * $18.00/hour)) = 50 hours * ($18.00/hour + $9.00/hour)) = $3,600
+
+<STEP 3>: Calculate Tina's total earnings for the 5-day workweek.
+Total earnings: Regular earnings + Overtime earnings = $900 + $3,600 = $4,500

@@ -1,0 +1,53 @@
+<
+STEP 1>:
+ Calculate Tina'
+s hourly wage:
+ $18.0
+0/hour
+
+
+<STEP 2
+>: Calculate Tina
+'s overtime wage
+: $18.
+00/hour +
+ $9.00
+/hour (1/
+2 hourly wage)
+ = $27.
+00/hour
+
+
+<STEP 
+3>: Calculate T
+ina's total earnings
+ for working 10
+ hours a day for 
+5 days:
+-
+ Total regular hours worked:
+ 10 hours/
+day * 5 days
+ = 50 hours
+
+- Total overtime
+ hours worked: 0
+ hours
+- Total earnings
+: 50 hours
+ * $18.
+00/hour +
+ 0 hours * $
+27.00
+/hour = $9
+00.00
+.
+
+Therefore
+, Tina makes a
+ total of $90
+0.00 for
+ working 10 hours
+ a day for 5
+ days.
+
