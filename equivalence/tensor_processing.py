@@ -70,6 +70,7 @@ data = completion.choices[0].message.content.strip()
 list_output = data.split("<STEP SPLIT>")
 best_matches = []
 
+# have to assert that joining them is equal to the original output. 
 for step_var in list_output:
     token_length = len(tokenizer.encode(step_var)) - 1 # subtract 1 for the <s> token
     
@@ -86,18 +87,13 @@ for step_var in list_output:
         
 
     if best_index != -1:
-        print(f"Best match for step '{step_var}' found at index {best_index} with similarity {best_similarity:.2f}")
-        best_matches.append((step_var, best_index, best_similarity))
-    else:
-        print(f"Failed to find a close match for step '{step_var}'")
+        best_matches.append((step_var, best_index, best_index + token_length, best_similarity))
 
-for step_var, index, similarity in best_matches:
+for step_var, index, end_index, similarity in best_matches:
     if index is not None:
-        print(f"Best match for step '{step_var}' found at index {index} with similarity {similarity:.2f}")
+        print(f"Best match for step '{step_var}' is {tokenizer.decode(tensor[0][index : end_index])} found at index {index} with similarity {similarity:.2f}")
     else:
         print(f"Failed to find a close match for step '{step_var}'")
 breakpoint()
-
-# tokenizer.decode(tensor[0][92:])
 
 # "".join(data.split("<STEP SPLIT>")) == stripped_outputs[0]
