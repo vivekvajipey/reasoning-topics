@@ -1,0 +1,31 @@
+1. First, let's calculate Tina's daily wage without considering overtime. Since she works 10 hours every day, her daily wage is:
+
+$18.00/hour x 10 hours/day = $180.00/day
+
+1. Next, let's calculate her weekly wage by multiplying her daily wage by the number of days she works in a week. In this case, she works 5 days:
+
+$180.00/day x 5 days/week = $900.00/week
+
+1. Finally, let's calculate her monthly wage by multiplying her weekly wage by the number of weeks in a month. Assuming an average month has 4 weeks:
+
+$900.00/week x 4 weeks/month = $3,600.00/month
+
+1. However, since Tina is eligible for overtime, we need to adjust her monthly wage accordingly. If she works more than 8 hours per shift, she will receive overtime pay, which is equal to her hourly wage plus half her hourly wage.
+
+Assuming she works an average of 9 hours per shift, her overtime pay per shift is:
+
+$18.00/hour + (1/2) \* $18.00/hour = $27.00/hour
+
+1. Over the course of a week, Tina will work 5 shifts, so her total overtime pay for the week is:
+
+$27.00/hour x 5 shifts/week x 5 days/week = $810.00/week
+
+1. Adding her overtime pay to her regular weekly wage, her total weekly wage becomes:
+
+$900.00/week + $810.00/week = $1,710.00/week
+
+1. Finally, multiplying her total weekly wage by the number of weeks in a month, we get her total monthly wage:
+
+$1,710.00/week x 4 weeks/month = $7,240.00/month
+
+So, Tina makes $7,240.00 per month.

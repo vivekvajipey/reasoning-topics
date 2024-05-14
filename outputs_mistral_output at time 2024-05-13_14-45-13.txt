@@ -1,0 +1,17 @@
+<STEP 1>: Calculate Tina's earnings for regular hours worked during each shift.
+
+Regular hours: 8 hours per shift * 5 days = 40 hours
+
+Regular earnings: $18.00 per hour * 40 hours = $720.00
+
+<STEP 2>: Calculate Tina's earnings for overtime hours worked during each shift.
+
+Overtime hours: 10 hours per shift - 8 hours per shift = 2 hours per shift * 5 days = 10 hours per week
+
+Total overtime hours: 10 hours per week * 5 weeks = 50 hours
+
+Overtime earnings: $18.00 per hour * 50 hours = $900.00
+
+<STEP 3>: Calculate Tina's total earnings during the 5-day workweek.
+
+Total earnings: Regular earnings + Overtime earnings = $720.00 + $900.00 = $1,620.00.
