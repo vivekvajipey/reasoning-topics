@@ -43,6 +43,7 @@ MERGE_BUCKETS_PROMPT = f"""Based on this question: {QUESTION}, would you say the
 
 MERGE_BUCKETS_WITH_STEPS_PROMPT = f"""Based on this question: {QUESTION}, would you say these 2 substeps of model-generated solutions perform the same steps and should be classified under the same bucket? Return just a 'Yes' or 'No' """
 
+# new prompt to try that i havent yet MERGE_BUCKETS_WITH_STEPS_PROMPT = f"""Based on this question: {QUESTION}, does this new model-generated substep belong in this existing list of substeps that have been categorized under the same bucket? Return just a 'Yes' or 'No' """
 
 
 model_name = "mistralai/Mistral-7B-Instruct-v0.1"
