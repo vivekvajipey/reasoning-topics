@@ -4,6 +4,7 @@ import os
 import openai
 from openai import OpenAI
 from difflib import SequenceMatcher
+import random
 
 # Function to calculate similarity
 def calculate_similarity(a, b):
@@ -20,8 +21,7 @@ INITIAL_QUESTION_PROMPT = f"""I will give you a math problem and a model-generat
 You should return the steps, in order, separated by commas in one single line. The goal is to call output.split(", ") on the output you generate. 
 
 Question: {QUESTION}
-Answer:
-"""
+Answer:"""
 
 TEMP_PROMPT = f"""I will give you a math problem and a model-generated solution to the problem. Your task is to identify where in the solution distinct steps occur, and to separate the solution at the location of each step with <STEP SPLIT>.
 You should return the steps, in order, separated by <STEP SPLIT> in one single line. The goal is to call output.split("<STEP SPLIT>") on the output you generate. 
@@ -31,19 +31,17 @@ Question: {QUESTION}
 Answer:
 """
 
+BUCKET_ASSIGNING_PROMPT = f"""I will give you a math problem, a model-generated solution to the problem, and a substep from the model-generated solution. You should return a descriptive, specific, and concise
+natural language label for the substep.
 
-# def get_stripped_outputs(file_path=FILE_PATH, question_start=QUESTION_START):
-#     model_name = "mistralai/Mistral-7B-Instruct-v0.1"
-#     tokenizer = AutoTokenizer.from_pretrained(model_name)
-#     tokenizer.pad_token = tokenizer.eos_token
+Question: {QUESTION}
+Answer:"""
 
-#     tensor = torch.load(file_path, map_location="cpu") # Load the file into a tensor
-#     decoded_output = tokenizer.batch_decode(tensor)
-#     response = " ".join(decoded_output)
-#     parsed_outputs = response.split(question_start)[1:]
-    
-#     stripped_outputs = [output.replace("<s>", "").replace("</s>", "").strip() for output in parsed_outputs] # Remove <s> tokens from the list of outputs
-#     return stripped_outputs
+MERGE_BUCKETS_PROMPT = f"""Based on this question: {QUESTION}, would you say these 2 model-generated names of solutions steps refer to the same thing? Return just a "Yes" or "No"
+"""
+
+MERGE_BUCKETS_WITH_STEPS_PROMPT = f"""Based on this question: {QUESTION}, would you say these 2 substeps of model-generated solutions perform the same steps and should be classified under the same bucket? Return just a 'Yes' or 'No' """
+
 
 
 model_name = "mistralai/Mistral-7B-Instruct-v0.1"
@@ -55,45 +53,109 @@ decoded_output = tokenizer.batch_decode(tensor)
 response = " ".join(decoded_output)
 parsed_outputs = response.split(QUESTION_START)[1:]
 
+
 stripped_outputs = [output.replace("<s>", "").replace("</s>", "").strip() for output in parsed_outputs] # Remove <s> tokens from the list of outputs
 
 
-completion = openai_client.chat.completions.create(
+buckets = []
+merged_buckets = []
+
+bucket_step_mapping = {}
+random.seed(0)
+for i in range(tensor.shape[0]):
+    print(i)
+    #breakpoint()
+    completion = openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": f"{TEMP_PROMPT} {stripped_outputs[0]}"}
+                {"role": "user", "content": f"{TEMP_PROMPT} {stripped_outputs[i]}"}
             ],
             temperature = 0
         )
-data = completion.choices[0].message.content.strip()
-list_output = data.split("<STEP SPLIT>")
-best_matches = []
+    data = completion.choices[0].message.content.strip()
+    list_output = data.split("<STEP SPLIT>")
+    best_matches = []
+    #assert("".join(list_output) == stripped_outputs[i]) # Since the steps are separated by <STEP SPLIT>, we have to assert that joining them is equal to the original output. 
 
-# have to assert that joining them is equal to the original output. 
-for step_var in list_output:
-    token_length = len(tokenizer.encode(step_var)) - 1 # subtract 1 for the <s> token
-    
-    best_similarity = 0
-    best_index = -1
-
-    found = False
-    for start_index in range(1, len(tensor[0]) - token_length):
-        decoded_segment = tokenizer.decode(tensor[0][start_index : start_index + token_length])
-        similarity = calculate_similarity(decoded_segment, step_var)
-        if similarity > best_similarity:
-            best_similarity = similarity
-            best_index = start_index
+    for step_var in list_output:
+        token_length = len(tokenizer.encode(step_var)) - 1 # subtract 1 for the <s> token
         
+        best_similarity = 0
+        best_index = -1
 
-    if best_index != -1:
-        best_matches.append((step_var, best_index, best_index + token_length, best_similarity))
+        found = False
+        for start_index in range(1, len(tensor[i]) - token_length):
+            decoded_segment = tokenizer.decode(tensor[i][start_index : start_index + token_length])
+            similarity = calculate_similarity(decoded_segment, step_var)
+            if similarity > best_similarity:
+                best_similarity = similarity
+                best_index = start_index
+            
+        if best_index != -1:
+            best_matches.append((step_var, best_index, best_index + token_length, best_similarity))
 
-for step_var, index, end_index, similarity in best_matches:
-    if index is not None:
-        print(f"Best match for step '{step_var}' is {tokenizer.decode(tensor[0][index : end_index])} found at index {index} with similarity {similarity:.2f}")
+    # for step_var, index, end_index, similarity in best_matches:
+    #     if index is not None:
+    #         print(f"Best match for step '{step_var}' is {tokenizer.decode(tensor[i][index : end_index])} found at index {index} with similarity {similarity:.2f}")
+    #     else:
+    #         print(f"Failed to find a close match for step '{step_var}'")
+
+    #breakpoint()
+
+    question_buckets = []
+    for step_var, index, end_index, similarity in best_matches:
+        #breakpoint()
+        if index is not None:  
+            bucket = openai_client.chat.completions.create(
+                        model="gpt-4o",
+                        messages=[
+                            {"role": "system", "content": SYSTEM_PROMPT},
+                            {"role": "user", "content": f"{BUCKET_ASSIGNING_PROMPT} {stripped_outputs[i]} \nStep: {step_var}"}
+                        ],
+                        temperature = 0
+                    )
+            bucket_data = bucket.choices[0].message.content.strip()
+            question_buckets.append((step_var, bucket_data)) # tuple of (step, classified bucket)
+            if not merged_buckets:
+                if bucket_data not in bucket_step_mapping:
+                    bucket_step_mapping[bucket_data] = [step_var]
+                else:
+                    bucket_step_mapping[bucket_data].append(step_var)
+
+    if not merged_buckets:
+        merged_buckets = question_buckets
     else:
-        print(f"Failed to find a close match for step '{step_var}'")
+
+        for i in range(len(question_buckets)): # these are the newly created (step, bucket) pairs that we're trying to merge with the existing merged_buckets. We favor the existing named buckets (rather than replacing their names). 
+            for j in bucket_step_mapping:
+                random_step_sample = random.choice(bucket_step_mapping[j]) # this is a random step from the bucket to ask gpt-4o to compare with a new step
+                
+        
+        # # This code below co
+        # mpares the natural language labels of each bucket with each other and asks if they should be merged.
+        # for i in range(len(question_buckets)):
+        #     for j in range(len(merged_buckets)):
+        #         #breakpoint()
+        #         yes_no = openai_client.chat.completions.create(
+        #             model="gpt-4o",
+        #             messages=[
+        #                 {"role": "system", "content": SYSTEM_PROMPT},
+        #                 {"role": "user", "content": f"{MERGE_BUCKETS_PROMPT} '{question_buckets[i]}' and '{merged_buckets[j]}'"}
+        #             ],
+        #             temperature = 0
+        #         )
+        #         print(f"First bucket: {question_buckets[i]}", f"Second bucket: {merged_buckets[j]}", yes_no.choices[0].message.content.strip())
+
+        #         if yes_no.choices[0].message.content.strip() == "Yes":
+        #             question_buckets[i] = merged_buckets[j]
+        #             break # assuming no duplicates in merged_buckets
+        
+        
+        merged_buckets = list(set(merged_buckets + question_buckets))
+    buckets.append(question_buckets)
+
+
 breakpoint()
 
 # "".join(data.split("<STEP SPLIT>")) == stripped_outputs[0]
