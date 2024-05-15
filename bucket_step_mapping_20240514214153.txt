@@ -1,0 +1,14 @@
+Label: Subtracting consumed eggs from initial count: "Janet starts with 16 eggs and eats 3 for breakfast, leaving her with 13 eggs. 
+"Subtracting the number of eggs used for baking from the total":  She then bakes muffins for her friends using 4 eggs, leaving her with 9 eggs. 
+Label: Selling remaining eggs at the farmers' market:  The remaining 9 eggs are sold at the farmers' market for $2 each. 
+Label: Calculating total earnings from selling eggs at the market:  So, to find out how much she makes, we multiply the number of eggs by the price per egg: 9 x $2 = $18.
+
+Janet makes $18 every day at the farmers' market."
+Identifying the number of eggs remaining after consumption and giving away: "First, we need to determine how many eggs Janet has left after eating three for breakfast and giving four to her friends. 
+"Calculating the remaining number of eggs after deductions":  She starts with 16 eggs, so after giving away 3 and 4, she has 16 - 3 - 4 = 9 eggs left. 
+Identifying the number of items to be sold at the market:  These 9 eggs are the ones she sells at the farmers' market. 
+"Calculating daily earnings from selling eggs":  Since she sells them for $2 each, she makes 9 x $2 = $18. So, Janet makes $18 every day at the farmers' market."
+Label: Identifying the initial number of eggs per day: "Janet starts with 16 eggs per day. 
+"Subtracting the eggs eaten for breakfast from the total":  She eats three for breakfast, so she has 13 eggs left. 
+"Subtracting eggs used for baking from the remaining total":  She bakes muffins for her friends with four eggs, leaving her with 9 eggs. 
+"Calculating daily earnings from selling eggs at the farmers' market":  The remaining eggs are sold at the farmers' market for $2 each. Therefore, the total amount of money made at the farmers' market daily is (9 eggs * $2/egg) = $18. Janet makes $18 every day at the farmers' market."

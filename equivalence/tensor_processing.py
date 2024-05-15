@@ -13,8 +13,8 @@ def calculate_similarity(a, b):
 
 openai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
-QUESTION_START = "[INST] Q: Tina makes $18.00 an hour.  If she works more than 8 hours per shift, she is eligible for overtime, which is paid by your hourly wage + 1/2 your hourly wage.  If she works 10 hours every day for 5 days, how much money does she make?\nA: Let's think step by step. [/INST]"
 FILE_PATH = "/Users/adityatadimeti/reasoning-topics/conditional/data/mistral-7b-v0.1-samples10-fewshot0-temp0.7-topk40-CoT-gsm8k_p9-1.pt"
+#FILE_PATH = "/Users/adityatadimeti/reasoning-topics/conditional/data/tensors/mistral-7b-v0.1-samples3-fewshot0-temp0.7-topk40-CoT-gsm8k_p0.pt"
 SYSTEM_PROMPT = "You are a skilled mathematical reasoner."
 QUESTION = "Tina makes $18.00 an hour. If she works more than 8 hours per shift, she is eligible for overtime, which is paid by your hourly wage + 1/2 your hourly wage. If she works 10 hours every day for 5 days, how much money does she make?"
 
@@ -28,7 +28,7 @@ TEMP_PROMPT = f"""I will give you a math problem and a model-generated solution 
 You should return the steps, in order, separated by <STEP SPLIT> in one single line. The goal is to call output.split("<STEP SPLIT>") on the output you generate. 
 If I concatenate the steps you provide, they should be identical to the original solution.
 Do not make the steps highly granular. 
-
+You should NOT distinguish the planning of a step and its execution: for instance, model-outputs that say "First we must do this." and follow it with the actual calculation should remain in the same step.
 
 Here's an example:
 
@@ -100,6 +100,13 @@ Below is what you should classify. Return just a 'Yes' or 'No' — remember the 
 
 """
 
+import re
+
+def extract_text_between_inst(text):
+    # Use regex to find all the text between [/INST] and [INST]
+    pattern = re.compile(r'\[\/INST\](.*?)\[INST\]', re.DOTALL)
+    matches = pattern.findall(text)
+    return matches
 
 model_name = "mistralai/Mistral-7B-Instruct-v0.1"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -108,11 +115,12 @@ tokenizer.pad_token = tokenizer.eos_token
 tensor = torch.load(FILE_PATH, map_location="cpu") # Load the file into a tensor
 decoded_output = tokenizer.batch_decode(tensor)
 response = " ".join(decoded_output)
-parsed_outputs = response.split(QUESTION_START)[1:]
 
+#parsed_outputs = response.split(["[/INST]"])[1:]
+parsed_outputs = extract_text_between_inst(response)
+parsed_outputs.append(response.split("[/INST]")[-1]) # Add the last part of the response that doesn't have an [INST] tag after it
 
 stripped_outputs = [output.replace("<s>", "").replace("</s>", "").strip() for output in parsed_outputs] # Remove <s> tokens from the list of outputs
-
 
 buckets = []
 merged_buckets = []
@@ -207,7 +215,8 @@ for i in range(tensor.shape[0]):
                 if yes_no.choices[0].message.content.strip() == "Yes":
                     #print(f"First step: {random_step_sample}", f"Second step: {question_buckets[i][0]}", yes_no.choices[0].message.content.strip())
                     question_buckets[qb] = (question_buckets[qb][0], j)
-                    keys.remove(j) #Assumes one existing bucket cannot categorize 2+ steps in a new solution, so we remove for efficiency.
+                    # keys.remove(j) #Assumes one existing bucket cannot categorize 2+ steps in a new solution, so we remove for efficiency.
+                    # NO LONGER operating under above assumption. We keep this to account for fact that model can still split into redundant substeps.
                     break # assuming no duplicate keys in bucket_step_mapping 
                 else:
                     start += 1
@@ -256,4 +265,3 @@ with open(answer_bucket_mapping_file, "w") as file:
 
 breakpoint()
 
-# "".join(data.split("<STEP SPLIT>")) == stripped_outputs[0]
