@@ -25,6 +25,7 @@ import torch.nn.functional as F
 from scipy.special import logsumexp
 import networkx as nx
 from accelerate import cpu_offload
+import argparse
 
 class BatchSentenceStoppingCriteria(StoppingCriteria):
     def __init__(self, tokenizer, stop_sequences):
@@ -196,7 +197,7 @@ Make sure that fundamentally different steps are put in different buckets; if tw
 <QUESTION>{question}</QUESTION>
 {bucket_examples_str}
 <STEP TO CATEGORIZE>{step}</STEP TO CATEGORIZE>
-Reminders: DO NOT INCLUDE tags such as <BUCKET> </BUCKET> in your answer. If you are proposing a new bucket name, start with "NEW :" e.g. "NEW : bucket name". DO NOT NAME NEW BUCKETS BASED ON WHETHER A STEP IS CORRECT/INCORRECT: that means you should NEVER output a bucket name that includes anything like 'Incorrect calculation...' """
+Reminders: DO NOT INCLUDE tags such as <BUCKET> </BUCKET> in your answer. If you are proposing a new bucket name, start with "NEW :" e.g. "NEW : bucket name"."""
 
 def categorize_step_with_gpt4(question, step, eq_class_labels, eq_class_examples):
     # print("BUCKETING PROMPT", get_bucket_prompt(question, step, eq_class_labels, eq_class_examples))
@@ -490,26 +491,33 @@ def build_probabilistic_graph(classes, class_phrasings, path_to_tensor, base_mod
 
 if __name__ == "__main__":
     gsm_df = pd.read_csv('../distribution/data/gsm8kTest.csv')
-
-    model_name = "mistral-7b-v0.1"
-    name2instruct = {"mistral-7b-v0.1":"mistralai/Mistral-7B-Instruct-v0.1"}
-    instruct_model_name = instruct_model_name = name2instruct[model_name]
-    tokenizer = AutoTokenizer.from_pretrained(instruct_model_name)
-    tokenizer.pad_token = tokenizer.eos_token
-    tokenizer.padding_side = 'left'
-
-    instruct_model = AutoModelForCausalLM.from_pretrained(instruct_model_name, torch_dtype=torch.bfloat16, device_map="auto")
-    instruct_model.generation_config = GenerationConfig.from_pretrained(instruct_model_name)
-    instruct_model.generation_config.pad_token_id = instruct_model.generation_config.eos_token_id
-
     # PARAMETER SELECTION
-    question_index = 0
+    parser = argparse.ArgumentParser(description="Process some integers.")
+    parser.add_argument('--q_num', type=int, default=0, help='Index of the question to process')
+    parser.add_argument('--n_samples', type=int, default=2, help='Number of samples to generate')
+    parser.add_argument('--checkpoint_load', action='store_true', help='Flag to load from checkpoint')
+    model_name = "mistral-7b-v0.1"
+
+    args = parser.parse_args()
+
+    question_index = args.q_num
     question = gsm_df['question'].tolist()[question_index]
-    n_samples = 2
-    checkpoint_load = False
+    n_samples = args.n_samples
+    checkpoint_load = args.checkpoint_load
+
     file_id = f"n{n_samples}p{question_index}"
 
     if not checkpoint_load:
+        name2instruct = {"mistral-7b-v0.1":"mistralai/Mistral-7B-Instruct-v0.1"}
+        instruct_model_name = instruct_model_name = name2instruct[model_name]
+        tokenizer = AutoTokenizer.from_pretrained(instruct_model_name)
+        tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.padding_side = 'left'
+
+        instruct_model = AutoModelForCausalLM.from_pretrained(instruct_model_name, torch_dtype=torch.bfloat16, device_map="auto")
+        instruct_model.generation_config = GenerationConfig.from_pretrained(instruct_model_name)
+        instruct_model.generation_config.pad_token_id = instruct_model.generation_config.eos_token_id
+
         all_equivalence_classes, unique_wordings, path_to_tensor = get_all_transitions(instruct_model, question_index, gsm_df, n_samples=n_samples)
 
         os.makedirs('pickle_jar', exist_ok=True)
@@ -522,6 +530,9 @@ if __name__ == "__main__":
         # Save path_to_tensor using torch's save method
         torch.save(path_to_tensor, f'pickle_jar/path_to_tensor_{file_id}.pt')
 
+        # Offload the instruct model to CPU
+        cpu_offload(instruct_model)
+
     # CHECKPOINT LOAD
     if checkpoint_load:
         print("Loading all_equivalence_classes, unique_wordings, path_to_tensor from checkpoint...")
@@ -532,9 +543,6 @@ if __name__ == "__main__":
             unique_wordings = pickle.load(f)
 
         path_to_tensor = torch.load(f'pickle_jar/path_to_tensor_{file_id}.pt')
-
-    # Offload the instruct model to CPU
-    cpu_offload(instruct_model)
     
     # build prob graph
     name2base = {"mistral-7b-v0.1":"mistralai/Mistral-7B-v0.1"}
