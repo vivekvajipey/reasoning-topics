@@ -26,15 +26,18 @@ from scipy.special import logsumexp
 import networkx as nx
 from accelerate import cpu_offload
 import argparse
+from utils import get_prompt_message
 
 class BatchSentenceStoppingCriteria(StoppingCriteria):
     def __init__(self, tokenizer, stop_sequences):
         # Tokenize each stop sequence and store their token IDs
-        self.stop_token_ids_list = [tokenizer.encode(seq, add_special_tokens=False)[1:] for seq in stop_sequences]
+        # self.stop_token_ids_list = [tokenizer.encode(seq, add_special_tokens=False)[1:] for seq in stop_sequences] # "Step n:" type input
         # self.stop_token_ids_list = [[9977, 28705, 28750, 28747], [9977, 28705, 28770, 28747], [9977, 28705, 28770, 28747]]
         # self.stop_token_ids_list = [[9977, 28705, 28770, 28747], [9977, 28705, 28781, 28747]]
         # self.stop_token_ids_list = [[9977, 28705, 28781, 28747], [9977, 28705, 28782, 28747]]
         # print("Stop token IDs:", self.stop_token_ids_list)  # Debugging to see the token IDs
+
+        self.stop_token_ids_list = [[842, 28705], [13]]
 
     def __call__(self, input_ids: torch.LongTensor, scores: torch.FloatTensor, **kwargs) -> bool:
         # Check each stop sequence against the end of the input_ids for each sequence in the batch
@@ -199,6 +202,24 @@ Make sure that fundamentally different steps are put in different buckets; if tw
 <STEP TO CATEGORIZE>{step}</STEP TO CATEGORIZE>
 Reminders: DO NOT INCLUDE tags such as <BUCKET> </BUCKET> in your answer. If you are proposing a new bucket name, start with "NEW :" e.g. "NEW : bucket name"."""
 
+def get_bucket_prompt_answer_tracking(question, step, buckets=None, examples=None):
+    if buckets is None:
+        buckets = []
+    if examples is None:
+        examples = []
+    
+    bucket_examples_str = ""
+    for i, (bucket, example) in enumerate(zip(buckets, examples), 1):
+        bucket_examples_str += f"<BUCKET {i}>{bucket}</BUCKET {i}>\n<EXAMPLE from BUCKET {i}>{example}</EXAMPLE from BUCKET {i}>\n"
+    
+    return f"""I will give you a math problem, and a substep in a solution to the problem. I will also give you a list of natural language label buckets that have been created from previous answers to the same question. Look at the step, identify which bucket it falls under, and return just the name of the bucket. If none of the existing buckets are representative, create a new bucket preceded with the string "NEW :". The label name must be descriptive, specific, and concise natural language. Return this new bucket string. 
+
+Make sure that fundamentally different steps are put in different buckets; if two steps belong in the same bucket, ensure that the types of mathematical operations/fundamental logic are approximately equivalent. Do not generate a new bucket if a step fits into an existing bucket, and do not name buckets based on correct vs. incorrect. Create a separate bucket for the declaration of the final answer.
+<QUESTION>{question}</QUESTION>
+{bucket_examples_str}
+<STEP TO CATEGORIZE>{step}</STEP TO CATEGORIZE>
+Reminders: DO NOT INCLUDE tags such as <BUCKET> </BUCKET> in your answer. If you are proposing a new bucket name, start with "NEW :" e.g. "NEW : bucket name"."""
+
 def get_bucket_prompt_correctness_agnostic(question, step, buckets=None, examples=None):
     if buckets is None:
         buckets = []
@@ -223,7 +244,8 @@ def categorize_step_with_gpt4(question, step, eq_class_labels, eq_class_examples
     # prompt = get_bucket_prompt(question, step, eq_class_labels, eq_class_examples)
     # prompt = get_bucket_prompt_correctness_agnostic(question, step, eq_class_labels, eq_class_examples)
     prompt = get_bucket_prompt_simple(question, step, eq_class_labels, eq_class_examples)
-    
+    # print("+++PROMPT:\n", prompt)
+
     response = client.chat.completions.create(
         model="gpt-4o",
         messages=[
@@ -299,7 +321,9 @@ def get_all_transitions(model, question_index, gsm_df, n_samples=2, print_loggin
     Build a graph of the probability of each state given the previous state.
     """
     question = gsm_df['question'].tolist()[question_index]
-    path_to_tensor = {(question,) : tokenizer.apply_chat_template(prompt_with_step_splits_numbered(question), add_generation_prompt=True, return_tensors="pt")}
+    # path_to_tensor = {(question,) : tokenizer.apply_chat_template(prompt_with_step_splits_numbered(question), add_generation_prompt=True, return_tensors="pt")}
+    print(get_prompt_message(question, num_fewshot_examples=0))
+    path_to_tensor = {(question,) : tokenizer.apply_chat_template(get_prompt_message(question, num_fewshot_examples=0), add_generation_prompt=True, return_tensors="pt")}
 
     question_abstract = f"question_{question_index}"
     # keep track of the paths that end in each equivalence class
@@ -331,11 +355,11 @@ def get_all_transitions(model, question_index, gsm_df, n_samples=2, print_loggin
             print("->class name: ", class_name)
                 # print()
             
-            # num_paths_to_sample = n_samples
-            # if iteration > 2:
-            #     # sample only min(number of traces ending in class_name, n_samples)
-            #     # do not want to over sample for rare states
-            #     num_paths_to_sample = min(n_samples, sum(all_equivalence_classes[class_name].values()))
+            num_paths_to_sample = n_samples
+            if iteration > 2:
+                # sample only min(number of traces ending in class_name, n_samples)
+                # do not want to over sample for rare states
+                num_paths_to_sample = min(n_samples, sum(all_equivalence_classes[class_name].values()))
 
 
             # sample some paths that lead to the new equivalence class
