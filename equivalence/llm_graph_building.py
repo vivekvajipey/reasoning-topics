@@ -181,7 +181,7 @@ def remove_trailing_step_info(step):
     pattern = r"\s*Step \d+:$"
     return re.sub(pattern, "", step).strip()
 
-def get_bucket_prompt(question, step, buckets=None, examples=None):
+def get_bucket_prompt_simple(question, step, buckets=None, examples=None):
     if buckets is None:
         buckets = []
     if examples is None:
@@ -199,14 +199,36 @@ Make sure that fundamentally different steps are put in different buckets; if tw
 <STEP TO CATEGORIZE>{step}</STEP TO CATEGORIZE>
 Reminders: DO NOT INCLUDE tags such as <BUCKET> </BUCKET> in your answer. If you are proposing a new bucket name, start with "NEW :" e.g. "NEW : bucket name"."""
 
+def get_bucket_prompt_correctness_agnostic(question, step, buckets=None, examples=None):
+    if buckets is None:
+        buckets = []
+    if examples is None:
+        examples = []
+
+    bucket_examples_str = ""
+    for i, (bucket, example) in enumerate(zip(buckets, examples), 1):
+        bucket_examples_str += f"<BUCKET {i}>{bucket}</BUCKET {i}>\n<EXAMPLE from BUCKET {i}>{example}</EXAMPLE from BUCKET {i}>\n"
+
+    return f"""I will give you a math problem, and a substep in a solution to the problem. I will also give you a list of natural language label buckets that have been created from previous answers to the same question. Look at the step, identify which bucket it falls under, and return just the name of the bucket. If none of the existing buckets are representative, create a new bucket preceded with the string "NEW :". The label name must be descriptive, specific, and concise natural language. Return this new bucket string. 
+
+Make sure that fundamentally different steps are put in different buckets; if two steps belong in the same bucket, ensure that the types of mathematical operations/fundamental logic are approximately equivalent. Do not generate a new bucket if a step fits into an existing bucket, and do not name buckets based on whether the step is correct or incorrect. Group conceptually similar steps together, regardless of their accuracy. For example, the steps "Let's calculate the total distance. Total distance = Distance A + Distance B. Total distance = 5 km + 3 km. Total distance = 8 km" and "Let's calculate the total distance. Total distance = Distance A + Distance B. Total distance = 5 km + 3 km. Total distance = 7 km" should both be in the same bucket (e.g. "Calculating Total Distance as sum of Distance A and Distance B") since they are logically equivalent, even though the second one is incorrect. 
+Create a separate bucket for the declaration of the final answer.
+<QUESTION>{question}</QUESTION>
+{bucket_examples_str}
+<STEP TO CATEGORIZE>{step}</STEP TO CATEGORIZE>
+Reminders: DO NOT INCLUDE tags such as <BUCKET> </BUCKET> in your answer. If you are proposing a new bucket name, start with "NEW :" e.g. "NEW : bucket name". NEVER label buckets based on whether the step is correct or incorrect, only focus on the conceptual reasoning being done."""
+
 def categorize_step_with_gpt4(question, step, eq_class_labels, eq_class_examples):
     # print("BUCKETING PROMPT", get_bucket_prompt(question, step, eq_class_labels, eq_class_examples))
+    # prompt = get_bucket_prompt(question, step, eq_class_labels, eq_class_examples)
+    # prompt = get_bucket_prompt_correctness_agnostic(question, step, eq_class_labels, eq_class_examples)
+    prompt = get_bucket_prompt_simple(question, step, eq_class_labels, eq_class_examples)
     
     response = client.chat.completions.create(
         model="gpt-4o",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": get_bucket_prompt(question, step, eq_class_labels, eq_class_examples)}
+            {"role": "user", "content": prompt}
         ],
         max_tokens=50,
         temperature=0.0,
@@ -288,6 +310,8 @@ def get_all_transitions(model, question_index, gsm_df, n_samples=2, print_loggin
     unique_wordings = defaultdict(set)
     unique_wordings[question_abstract] = {question}
 
+    next_eq_classes = defaultdict(set) # eq_class -> set of next step equivalence classes 
+
     iteration = 0
     while True:
         print(f"Iteration {iteration}: {len(new_equivalence_classes)} branches")
@@ -302,17 +326,28 @@ def get_all_transitions(model, question_index, gsm_df, n_samples=2, print_loggin
         # sample paths from each existing equivalence class
         # (this should be batched if we're using a transformer)
         for class_name in prev_equivalence_classes:
-            if print_logging:
-                print("class name: ", class_name)
-                print()
+            # if print_logging:
+            print()
+            print("->class name: ", class_name)
+                # print()
             
+            # num_paths_to_sample = n_samples
+            # if iteration > 2:
+            #     # sample only min(number of traces ending in class_name, n_samples)
+            #     # do not want to over sample for rare states
+            #     num_paths_to_sample = min(n_samples, sum(all_equivalence_classes[class_name].values()))
+
+
             # sample some paths that lead to the new equivalence class
-            paths = sample_paths(all_equivalence_classes[class_name], n_samples)
+            paths = sample_paths(all_equivalence_classes[class_name], num_paths_to_sample)
             if print_logging:
                 print("paths: ", paths)
                 print()
 
-            for path in paths:
+            for i, path in enumerate(paths):
+                if i == 0:
+                    print("example: ", path[-1])
+
                 # sample completions from the model to get the next step following the path
                 new_paths, path_to_tensor = sample_completions_from_model(model, tokenizer, path, path_to_tensor, n_samples=n_samples) 
                 if print_logging:
@@ -322,6 +357,9 @@ def get_all_transitions(model, question_index, gsm_df, n_samples=2, print_loggin
                 completion_classes = get_equivalence_classes(new_paths, all_equivalence_classes)
                 if print_logging:
                     print("completions_classes: ", completion_classes)
+                
+                for completion_class in completion_classes.keys():
+                    next_eq_classes[class_name].add(completion_class) 
 
                 # Update our data structures
                 # I think it's ok for this kind of thing to be in a for loop,
@@ -355,7 +393,7 @@ def get_all_transitions(model, question_index, gsm_df, n_samples=2, print_loggin
         if len(new_equivalence_classes) == 0:
             break
 
-    return all_equivalence_classes, unique_wordings, path_to_tensor
+    return all_equivalence_classes, unique_wordings, path_to_tensor, next_eq_classes
 
 
 # BUILD PROBABILISTIC GRAPH
@@ -420,7 +458,7 @@ def score_paths_with_base_model(model, paths_tensor, mask, print_all_logprobs = 
 
     return summed_logprobs
 
-def build_probabilistic_graph(classes, class_phrasings, path_to_tensor, base_model, tokenizer, n_samples, question, print_logging=False, file_name="unnamed"):
+def build_probabilistic_graph(classes, class_phrasings, path_to_tensor, next_eq_classes, base_model, tokenizer, n_samples, question, print_logging=False, file_name="unnamed"):
     """
     Build a graph of the probability of transitioning from one state to another.
     """
@@ -434,7 +472,7 @@ def build_probabilistic_graph(classes, class_phrasings, path_to_tensor, base_mod
     # NOTE: right now we're iterating over all possible classes. We could speed things up
     # by keeping track of the pairs of classes that were observed at least one in step 1
     for first_state in classes:
-        for second_state in classes:
+        for second_state in next_eq_classes[first_state]:
             print("first state: ", first_state, ", second state: ", second_state)
             # compute the probability of transitioning from first state to second state
             first_state_paths = sample_paths(classes[first_state], n_samples)
@@ -502,6 +540,8 @@ if __name__ == "__main__":
 
     question_index = args.q_num
     question = gsm_df['question'].tolist()[question_index]
+    print("Question:")
+    print(question)
     n_samples = args.n_samples
     checkpoint_load = args.checkpoint_load
 
@@ -518,7 +558,7 @@ if __name__ == "__main__":
         instruct_model.generation_config = GenerationConfig.from_pretrained(instruct_model_name)
         instruct_model.generation_config.pad_token_id = instruct_model.generation_config.eos_token_id
 
-        all_equivalence_classes, unique_wordings, path_to_tensor = get_all_transitions(instruct_model, question_index, gsm_df, n_samples=n_samples)
+        all_equivalence_classes, unique_wordings, path_to_tensor, next_eq_classes = get_all_transitions(instruct_model, question_index, gsm_df, n_samples=n_samples)
 
         os.makedirs('pickle_jar', exist_ok=True)
         with open(f'pickle_jar/all_equivalence_classes_{file_id}.pkl', 'wb') as f:
@@ -526,11 +566,12 @@ if __name__ == "__main__":
 
         with open(f'pickle_jar/unique_wordings_{file_id}.pkl', 'wb') as f:
             pickle.dump(unique_wordings, f)
+        
+        with open(f'pickle_jar/next_eq_classes_{file_id}.pkl', 'wb') as f:
+            pickle.dump(next_eq_classes, f)
 
         # Save path_to_tensor using torch's save method
         torch.save(path_to_tensor, f'pickle_jar/path_to_tensor_{file_id}.pt')
-
-        # Offload the instruct model to CPU
         cpu_offload(instruct_model)
 
     # CHECKPOINT LOAD
@@ -555,7 +596,7 @@ if __name__ == "__main__":
     base_model.generation_config = GenerationConfig.from_pretrained(base_model_name)
     base_model.generation_config.pad_token_id =base_model.generation_config.eos_token_id
 
-    graph = build_probabilistic_graph(all_equivalence_classes, unique_wordings, path_to_tensor, base_model, base_tokenizer, n_samples, question, file_name=file_id)
+    graph = build_probabilistic_graph(all_equivalence_classes, unique_wordings, path_to_tensor, next_eq_classes, base_model, base_tokenizer, n_samples, question, file_name=file_id)
     pos = nx.bfs_layout(graph, start=f"question_{question_index}", scale=100)
     labels = dict()
     for u, v, data in graph.edges(data=True):
