@@ -43,6 +43,8 @@ for file_path in os.listdir("/Users/adityatadimeti/reasoning-topics/conditional/
     counter += 1
     if counter == 100:
         break
+    if counter <= 3:
+        continue
     elif counter % 1 == 0:
             # Generate timestamp
         timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
@@ -147,7 +149,7 @@ for file_path in os.listdir("/Users/adityatadimeti/reasoning-topics/conditional/
     for i in range(tensor.shape[0]):
         print(i, len(bucket_step_mapping))
         completion = openai_client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4o",
                 messages=[
                     {"role": "system", "content": SYSTEM_PROMPT},
                     {"role": "user", "content": f"{STEP_SPLIT_PROMPT} {stripped_outputs[i]}"}
@@ -181,7 +183,7 @@ for file_path in os.listdir("/Users/adityatadimeti/reasoning-topics/conditional/
             #breakpoint()
             if index is not None:  
                 bucket = openai_client.chat.completions.create(
-                            model="gpt-4",
+                            model="gpt-4o",
                             messages=[
                                 {"role": "system", "content": SYSTEM_PROMPT},
                                 {"role": "user", "content": f"{BUCKET_ASSIGNING_PROMPT} {stripped_outputs[i]} \nStep: {step_var}"}
@@ -208,9 +210,9 @@ for file_path in os.listdir("/Users/adityatadimeti/reasoning-topics/conditional/
                     #breakpoint()
                     #random_step_sample = random.choice(bucket_step_mapping[j])
                     num_elements = min(len(bucket_step_mapping[j]), 5)
-                    random_step_sample = random.sample(bucket_step_mapping[j], num_elements)  # these are random steps from the bucket to ask gpt-4o to compare with a new step
+                    random_step_sample = random.sample(bucket_step_mapping[j], num_elements)  # these are random steps from the bucket to ask gpt-4oo to compare with a new step
                     yes_no = openai_client.chat.completions.create( 
-                        model="gpt-4",
+                        model="gpt-4o",
                         messages=[
                             {"role": "system", "content": SYSTEM_PROMPT},
                             {"role": "user", "content": f"{MERGE_BUCKETS_WITH_STEPS_PROMPT} \nExamples from existing bucket: '{random_step_sample}'. Name of existing bucket: {j} \n Current step to compare to bucket: '{question_buckets[qb][0]}'. Name of current step: {question_buckets[qb][1]}"}
