@@ -51,3 +51,6 @@ for file_path in os.listdir("/Users/adityatadimeti/reasoning-topics/conditional/
     tensor = torch.load(dir, map_location="cpu") # Load the file into a tensor
     breakpoint()
     counter += 1
+
+    # NOTE: BEST_MATCHES is a tuple, for each generation, that also contains the indices for starting and stopping of the steps in each generation. these can be used to get the entropy of each step and then plot it
+    # along the edges
