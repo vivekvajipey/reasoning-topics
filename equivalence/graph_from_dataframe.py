@@ -44,7 +44,7 @@ for file_path in os.listdir("/Users/adityatadimeti/reasoning-topics/conditional/
     counter = 0
     if "CoT" not in file_path:
         continue
-    if counter == 8:
+    if counter == 8: # only processed 8 tensors 
         break
 
     dir = "/Users/adityatadimeti/reasoning-topics/conditional/data/tensors/" + file_path
