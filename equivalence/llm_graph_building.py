@@ -31,13 +31,13 @@ from utils import get_prompt_message
 class BatchSentenceStoppingCriteria(StoppingCriteria):
     def __init__(self, tokenizer, stop_sequences):
         # Tokenize each stop sequence and store their token IDs
-        # self.stop_token_ids_list = [tokenizer.encode(seq, add_special_tokens=False)[1:] for seq in stop_sequences] # "Step n:" type input
+        self.stop_token_ids_list = [tokenizer.encode(seq, add_special_tokens=False)[1:] for seq in stop_sequences] # "Step n:" type input
         # self.stop_token_ids_list = [[9977, 28705, 28750, 28747], [9977, 28705, 28770, 28747], [9977, 28705, 28770, 28747]]
         # self.stop_token_ids_list = [[9977, 28705, 28770, 28747], [9977, 28705, 28781, 28747]]
         # self.stop_token_ids_list = [[9977, 28705, 28781, 28747], [9977, 28705, 28782, 28747]]
         # print("Stop token IDs:", self.stop_token_ids_list)  # Debugging to see the token IDs
 
-        self.stop_token_ids_list = [[842, 28705], [13]]
+        # self.stop_token_ids_list = [[842, 28705], [13]]
 
     def __call__(self, input_ids: torch.LongTensor, scores: torch.FloatTensor, **kwargs) -> bool:
         # Check each stop sequence against the end of the input_ids for each sequence in the batch
@@ -145,6 +145,8 @@ def convert_to_left_padded(tensor, model, tokenizer):
 
 def sample_completions_from_model(model, tokenizer, path, path_to_tensor, n_samples):
     input_tensor = path_to_tensor[path]
+    print("OOOOOOOOOOOOOOOOOOOOOOOOO: ", input_tensor[-10:])
+
     if input_tensor[0, -1].item() == 2:
         new_paths = [path + ('<eos>',)] # no need to repeat n_samples times
         return new_paths, path_to_tensor
@@ -628,4 +630,4 @@ if __name__ == "__main__":
     fig, ax = plt.subplots()
     nx.draw_networkx(graph, pos=pos, ax=ax)
     nx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels)
-    fig.savefig(f"figs/{file_id}-plot.png") 
+    fig.savefig(f"numbered_figs/{file_id}-plot.png") 

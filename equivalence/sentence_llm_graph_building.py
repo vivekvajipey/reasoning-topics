@@ -27,21 +27,28 @@ import networkx as nx
 from accelerate import cpu_offload
 import argparse
 from utils import get_prompt_message
+from torch import LongTensor, FloatTensor
 
 class BatchSentenceStoppingCriteria(StoppingCriteria):
-    def __init__(self, tokenizer, stop_sequences_ids):
+    def __init__(self, tokenizer, stop_sequences_ids, device='cpu'):
         # Tokenize each stop sequence and store their token IDs
         # self.stop_token_ids_list = [tokenizer.encode(seq, add_special_tokens=False)[1:] for seq in stop_sequences] # "Step n:" type input
-        self.stop_token_ids_list = stop_sequences_ids # ['. ', '\n', '. ']
+        self.stop_token_ids_list = [torch.tensor(stop_token_ids, device=device) for stop_token_ids in stop_sequences_ids] # ['. ', '\n', '. ']
+        self.digit_tokens = [28734, 28740, 28750, 28770, 28781, 28782, 28784, 28787, 28783, 28774]
+        self.ignore_dups_indices = set([0])
 
     def __call__(self, input_ids: torch.LongTensor, scores: torch.FloatTensor, **kwargs) -> bool:
         # Check each stop sequence against the end of the input_ids for each sequence in the batch
-        for stop_token_ids in self.stop_token_ids_list:
+        for i, stop_token_ids in enumerate(self.stop_token_ids_list):
             if input_ids.shape[1] >= len(stop_token_ids):
                 # Extract the last tokens of the same length as the stop sequence
                 last_tokens = input_ids[:, -len(stop_token_ids):]
                 # Check if they match the stop sequence tokens
-                is_match = (last_tokens == torch.tensor(stop_token_ids, device=input_ids.device)).all(dim=1)
+                is_match = (last_tokens == stop_token_ids).all(dim=1)
+                if is_match.any() and i in self.ignore_dups_indices:
+                    second_to_last_tokens = input_ids[:, -2 * len(stop_token_ids): -len(stop_token_ids)]
+                    if (second_to_last_tokens == stop_token_ids).all(dim=1):
+                        continue 
                 # If any sequence in the batch matches, return True to stop generation
                 if is_match.any():
                     print("Stopping sequence detected, stopping generation.")
@@ -116,33 +123,53 @@ Output 5:
     return response.choices[0].message.content 
 
 def sample_completions_from_model(model, tokenizer, path, path_to_tensor, n_samples):
+    if path[-1].startswith("<answer"):
+        return None, path_to_tensor
+    
     input_tensor = path_to_tensor[path]
+    # print("OOOOOOOOOOOOOOOOOOOOOOOOO: ", input_tensor[-10:])
+
     if input_tensor[0, -1].item() == 2:
         answer_numeric = get_final_answer_numeric(path[-1])
         print("******ANSWER NUMERIC = ", answer_numeric)
         
-        new_paths = [path + (f'<answer={answer_numeric}>',)] # no need to repeat n_samples times
+        new_paths = [path + (f'<answer={answer_numeric}>',)] # no need to repeat n_samples times?
         print("NEW PATHS: ", new_paths)
         return new_paths, path_to_tensor
 
-    stop_sequences_ids = [[842, 28705], [13], [28723, 28705], [28723]]
-    sentence_stopping_criteria = StoppingCriteriaList([BatchSentenceStoppingCriteria(tokenizer, stop_sequences_ids)])
+    # stop_sequences_ids = [[842, 28705], [13], [28723, 28705], [28723]]
+    # stop_sequences_ids = [[842, 28705], [13], [28723, 28705]]
+    # stop_sequences_ids = [[842, 28705], [28723, 28705]]
+    # stop_sequences_ids = [[13]]
+    # stop_sequences_ids = [[13], [28723, 28705], [28723], [842, 28705]]
+    stop_sequences_ids = [[13], [842, 28705], [28723, 28705]]
+    
+    sentence_stopping_criteria = StoppingCriteriaList([BatchSentenceStoppingCriteria(tokenizer, stop_sequences_ids, device=model.device)])
     
     # max_length = 0
     new_paths = []
 
     for _ in range(n_samples):
-        gen_outputs = model.generate(
-            input_tensor.to(model.device),
-            min_new_tokens=10,
-            max_new_tokens=1000,
-            return_dict_in_generate=True,
-            output_scores=True,
-            do_sample=True,
-            temperature=0.7,
-            top_k=40,
-            stopping_criteria=sentence_stopping_criteria
-        ).sequences
+        cur_input = input_tensor.to(model.device)
+        MIN_STEP_LEN_TOKENS = 5
+        MAX_RESAMPLE_ATTEMPTS = 5
+        # print(f"WWWWWWWWW: {cur_input.shape[1]} - {input_tensor.shape[1]} > {MIN_STEP_LEN_TOKENS}")
+        num_resamples = 0
+        while (num_resamples < MAX_RESAMPLE_ATTEMPTS) and (cur_input.shape[1] - input_tensor.shape[1] <= MIN_STEP_LEN_TOKENS):
+            gen_outputs = model.generate(
+                input_tensor.to(model.device),
+                min_new_tokens=10,
+                max_new_tokens=1000,
+                return_dict_in_generate=True,
+                output_scores=True,
+                do_sample=True,
+                temperature=0.7,
+                top_k=40,
+                stopping_criteria=sentence_stopping_criteria
+            ).sequences
+            cur_input = gen_outputs
+
+            num_resamples += 1
 
         # if gen_outputs.shape[1] > max_length:
             # max_length = gen_outputs.shape[1]
@@ -302,10 +329,14 @@ def get_all_transitions(model, question_index, gsm_df, n_samples=2, print_loggin
                 # print()
             
             num_paths_to_sample = n_samples
+            num_completions_to_sample = n_samples
             if iteration > 2:
                 # sample only min(number of traces ending in class_name, n_samples)
                 # do not want to over sample for rare states
                 num_paths_to_sample = min(n_samples, sum(all_equivalence_classes[class_name].values()))
+                if "Incorrect" in class_name or "incorrect" in class_name:
+                    print("ONLY SAMPLING FROM INCORRECT ONCE")
+                    num_completions_to_sample = min(1, n_samples)
 
 
             # sample some paths that lead to the new equivalence class
@@ -319,7 +350,12 @@ def get_all_transitions(model, question_index, gsm_df, n_samples=2, print_loggin
                     print("example: ", path[-1])
 
                 # sample completions from the model to get the next step following the path
-                new_paths, path_to_tensor = sample_completions_from_model(model, tokenizer, path, path_to_tensor, n_samples=n_samples) 
+                new_paths, path_to_tensor = sample_completions_from_model(model, tokenizer, path, path_to_tensor, n_samples=num_completions_to_sample)
+
+                # if terminal cur path ends in terminal state ("<answer=...>"), continue
+                if new_paths == None:
+                    continue
+
                 if print_logging:
                     print("new_paths: ", new_paths)
 
@@ -572,4 +608,4 @@ if __name__ == "__main__":
     fig, ax = plt.subplots()
     nx.draw_networkx(graph, pos=pos, ax=ax)
     nx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels)
-    fig.savefig(f"figs/{file_id}-plot.png") 
+    fig.savefig(f"sentence_figs/{file_id}-plot.png") 

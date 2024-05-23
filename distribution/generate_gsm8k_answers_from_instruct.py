@@ -1,3 +1,9 @@
+import os
+os.environ['HF_HOME'] = '/scr/vvajipey/.cache/huggingface'
+os.environ['HF_HUB'] = '/scr/vvajipey/.cache/huggingface'
+from huggingface_hub import login
+login("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")
+
 import argparse
 import csv
 import numpy as np

@@ -1,3 +1,9 @@
+import os
+os.environ['HF_HOME'] = '/scr/vvajipey/.cache/huggingface'
+os.environ['HF_HUB'] = '/scr/vvajipey/.cache/huggingface'
+from huggingface_hub import login
+login("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")
+
 import argparse
 import csv
 import numpy as np
@@ -181,7 +187,7 @@ def sum_answer_logprobs(model, tokenizer, input_ids, answer_mask, batch_size=5, 
                         # text_sequence.append((tokenizer.decode(token), p.item()))
                 # batch.append(text_sequence)
 
-    print("TOTAL SUMMED LOGPROBS: ", total_summed_logprobs)
+    # print("TOTAL SUMMED LOGPROBS: ", total_summed_logprobs)
 
     return total_summed_logprobs, norm_total_summed_logprobs
 
@@ -278,7 +284,7 @@ def main():
                     print(p.replace("<unk>", ""))
             
             num_ai = answer_statements.size(0)
-            print('num a_i: ', num_ai)
+            # print('num a_i: ', num_ai)
 
             all_surprisals_ai_given_q = torch.tensor([])
             all_norm_surprisals_ai_given_q = torch.tensor([])
@@ -301,8 +307,8 @@ def main():
                                                                         run_problem_name=f"{run_name}-gsm8k_p{problem_number}",
                                                                         print_logging=False
                                                                     )
-                print("logprobs_ai_given_rk_q: ", logprobs_ai_given_rk_q)
-                print("norm_logprobs_ai_given_rk_q: ", norm_logprobs_ai_given_rk_q)
+                # print("logprobs_ai_given_rk_q: ", logprobs_ai_given_rk_q)
+                # print("norm_logprobs_ai_given_rk_q: ", norm_logprobs_ai_given_rk_q)
                 if args.verbose:
                     sal_total_time = time.time() - sal_start
                     print(f"sum_answer_logprobs took {sal_total_time} seconds")
@@ -312,7 +318,7 @@ def main():
                 # Calculate -log(P(a_i | q))
                 logprob_a_i_given_q = torch.logsumexp(logprobs_ai_given_rk_q, dim=0) - torch.log(torch.tensor(num_ai)) # log ( (1 / num_ai) * sum of (exp ())
                 surprisal_a_i_given_q = -logprob_a_i_given_q
-                print(f"-log p(a_{ai_idx} | q): {surprisal_a_i_given_q}")
+                # print(f"-log p(a_{ai_idx} | q): {surprisal_a_i_given_q}")
                 all_surprisals_ai_given_q = torch.cat((all_surprisals_ai_given_q, torch.tensor([surprisal_a_i_given_q])))
 
                 # Calculate -log(P(a_i | q)) using normalized log probabilities
